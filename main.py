@@ -1,3 +1,3 @@
 
-print('hola veronica')
+print('hola vero')
 
