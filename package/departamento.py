@@ -34,10 +34,11 @@ class Departamento:
         lista_salario = list(dic_nombre_salario.values())
         lista_salario.sort()
         lista_salario.reverse()
-        #for x in lista_salario:
-        for nombre,salario in dic_nombre_salario.items():
-            print(nombre, salario)
-        lista_nombres = list(dic_nombre_salario.keys())
+
+        for x in lista_salario:
+            name = list(dic_nombre_salario.keys())[list(dic_nombre_salario.values()).index(x)]
+            print(f"{name}:{x}")
+        return 'esto es un reporte de los empleados'
         
 
     def __str__(self):
