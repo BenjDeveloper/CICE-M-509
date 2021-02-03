@@ -12,6 +12,7 @@ class Department:
         self.name = name
         self.telephone_number = telephone_number
         self.employee_list = employee_list
+        #self.employee_dic = [i.__dict__['name'] = i.__dict__['salary'] for i in employee_list]
         for i in self.employee_list:
             self.employee_dic[i.__dict__['name']] = i.__dict__['salary']
 
