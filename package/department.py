@@ -7,6 +7,7 @@
 from .employee import Employee
 
 class Department:
+    average = 0
     employee_dic = {}
     def __init__(self, name, telephone_number, employee_list):
         self.name = name
@@ -21,8 +22,8 @@ class Department:
     def average_salary(self):
         salary_list = list(self.employee_dic.values())
         length = len(salary_list)
-        average = sum(salary_list) / length
-        return f"The mean salary is {average}"
+        self.average = sum(salary_list) / length
+        return f"The mean salary is {self.average}"
 
     def employee_report(self):
         salary = list(self.employee_dic.values())
@@ -41,7 +42,7 @@ class Department:
         
 
     def __str__(self):
-        pass
+        return f" The average salary of this department: {self.average}"
 
 """
 emp1 = Employee('Ava','Lord','F-010101-M','ava@gmail.com','AVALORD',35000,'10PM')
