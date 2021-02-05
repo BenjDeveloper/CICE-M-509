@@ -1,10 +1,10 @@
 
 # EJEMPLO DE MANEJO  DE REPOSITORIOS Y CLASES POR MEDIO DE PAQUETES
 
-import package.departamento
-import package.empleado
-import package.persona
-import package.User
+import package.departamento as depa
+import package.empleado as Empleado
+# import package.persona
+# import package.User
 
 
 def main():
@@ -29,23 +29,32 @@ def main():
     # # print(hola.strftime("%d/%m/%Y"))
 
     
-    empleado1=Empleado("juan","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"contabilidad","9123456", 1200,"L-V 10H-14H")
-    print(empleado1)
+    empleado1=Empleado.Empleado("juan","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"qwert@asdf","9112345623456", 1200,"L-V 10H-14H")
+    # print(empleado1)
+    departamento1=depa.Departamento("informatica","91233456")
+    departamento1.empleados.append(empleado1)
+    # print (departamento1.empleados)
+    # print (departamento1.empleados[0])
+    empleado1.pertenece_departamento=departamento1
+    # print(empleado1.pertenece_departamento)
+    # print(type(empleado1.pertenece_departamento))
 
-    empleado2=Empleado("pepe","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"contabilidad","9123456", 1200,"L-V 10H-14H")
-    # print(empleado2)
+    print (departamento1.empleados[0].nombre)
 
-    empleado3=Empleado("sara","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"informatica","9123456", 1200,"L-V 10H-14H")
-    # print(empleado3)
+    # empleado2=Empleado("pepe","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"contabilidad","9123456", 1200,"L-V 10H-14H")
+    # # print(empleado2)
 
-    empleado4=Empleado("susana","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"informatica","9123456", 1200,"L-V 10H-14H")
-    # print(empleado4)
+    # empleado3=Empleado("sara","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"informatica","9123456", 1200,"L-V 10H-14H")
+    # # print(empleado3)
 
-    empleado5=Empleado("ana","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"informatica","9123456", 1200,"L-V 10H-14H")
-    # print(empleado5)
+    # empleado4=Empleado("susana","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"informatica","9123456", 1200,"L-V 10H-14H")
+    # # print(empleado4)
 
-    # print(empleado5.pertenece_departamento.departYemplea)
-    # print(empleado1.pertenece_departamento.departYemplea)
+    # empleado5=Empleado("ana","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"informatica","9123456", 1200,"L-V 10H-14H")
+    # # print(empleado5)
+
+    # # print(empleado5.pertenece_departamento.departYemplea)
+    # # print(empleado1.pertenece_departamento.departYemplea)
 
 
 

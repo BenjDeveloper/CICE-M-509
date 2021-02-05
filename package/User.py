@@ -1,7 +1,7 @@
 
 
 class User (object):
-    def __init__(self,email:str,clave:str,activo:bool):
+    def __init__(self,email:str,clave:str,activo=True):
         self.email=email
         self.clave=clave
         self.activo=activo
@@ -14,7 +14,7 @@ class User (object):
             return True
         return False
 
-user1=User("qwerty@asdf","123456",True)
-print(user1)
-print(user1.validacion("aaaaa","123456"))
-print(user1.validacion("qwerty@asdf","123456"))
+# user1=User("qwerty@asdf","123456",True)
+# print(user1)
+# print(user1.validacion("aaaaa","123456"))
+# print(user1.validacion("qwerty@asdf","123456"))
