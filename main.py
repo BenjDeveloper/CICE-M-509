@@ -29,18 +29,24 @@ def main():
     # # print(hola.strftime("%d/%m/%Y"))
 
     
-    empleado1=Empleado.Empleado("juan","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"qwert@asdf","9112345623456", 1200,"L-V 10H-14H")
+    empleado1=Empleado.Empleado("juan","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"qwerty@asdf","9112345623456", 1200,"L-V 10H-14H")
     # print(empleado1)
     departamento1=depa.Departamento("informatica","91233456")
-    departamento1.empleados.append(empleado1)
-    # print (departamento1.empleados)
-    # print (departamento1.empleados[0])
-    empleado1.pertenece_departamento=departamento1
-    # print(empleado1.pertenece_departamento)
-    # print(type(empleado1.pertenece_departamento))
+    # departamento1.empleados.append(empleado1)
+    # # print (departamento1.empleados)
+    # # print (departamento1.empleados[0])
+    # empleado1.pertenece_departamento=departamento1
+    # # print(empleado1.pertenece_departamento)
+    # # print(type(empleado1.pertenece_departamento))
 
+    empleado2=Empleado.Empleado("pepe","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"qwerty@asdf","9112345623456",1300,"L-V 10H-14H")
+    departamento1.setEmpleados(empleado1,empleado2)
     print (departamento1.empleados[0].nombre)
+    print (departamento1.empleados)
 
+    print(empleado1.pertenece_departamento)
+    departamento1.printEmp()
+    print(departamento1.mediaSal())
     # empleado2=Empleado("pepe","perez","21/11/1995","1234567F",["sainz de baranda","44","4º","Izq"],"contabilidad","9123456", 1200,"L-V 10H-14H")
     # # print(empleado2)
 
