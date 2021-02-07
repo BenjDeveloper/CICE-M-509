@@ -8,7 +8,9 @@ class Empleado(Persona, Usuario):
         Usuario.__init__(self, email, clave, activo)
         self.salario = salario
         self.horario = horario
-        self.departamento = 'sin asignar'
 
     def __str__ (self):
-        return Persona.__str__(self) + '\n' + Usuario.__str__(self) + '\n' #+ 'salario:' {self.salario} + '\n' + 'horario:' {self.horario} +'\n' + 'departamento:' {self.departamento}
+        return Persona.__str__(self) + '\n' + Usuario.__str__(self) + '\n' + '\t    Salario: '+ str (self.salario) + '\n' + '\t    Horario: '+ self.horario +'\n'
+
+    def getEmpleado(self):
+        return self.__str__()

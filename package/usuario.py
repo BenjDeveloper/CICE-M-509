@@ -7,11 +7,9 @@ class Usuario:
 
 
     def __str__ (self):
-        return f'''
-        mail : {self.email} 
-        clave : {self.clave}
-        activo : {self.activo}
-        '''
+        return f'''\t    Email : {self.email} 
+            Clave : {self.clave}
+            Activo : {self.activo}'''
 
     def validacion(self, param_email, param_clave):
         
