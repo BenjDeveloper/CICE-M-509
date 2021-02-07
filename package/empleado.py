@@ -10,7 +10,7 @@ class Empleado(Persona, Usuario):
         self.horario = horario
 
     def __str__ (self):
-        return Persona.__str__(self) + '\n' + Usuario.__str__(self) + '\n' + '\t    Salario: '+ str (self.salario) + '\n' + '\t    Horario: '+ self.horario +'\n'
+        return 'Empleado : Salario = '+ str (self.salario)+' '+Persona.__str__(self) + Usuario.__str__(self) +' : Horario: '+ self.horario 
 
     def getEmpleado(self):
-        return self.__str__()
+        return '\n'+self.__str__()

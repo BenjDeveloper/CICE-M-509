@@ -8,12 +8,14 @@ class Persona(object):
         self.direccion = direccion
 
     def __str__ (self):
-        return f'''
-            Nombre : {self.nombre} 
-            Apellido : {self.apellido}
-            Fecha de nacimiento : {self.__fecha_de_nacimiento }
-            DNI : {self.dni} 
-            Direccion : {self.direccion}'''
+        return f''': {self.dni} : {self.nombre} {self.apellido}'''
+
+    # return f'''
+    #         Nombre : {self.nombre} 
+    #         Apellido : {self.apellido}
+    #         Fecha de nacimiento : {self.__fecha_de_nacimiento }
+    #         DNI : {self.dni} 
+    #         Direccion : {self.direccion}'''
 
     def getNombreCompleto (self):
         return f' El nombre completo de la persona es:  {self.nombre}  {self.apellido}'

@@ -18,14 +18,18 @@ def main():
     empleado_9 = Empleado ('mariano', 'rojo', '18-10-1990', '98756045K', 'la paz 99', 'mariano@gmail.com', '98764', True, 45000, 'tarde')
     empleado_10 = Empleado ('luis', 'sanz', '29-12-1999', '123498675H', 'pinar 30', 'luis@gmail.com', '7658476', True, 30000, 'partido')
 
+    x =  [empleado_1, empleado_2, empleado_3, empleado_4, empleado_5, empleado_6, empleado_7, empleado_8, empleado_9, empleado_10   ]
+
     #print (empleado_1.salario)
     #print(empleado_1)
 
-    departamento_calidad = Departamento ('calidad', '987654321', [empleado_1, empleado_6])
+    departamento_calidad = Departamento ('calidad', '987654321', x)
 
-    #print (departamento_calidad)
+    departamento_calidad.empleados.sort( key = lambda Empleado : Empleado.salario, reverse=False )
+
+    print (departamento_calidad)
     #print (f' El SALARIO MEDIO del departamento es: {departamento_calidad.media_salarial()}  '.center (70, '='))
-    departamento_calidad.reporte_empleados()
+    # departamento_calidad.reporte_empleados()
 
 main()
 
