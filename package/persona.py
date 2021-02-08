@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 #CAMBIAR A DATE TIME LAS FECHAS 
 
 class Persona():
@@ -28,7 +28,11 @@ class Persona():
     def getNombreCompleto(self):
         return f'{self.nombre} {self.apellido}'
 
-    def getDia(self):
+
+    def __strFecha__():
+        fecha = self.fecha_nacimiento.strptime(self.fecha_nacimiento, '%d,%m,%y')
+
+    '''def getDia(self):
         return self.__dia
 
     def getMes(self):
@@ -47,5 +51,7 @@ class Persona():
 
     def setAño(self, año):
         self.__año = año
-        self.fecha_nacimiento = f'{self.__dia}-{self.__mes}-{self.__año}'
+        self.fecha_nacimiento = f'{self.__dia}-{self.__mes}-{self.__año}'''
+
+
 
