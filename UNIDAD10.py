@@ -96,9 +96,10 @@ print(objeto_tiempo)'''
 
 from datetime import time 
 
-#tiempo (hora,min,seg  )
+#tiempo (hora,min,seg = 0 )
 a = time()
 print ( 'a =',a)
+
 
 b = time(11,54,56)
 print(b)
