@@ -6,13 +6,4 @@ class Usuario(object):
         self.activo = activo
 
     def validacion(self, param_email, param_clave):
-        self.email = email
-        self.clave = clave 
-        self.activo = False
-        if(email == param_email and clave == param_clave):
-            valido = True
-            self.activo = True
-        else:
-            valido = False
-            
-        return valido
+        return True if (param_email == self.email and param_clave == self.clave) else False
