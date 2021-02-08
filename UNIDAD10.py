@@ -37,12 +37,26 @@ texto = 'hola esta cadena es un texto'
 
 re.split(' ',texto)'''
 
-#PATRONES CON METACARACTERES
+'''#PATRONES CON METACARACTERES
 
 #OR (|)
 texto = 'hola adios hello bye'
 
 obj = re.findall('hola|hello',texto)
-print(obj)
+print(obj)'''
 
+#ejemplo 1
+#email
 
+'''nombreusu == '[A-z0-9]'{6,30}
+arroba == '[@]'
+gmail == '[A-z]'{2,10}
+. == '[.]'
+com == ['A-z0-9']{2,4}'''
+
+texto = 'vsalgueroherrera@gmail.com'
+patron = '[A-z0-9]{6,30}[@][A-z]{2,10}[.][A-z0-9]{2,4}'
+if re.match(patron,texto):
+    print('correo valido')
+else:
+    print('correo no valido ')
