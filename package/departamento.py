@@ -24,7 +24,7 @@ class Departamento():
         empsorted=self.empleados.copy()
         empsorted.sort(reverse=True,key=self.getSalario)
         for emp in empsorted:
-            print(f"Nombre: {emp.nombre} Apellido: {emp.apellido} Salario: {emp.salario}")
+            print(f"Nombre: {emp.nombre:<15} Apellido: {emp.apellido:<15} Salario: {emp.salario}")
 
     def mediaSal(self):
         listaSal=list(map(lambda emp: emp.salario, self.empleados))

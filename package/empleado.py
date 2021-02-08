@@ -1,5 +1,5 @@
 
-from .persona import Persona
+from .Persona import Persona
 from .departamento import Departamento
 from .User import User
 # print(type(Persona),Persona)
