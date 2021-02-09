@@ -43,6 +43,8 @@ def guardar(dicc):
     print(maximo)
     print(minimo)
     print(media)
-
+    output.writelines("Máximo;"+";".join(str(v) for v in maximo))
+    output.writelines("Mínimo;"+";".join(str(v) for v in minimo))
+    output.writelines("Media;"+";".join(str(v) for v in media))
 
 guardar(empresa)
