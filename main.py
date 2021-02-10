@@ -4,6 +4,7 @@
 from package.persona import Persona
 from package.empleado import Empleado
 from package.departamento import Departamento
+import csv
 
 def main():
 
@@ -25,6 +26,10 @@ def main():
     departamento_calidad.sort( )
 
     print (departamento_calidad)
+
+    path = 'C:/Users/cice.AULA4POV14S/Pictures/Saved Pictures/CICE-M-509'
+    fichero = open (path+'/fichero.csv', 'w')
+    fichero.close
 
 main()
 
