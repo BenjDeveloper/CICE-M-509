@@ -12,7 +12,7 @@ class Empleado(Persona,User):
         User.__init__(self,email,clave)
         self.pertenece_departamento=None  #! instancia
         
-        self.salario=salario
+        self.salario=int(salario)
         self.horario=horario
         self.diainicio=horario.split(" ")[0].split("-")[0]
         self.diafinal=horario.split(" ")[0].split("-")[1]
