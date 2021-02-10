@@ -15,11 +15,11 @@
 class Usuario():
     email = 'willyg.ginestal@gmail.com'
     contraseña = '101010'
-    print('\nEl email del usuario es:',email)
-    print('La contraseña del usuario es:',contraseña,'\n')
+    #print('\nEl email del usuario es:',email)
+    #print('La contraseña del usuario es:',contraseña,'\n')
     activo = True
 
-    print('Vamos a validar este email y esta contraseña...\n')
+    #print('Vamos a validar este email y esta contraseña...\n')
     
     def __init__(self, email, contraseña):
         self.email = email
@@ -31,8 +31,9 @@ class Usuario():
         else:
             return False
             
-    
+"""    
 anonimo = Usuario('willyg.ginestal@gmail.com', '101010')
 print('El email introducido es willyg.ginestal@gmail.com''\n''La contraseña introducida es 101010\n')
 print('Comprobamos....',anonimo.validation('willyg.ginestal@gmail.com', '101010'))
 print('El email y contraseña son correctos!!!\tContinuemos...\n')
+"""

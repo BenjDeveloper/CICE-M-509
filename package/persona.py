@@ -73,7 +73,7 @@ class Persona():
             return año[2]
         else:
             return haño
-
+"""
 anonimo = Persona('Guillermo', 'Ginestal','7/03/1989','204290350Y','Calle Avila' )
 
 print(anonimo)
@@ -87,7 +87,7 @@ print('Editando la fecha de nacimiento...')
 print('Día >>>',anonimo.setDia(16))
 print('Mes >>>',anonimo.setDia(12))
 print('Año >>>',anonimo.setDia(1988))
-
+"""
 
 
 

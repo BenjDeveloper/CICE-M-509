@@ -30,7 +30,7 @@ class Departamento:
 
     def reporte_empleados(self):
         dic_nombre_salario = {}
-        for nombre in self.lista_empleados:
+        for nombre in self.lista_emp:
             dic_nombre_salario[nombre.__dict__['nombre']] = nombre.__dict__['salario']
         lista_salario = list(dic_nombre_salario.values())
         lista_salario.sort()
