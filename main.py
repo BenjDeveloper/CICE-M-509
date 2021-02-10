@@ -59,7 +59,7 @@ def main():
     for row in listaañadir:
         escritura.writerow(row)
 
-
+    fichero.close()
 
 
 
