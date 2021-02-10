@@ -10,19 +10,20 @@
 #     del Departamento, tambien un metodo que imprima un reporte de los empleados y sus salarios,
 #     ordenados de mayor a menor en funcion de sus salarios
 
-from empleado import Empleado
+from .empleado import Empleado
 class Departamento:
     e1 = Empleado(1400,'L-V 8H a 18H','raulito@gmail.com','asafsfafsf','Raúl','González','González', '04358213-Z', 'Calle Piedra 28')
     e2 = Empleado(1800,'L-S 9H a 19H','jose@gmail.com','afhsdjfsdf','Jose','Galardo','G', '04358213-Z', 'Calle Piedra 28')
     lista_empleados = [e1, e2]
 
-    def __init__(self, departamento_nombre:str, departamento_telefono:str):
+    def __init__(self, departamento_nombre:str, departamento_telefono:str, lista_emp):
         self.departamento_nombre = departamento_nombre
         self.departamento_telefono = departamento_telefono
+        self.lista_emp = lista_emp
 
     def media_salarial(self):
         lista_salario = []
-        for salario in self.lista_empleados:
+        for salario in self.lista_emp:
             lista_salario.append(salario.__dict__['salario'])
         suma_salarial = sum(lista_salario) / len(lista_salario)
         return f"La media salarial es: {suma_salarial} euros"
@@ -44,6 +45,6 @@ class Departamento:
     def __str__(self):
         return f'\n Nombre del departamento: {self.departamento_nombre}\n Teléfono del departamento: {self.departamento_telefono}'
 
-departamento = Departamento('Desarrollo','916374567')
-print(departamento.media_salarial())
-print(departamento.reporte_empleados())
+# departamento = Departamento('Desarrollo','916374567')
+# print(departamento.media_salarial())
+# print(departamento.reporte_empleados())
