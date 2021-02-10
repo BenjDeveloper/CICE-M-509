@@ -20,16 +20,11 @@ def main():
 
     x =  [empleado_1, empleado_2, empleado_3, empleado_4, empleado_5, empleado_6, empleado_7, empleado_8, empleado_9, empleado_10   ]
 
-    #print (empleado_1.salario)
-    #print(empleado_1)
-
     departamento_calidad = Departamento ('calidad', '987654321', x)
 
-    departamento_calidad.empleados.sort( key = lambda Empleado : Empleado.salario, reverse=False )
+    departamento_calidad.sort( )
 
     print (departamento_calidad)
-    #print (f' El SALARIO MEDIO del departamento es: {departamento_calidad.media_salarial()}  '.center (70, '='))
-    # departamento_calidad.reporte_empleados()
 
 main()
 
