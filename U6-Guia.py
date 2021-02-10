@@ -14,11 +14,39 @@
 #     fecha de nacimiento:str -> 'dia-mes-año' 
 #     dni:str
 #     direccion:list
+class Persona (object):
+    def __init__ (self, nombre, apellido, fecha_de_nacimiento, dni, direccion ):
+        self.nombre = nombre
+        self.apellido = apellido
+        self.__fecha_de_nacimiento = fecha_de_nacimiento
+        self.dni = dni
+        self.direccion = direccion
+
+    def __str__ (self):
+        return f'''
+        nombre : {self.nombre} 
+        apellido : {self.apellido}
+        fecha de nacimiento : {self.__fecha_de_nacimiento }
+        DNI : {self.dni} 
+        direccion : {self.direccion}
+        '''
+albita = Persona ('Alba', 'Herresanchez', '12-05-2002', '123455678', ['San Sebastian 13', 'Torrejon'])
+print (albita)
+#! paty revisa esta seccion que tiene un detalle en la funcio foo
 
 # 2.- Edite la clase Persona y agrege un metodo que permita concatenar 
 #     el nombre completo (nombre y apellido):
 #     def getNombreCompleto(self):
-#         pass
+#         
+
+def getNombreCompleto(self):
+    return f' El nombre completo de la persona es:  {self.nombre}  {self.apellido}'
+
+print (getNombreCompleto(albita))
+
+
+
+
     
 # 3.- Edite la clase Persona y 3 metodos que permita adquirir(getter) el dia , el mes y el año
 #     nota: el atributo fecha_nacimiento es un str ( String )
