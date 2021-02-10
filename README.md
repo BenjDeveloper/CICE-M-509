@@ -74,7 +74,7 @@ Ejercicios
 + 12)Separe el archivo de las clases en un paquete como se reviso en el 'ejemplo5_clase' y 
      luego cree un archivo main.py donde ubicara la 
      pregunta 10 y todas las funcionalidadesde que no pertenezcan a ninguna clase
-    
+
 + 13)Cree una clase Departamento con los siguientes atributos:
      nombre:str
      telefono:str
