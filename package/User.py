@@ -7,7 +7,8 @@ class User (object):
         self.activo=activo
     def __str__(self):
         activostr="online" if self.activo==True else "ofline"
-        return f"email: {self.email}, clave: {self.clave}, activo: {activostr}"
+        # return f"email: {self.email}, clave: {self.clave}, activo: {activostr}"
+        return f"email: {self.email}, activo: {activostr}"
 
     def validacion(self, param_email, param_clave):
         if param_email==self.email and param_clave==self.clave and self.activo==True:
