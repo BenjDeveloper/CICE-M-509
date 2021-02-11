@@ -18,9 +18,6 @@ class Employee(Person, User):
     def __str__(self):
         return f"{self.name} {self.last_name} {self.dni} {self.email} {self.salary} {self.schedule}"
 
-#obj = Employee('darius', 'kan', 'M-000-T', 'aaa@gmail.com', 'D4rk3ns5', 30.000, '10AM')
-
-#print(obj.__dict__)
 
 
 
