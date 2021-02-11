@@ -12,7 +12,7 @@ def main():
 
     path = '/Users/veronica/Documents/GitHub/CICE-M-509/'
     fichero = open( path+'/fichero.csv', 'r')
-
+    
     lectura = csv.reader(fichero) 
     lista = [] 
     for fila in lectura:
