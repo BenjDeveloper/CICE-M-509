@@ -27,7 +27,7 @@ def main():
 
     print (departamento_calidad)
 
-    path = 'C:/Users/cice.AULA4POV14S/Pictures/Saved Pictures/CICE-M-509'
+    path = 'C:/Users/cice.AULA4POV14S/Music/CICE-M-509'
     fichero = open (path+'/fichero.csv', 'w')
     fichero.close
 
