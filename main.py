@@ -4,6 +4,7 @@
 import csv
 import package.departamento as depa
 import package.empleado as Empleado
+from package.Gerencia import Gerencia
 # import package.persona
 # import package.User
 
@@ -81,6 +82,10 @@ def main():
 
     fichero.close()
 
+    departamento_contabilidad = depa.Departamento("contabilidad","91244444")
+    alphatechsl=Gerencia("Alphatech S.L.")
+    alphatechsl.setDepartamentos(departamento_informatica,departamento_contabilidad)
+    print(alphatechsl)
 
 
 
