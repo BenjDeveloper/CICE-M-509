@@ -10,7 +10,7 @@ import csv
 #FUNCION MAIN
 def main():
 
-    path = ''
+    path = '/Users/veronica/Documents/GitHub/CICE-M-509/'
     fichero = open( path+'/fichero.csv', 'r')
 
     lectura = csv.reader(fichero) 
