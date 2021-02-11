@@ -46,12 +46,22 @@ class ManageLadder:
         else:
             department_file = open('DATABASE/DEPARTMENTS.csv', 'r')
             file_d = csv.reader(department_file)
-            for i in file_d:
-                for index_d, x in enumerate(i, start=1):
-                    print(f"{index_d}._ {x}")
+            print("DEPARTAMENTO","\t\t", "TELEFONO")
+            for index_d, i in enumerate(file_d, start=1):
+                print(f"{index_d}._{i[0]}", "\t", i[1])
+            department_file.close()
     
     def updateDepartment(self):
         pass
+    
+
+    def deleteDepartment(self):
+        if os.stat('DATABASE/DEPARTMENTS.csv').st_size == 0:
+            print('No hay ningun departamento')
+        else:
+            department_file = open("DATABASE/DEPARTMENTS.csv", 'r')
+            file_d = csv.reader(department_file)
+            print(dir(file_d))
 
         
         

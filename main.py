@@ -4,18 +4,13 @@ from package.employee import Employee
 from package.department import Department
 from package.managaError import ManageError
 from package.manage import ManageLadder
+from header import header
 import csv
 
 def main():
-    print("#########################################################################")
-    print("#########################################################################")
-    print("##     ##       ########  #######    #######    ########   #######     ##")
-    print("##     ##       ##    ##  ##     ##  ##     ##  ##         ##    ##    ##")
-    print("##     ##       ########  ##     ##  ##     ##  ########   ######      ##")
-    print("##     ##       ##    ##  ##     ##  ##     ##  ##         ##    ##    ##")
-    print("##     #######  ##    ##  #######    #######    ########   ##     ##   ##")
-    print("#########################################################################")
-    print("#########################################################################")
+    header()
+    
+                
     #print("1._Administrar departamentos \n2._Administrar Empleados")
     #option = int(input("Eliga una option: "))
 
@@ -27,7 +22,10 @@ def main():
     #data_file1 = open('DATABASE/HHRR.csv', 'w')
     
     ma = ManageLadder()
-    ma.createDepartment()
+    ma.deleteDepartment()
 
 
 main()
+
+
+
