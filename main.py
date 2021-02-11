@@ -98,7 +98,100 @@ def main():
     depart_informatica.printEmp()
     print(depart_informatica.mediaSal())
 
+def menu(empresaExistente):
+    def depOemp():
+        seleccion=input("seleccione el elemento sobre el que realizar la accion: \n\tD - Departamento \n\tE - Empleado \nOpcion seleccionada: ")
+        if seleccion!="D" and seleccion!="E":
+            print("ERROR: opcion no valida")                                                                                        #!implementar errores
+            # continue
+            pass
+        return seleccion
+    opciones=["C","R","U","D"]
+
+    print("Editar empleados y/o departamentos")
+    opcion=input("""seleccione la accion que desea realizar:
+    C - Create - Crear un Objeto
+    R - Read   - Consultar Exitencia 
+    U - Update - Editar Datos
+    D - Delete - Eliminar Objeto
+Opcion seleccionada: """)
+    if opcion not in opciones:
+        print("ERROR: opcion no valida")                                                                                                #!implementar errores
+        # continue
+        pass
+
+    if opcion=="C":
+        if depOemp()=="D":
+            nombre=input("Introduzca el nombre del departamento: ")
+            telefono=input("Introduzca el telefono del departamento: ")
+            midepartamento=depa.Departamento(nombre,telefono)
+            empresaExistente.setDepartamentos(midepartamento)
+            print(f"Se ha creado el departamento {midepartamento}")
+        # if depOemp()=="E":
+        else:
+            nombredepartamento=input("Introduzca el nombre del departamento al que pertenece el Empleado: ")
+            nombre=input("Introduzca el nombre del Empleado: ")
+            apellido=input("Introduzca el apellido del Empleado: ")
+            fecha=input("Introduzca el fecha del Empleado: ")
+            dni=input("Introduzca el dni del Empleado: ")
+            direccion=input("Introduzca el direccion del Empleado: ")
+            email=input("Introduzca el email del Empleado: ")
+            clave=input("Introduzca el clave del Empleado: ")
+            salario=input("Introduzca el salario del Empleado: ")
+            horario=input("Introduzca el horario del Empleado: ")
+            miempleado=Empleado(nombre,apellido,fecha,dni,direccion,email,clave,salario,horario)                                        #!implementar errores
+            empresaExistente.getDepartamento(nombredepartamento).setEmpleados(miempleado)                                               #!implementar errores
+            print(f"Se ha creado el empleado {miempleado}, en el departamento {nombredepartamento}")
+
+    if opcion=="R":
+        if depOemp()=="D":
+            nombre=input("Introduzca el nombre del departamento que quiere comprobar: ")
+            if empresaExistente.getDepartamento(nombre)==None:
+                print(f"El departamento {nombre} no existe")
+            else:
+                print(f"El departamento {nombre} si existe")
+        # if depOemp()=="E":
+        else:
+            nombre=input("Introduzca el nombre del empleado que quiere comprobar: ")
+            existe=False
+            for departamento in empresaExistente.departamento:
+                for empleado in departamento.empleados:
+                    if empleado.nombre==nombre:
+                        print(f"El empleado {nombre} si existe")
+                        existe=True
+            if existe==False:
+                print(f"El empleado {nombre} no existe")
+    
 
 
 
-main()
+
+
+    if opcion=="D":
+        if depOemp()=="D":
+            print("Tambien se va a elimnar todos los empleados del departamento que quiere Eliminar: ")
+            nombre=input("Introduzca el nombre del departamento que quiere Eliminar: ")
+            empresaExistente.departamento.remove(empresaExistente.getDepartamento(nombre))
+            print(empresaExistente)
+            print(f"El departamento {nombre} se ha eliminado")                                               #!implementar errores
+        else:
+            nombre=input("Introduzca el nombre del empleado que quiere Eliminar: ")
+            nombredepartamento=input("Introduzca el nombre del departamento al que pertenece el Empleado: ")
+            
+            existe=False
+            for index,empleado in enumerate(empresaExistente.getDepartamento(nombredepartamento).empleados):
+                if empleado.nombre==nombre:
+                    empresaExistente.getDepartamento(nombredepartamento).empleados.pop(index)
+                    print(f"El empleado {nombre} se ha eliminado")
+                    existe=True
+                    break
+            if existe==False:
+                print(f"El empleado {nombre}, o el departamento no existe")                                               #!implementar errores
+                    
+
+
+# main()
+
+alphatechsl=Gerencia("Alphatech S.L.")
+alphatechsl.setDepartamentosCSV("importempCSV\departamentos.csv")
+menu(alphatechsl)
