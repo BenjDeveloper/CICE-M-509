@@ -1,3 +1,4 @@
+nombre,apellido,fecha,dni,direccion,email,clave,salario,horario
 juan,perez,21/11/1995,712187548067K,"[sainz de baranda,44,4º,Izq]",qwerty@asdf.com,tzrtl," 1200",L-V 10H-14H
 pepe,perez,25/1/1983,313256588501E,"[sainz de baranda,44,4º,Izq]",tudul@asdf.com,ufwgk,1866,L-V 10H-14H
 sara,sanchez,16/4/1995,489725656749S,"[sainz de baranda,44,4º,Izq]",trnuf@asdf.com,kmnja," 1744",L-V 10H-14H

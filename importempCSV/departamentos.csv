@@ -1,0 +1,3 @@
+departamento,telefono,"ruta csv empleados"
+informatica,91233456,importempCSV\empleados1.csv
+contabilidad,91234444,importempCSV\empleados2.csv

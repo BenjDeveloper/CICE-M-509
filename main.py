@@ -43,50 +43,60 @@ def main():
     # fichero = open( path+'/fichero.csv', 'r')
 
 
-    listaañadir=[["Patricia","Herresanchez","5/5/1995","223233444T","iglesia2","patricia@gmail.com","jfjfur123","40000","L-V 10H-14H"],
-    ["pepe","perez","18/3/1970","12345678K","real30","pepe@gmail.com","12345","50000","L-V 10H-14H"],
-    ["maria","lopez","7/5/1992","176894045K","cordillera39","maria@gmail.com","67584","45000","L-V 10H-14H"],
-    ["jose","martin","5/5/2002","123458765H","blanco30","jose@gmail.com","9875766","30000","L-V 10H-14H"],
-    ["ana","sanchez","9/11/1976","123484567P","Sepulveda80","ana@gmail.com","12678","420000","L-V 10H-14H"],
-    ["eva","fernandez","8/10/1988","12398778L","corredera10","eva@gmail.com","129889","55000","L-V 10H-14H"],
-    ["Antonio","ruiz","28/8/1991","22765894T","lanuza11","antonio@gmail.com","123423","40000","L-V 10H-14H"],
-    ["elena","rincon","23/7/1985","12345678K","arroyo30","elena@gmail.com","98745","50000","L-V 10H-14H"],
-    ["mariano","rojo","10/8/1975","98756045K","lapaz99","mariano@gmail.com","98764","45000","L-V 10H-14H"],
-    ["luis","sanz","14/10/1985","123498675H","pinar30","luis@gmail.com","7658476","30000","L-V 10H-14H"]]
+    # listaañadir=[["Patricia","Herresanchez","5/5/1995","223233444T","iglesia2","patricia@gmail.com","jfjfur123","40000","L-V 10H-14H"],
+    # ["pepe","perez","18/3/1970","12345678K","real30","pepe@gmail.com","12345","50000","L-V 10H-14H"],
+    # ["maria","lopez","7/5/1992","176894045K","cordillera39","maria@gmail.com","67584","45000","L-V 10H-14H"],
+    # ["jose","martin","5/5/2002","123458765H","blanco30","jose@gmail.com","9875766","30000","L-V 10H-14H"],
+    # ["ana","sanchez","9/11/1976","123484567P","Sepulveda80","ana@gmail.com","12678","420000","L-V 10H-14H"],
+    # ["eva","fernandez","8/10/1988","12398778L","corredera10","eva@gmail.com","129889","55000","L-V 10H-14H"],
+    # ["Antonio","ruiz","28/8/1991","22765894T","lanuza11","antonio@gmail.com","123423","40000","L-V 10H-14H"],
+    # ["elena","rincon","23/7/1985","12345678K","arroyo30","elena@gmail.com","98745","50000","L-V 10H-14H"],
+    # ["mariano","rojo","10/8/1975","98756045K","lapaz99","mariano@gmail.com","98764","45000","L-V 10H-14H"],
+    # ["luis","sanz","14/10/1985","123498675H","pinar30","luis@gmail.com","7658476","30000","L-V 10H-14H"]]
 
-    fichero = open('empleados2.csv', 'a')
+    # fichero = open('empleados2.csv', 'a')
 
-    escritura= csv.writer(fichero)
-    for row in listaañadir:
-        escritura.writerow(row)
+    # escritura= csv.writer(fichero)
+    # for row in listaañadir:
+    #     escritura.writerow(row)
 
-    fichero.close()
+    # fichero.close()
 
 
 
-    fichero = open('empleados.csv', 'r')
+    # fichero = open('empleados.csv', 'r')
 
-    departamento_informatica = depa.Departamento("informatica","91233456")
+    # departamento_informatica = depa.Departamento("informatica","91233456")
 
-    lectura = csv.reader(fichero) 
-    lista = [] 
-    for fila in lectura:
-        empleado = Empleado.Empleado( fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8])
-        departamento_informatica.setEmpleados(empleado)
+    # lectura = csv.reader(fichero) 
+    # lista = [] 
+    # for fila in lectura:
+    #     empleado = Empleado.Empleado( fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8])
+    #     departamento_informatica.setEmpleados(empleado)
 
 
     
-    departamento_informatica.printEmp()
-    print (departamento_informatica)
-    print (departamento_informatica.mediaSal())
+    # departamento_informatica.printEmp()
+    # print (departamento_informatica)
+    # print (departamento_informatica.mediaSal())
 
-    fichero.close()
+    # fichero.close()
 
-    departamento_contabilidad = depa.Departamento("contabilidad","91244444")
+    # departamento_contabilidad = depa.Departamento("contabilidad","91233456")
+    # alphatechsl=Gerencia("Alphatech S.L.")
+    # alphatechsl.setDepartamentos(departamento_informatica,departamento_contabilidad)
+    # print(alphatechsl)
+    
+    
     alphatechsl=Gerencia("Alphatech S.L.")
-    alphatechsl.setDepartamentos(departamento_informatica,departamento_contabilidad)
+    alphatechsl.setDepartamentosCSV("importempCSV\departamentos.csv")
     print(alphatechsl)
-
+    # print(alphatechsl.getDepartamento("informatica"))
+    depart_informatica=alphatechsl.getDepartamento("informatica")
+    print()
+    print(depart_informatica)
+    depart_informatica.printEmp()
+    print(depart_informatica.mediaSal())
 
 
 
