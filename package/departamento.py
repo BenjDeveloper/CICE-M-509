@@ -12,6 +12,7 @@ class Departamento:
         for empleado in self.empleados:
             cadena += empleado.getEmpleado()
         return cadena
+
     def media_salarial (self):
         salario_sum = 0
         for x in self.empleados:
@@ -19,18 +20,7 @@ class Departamento:
             salario_media = salario_sum/ (len (self.empleados))
         return salario_media
 
-    def reporte_empleados (self):
-        lis_emple = []
-        lis_salar = []
-        for empleado in self.empleados:
-            lis_emple.append (empleado.nombre)
-            lis_salar.append (empleado.salario)
-        diccionaro_reporte = dict(zip (lis_emple, lis_salar))
-        # diccionaro_reporte = {'nombre:' : lis_emple, 'salario:' : lis_salar}
-        
-        for k,v  in diccionaro_reporte.items():
+    def sort(self,fn_lambda = lambda Empleado : Empleado.salario,  option = False ):
+        self.empleados.sort( key = fn_lambda, reverse = option )
 
-            print (f' El salario de {k}  del departamento {self.nombre.upper()} es {v} euros al año')
-
-        
 
