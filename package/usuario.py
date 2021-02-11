@@ -1,6 +1,6 @@
 class Usuario(object):
     #CONSTRUCTOR
-    def __init__(self, email:str,clave:str,activo:bool)
+    def __init__(self, email:str,clave:str,activo:bool):
         self.email = email 
         self.clave = clave 
         self.activo = activo

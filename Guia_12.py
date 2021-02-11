@@ -9,6 +9,7 @@
 # path = './MPP - Máster Programación Python - Oficial Python Institute/Unidad 12/M-509'
 
 #Parte I - ESCRITURA
+
     # fichero = open( path+'/fichero.csv', 'a')
     # fichero.write(f'Patricia,Herresanchez,15-09-71,223233444T,iglesia2,patricia@gmail.com,jfjfur123∑,True,40000,partido')
     # fichero.close()
