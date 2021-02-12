@@ -22,7 +22,7 @@ def main():
     #data_file1 = open('DATABASE/HHRR.csv', 'w')
     
     ma = ManageLadder()
-    ma.deleteDepartment()
+    ma.updateEmployee()
 
 
 main()
