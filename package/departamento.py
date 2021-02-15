@@ -7,7 +7,7 @@ class Departamento:
         self.empleados = lista_empleados
 
     def __str__ (self):
-        cadena = f''' DEPARTAMENTO {self.nombre.upper ()} -- Teléfono del departamento: {self.telefono}
+        cadena = f'''\n DEPARTAMENTO {self.nombre.upper ()} -- Teléfono del departamento: {self.telefono}
         '''
         for empleado in self.empleados:
             cadena += empleado.getEmpleado()
