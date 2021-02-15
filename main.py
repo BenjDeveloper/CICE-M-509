@@ -9,21 +9,52 @@ import csv
 
 def main():
     header()
-    
+    obj = ManageLadder()
+    shutdown = True
+    while shutdown == True:
+        option = input("1._DEPARTAMENTOS \n2._EMPLEADOS \n3._SALIR \nELIGA UNA OPCIÓN: ")
+        if option == '1':
+            go_back_to_main_menu = True
+            while go_back_to_main_menu == True:
+                department_options = input("1._CREAR DEPARTAMENTOS \n2._ACTUALIZAR DEPARTAMENTOS \
+                                        \n3._VER DEPARTAMENTOS \n4._BORRAR DEPARTAMENTOS \n5._VOLVER AL MENÚ PRINCIPAL \
+                                        \nELIGA UNA OPCIÓN: ")
+                if department_options == '1': obj.createDepartment()
+                elif department_options == '2': obj.updateDepartment()
+                elif department_options == '3': obj.readDepartment()
+                elif department_options == '4': obj.deleteDepartment()
+                elif department_options == '5': go_back_to_main_menu = exit()
+                else:
+                    print("La opción introducida no es válida")        
+            
+        elif option == '2':
+            go_back_to_main_menu = True
+            while go_back_to_main_menu == True:
+                employee_options = input("1._CREAR DEPARTAMENTOS \n2._ACTUALIZAR DEPARTAMENTOS \
+                                        \n3._VER DEPARTAMENTOS \n4._BORRAR DEPARTAMENTOS \n5._VOLVER AL MENÚ PRINCIPAL \
+                                        \nELIGA UNA OPCIÓN: ")
+                if employee_options == '1': obj.createEmployee()
+                elif employee_options == '2': obj.updateEmployee()
+                elif employee_options == '3': obj.readEmployee()
+                elif employee_options == '4': obj.deleteEmployee()
+                else:
+                    print("La opción introducida no es válida") 
+        elif option == '3':
+            shutdown = exit()
+        else:
+            print('La opción introducida no es válida') 
                 
-    #print("1._Administrar departamentos \n2._Administrar Empleados")
-    #option = int(input("Eliga una option: "))
 
-    #data_file = open('data_file.csv', 'a')
-    #read_data_file = csv.reader(data_file)
-    #for i in read_data_file:
-    #   print(i)
-    #data_file.writelines('\nKalaella,davos,F-010105-M,davos@gmail.com,deRitio,60000,14PM')
-    #data_file1 = open('DATABASE/HHRR.csv', 'w')
+
     
-    ma = ManageLadder()
-    ma.updateEmployee()
+    #ma = ManageLadder()
+    #ma.updateEmployee()
 
+def exit():
+    print("==============================================================")
+    print("==================   PROGRAM SHUTDOWN    =====================")
+    print("==============================================================")
+    return False
 
 main()
 
