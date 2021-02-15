@@ -6,8 +6,7 @@ import re
 
 
 class ManageLadder:
-    def __init__(self):
-        pass
+    
 
     #===============================================================================================
     #==================================   CRUD DEPARTAMENTOS   =====================================
@@ -53,7 +52,7 @@ class ManageLadder:
             print("DEPARTAMENTO","\t\t", "TELEFONO")
             print("----------------------------------")
             for index_d, i in enumerate(file_d, start=1):
-                if len(i[0]) < 10:
+                if len(i[0]) <= 10:
                     print(f"{index_d}._{i[0]}", "\t\t", i[1])
                 else:
                     print(f"{index_d}._{i[0]}", "\t", i[1])
@@ -77,6 +76,7 @@ class ManageLadder:
             department_file.close()
 
             lenght_list = len(list_department)
+            print("Introduzca el número del departamento que desea eliminar/actualizar")
             number_deparment = obj.checkNumber(lenght_list)
             number_deparment = number_deparment - 1
             
@@ -249,6 +249,7 @@ class ManageLadder:
             department_file = open(f"DATABASE/{chosenDepartment}", "a")
             department_file.write(f"\n{employee_data_joined}")
             department_file.close()
+        print(f"El empleado {employee_name} ha sido creado exitosamente")
 
     def readEmployee(self):
         obj = ManageLadder()
