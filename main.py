@@ -23,7 +23,18 @@ def main():
 
     #ESCRITURA DEL ARCHIVO 
     fichero = open( path+'/fichero.csv', 'a')
-    fichero.write(f'Patricia,Herresanchez,13-08-1993,36476888S,Segovia,patrihf@gmail.com,44raton55,True,1401.5,8:00-15:30')
+    nombre = input ('Agregar nombre: ')
+    apellido = input ('Agregar apellido: ')
+    fecha_nacimiento = input ('Agregar fecha de nacimiento: ')
+    dni = input ('Agregar DNI: ')
+    direccion = input ('Agregar direccion: ')
+    mail = input ('Agregar mail: ')
+    clave = input ('Agregar clave: ')
+    activo = True
+    salario = input ('Agregar salario: ')
+    horario = input ('Agregar horario: ')
+    fichero.write(f'{nombre},{apellido},{fecha_nacimiento},{dni},{direccion},{mail},{clave},{True},{salario},{horario}')
+
     
 
     
