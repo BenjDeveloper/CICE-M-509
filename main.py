@@ -168,14 +168,26 @@ Opcion seleccionada: """)
                     print(f"El departamento {nombre} si existe")
                 continue
             else:
+                # nombre=input("Introduzca el nombre del empleado que quiere comprobar: ")
+                # existe=False
+                # for departamento in empresaExistente.departamento:
+                #     for empleado in departamento.empleados:
+                #         if empleado.nombre==nombre:
+                #             print(f"El empleado {nombre} si existe")
+                #             existe=True
+                #             break
+                # if existe==False:
+                #     print(f"El empleado {nombre} no existe")
+                # continue
+
+                alphatechsl.updateAllEmpleados()
                 nombre=input("Introduzca el nombre del empleado que quiere comprobar: ")
                 existe=False
-                for departamento in empresaExistente.departamento:
-                    for empleado in departamento.empleados:
-                        if empleado.nombre==nombre:
-                            print(f"El empleado {nombre} si existe")
-                            existe=True
-                            break
+                for empleado in alphatechsl.getAllEmpleados():
+                    if empleado.nombre==nombre:
+                        print(f"El empleado {nombre} si existe")
+                        existe=True
+                        break
                 if existe==False:
                     print(f"El empleado {nombre} no existe")
                 continue
@@ -201,20 +213,20 @@ Opcion seleccionada: """)
                 # print(departoUpdate)
                 continue
             else:
-                nombredepartamento=input("Introduzca el nombre del departamento al que pertenece el Empleado que quiere actualizar: ")
+                alphatechsl.updateAllEmpleados()
                 nombre=input("Introduzca el nombre del Empleado que quiere actualizar: ")
                 existe=False
-                for empleado in empresaExistente.getDepartamento(nombredepartamento).empleados:
+                for empleado in alphatechsl.getAllEmpleados():
                     if empleado.nombre==nombre:
-                        
+                        print(f"El empleado {nombre} si existe")
                         existe=True
                         break
                 if existe==False:
-                    print(f"El empleado {nombre}, o el departamento no existe") 
+                    print(f"El empleado {nombre} no existe")
                     continue
                 # print(empleado)
                 nombre=input("Introduzca el nuevo nombre del Empleado: ")
-                empleado.nombre=empleado.nombre if nombre=="" else nombre
+                empleado.nombre=empleado.nombre if nombre=="" else nombre                   #condicional ternario
                 apellido=input("Introduzca el nuevo apellido del Empleado: ")
                 empleado.apellido=empleado.apellido if apellido=="" else apellido
                 fecha=input("Introduzca el nuevo fecha del Empleado: ")
@@ -268,4 +280,28 @@ Opcion seleccionada: """)
 
 alphatechsl=Gerencia("Alphatech S.L.")
 alphatechsl.setDepartamentosCSV("importempCSV\departamentos.csv")
+alphatechsl.updateAllEmpleados()
+print(alphatechsl.departamento)
+# print(alphatechsl.departamento['informatica'].empleados)
+# print(alphatechsl.getDepartamento('informatica'))
+# print(alphatechsl.getDepartamento('infor'))
+# print('hey')
+
+# print(alphatechsl.setAllEmpleados(*alphatechsl.departamento['informatica'].empleados))
+# print(alphatechsl.setAllEmpleados(*alphatechsl.departamento['contabilidad'].empleados))
+# print(alphatechsl.getAllEmpleados())
+# # print(alphatechsl.__allempleados)
+
+# # print(type(alphatechsl.getAllEmpleados))
+
+# # for e in alphatechsl.departamento['informatica'].empleados:
+# #     # print(e.nombre)
+# #     # print(e)
+# #     print(type(e))
+
+# for e in alphatechsl.getAllEmpleados():
+#     print(e.nombre)
+#     # print(e)
+#     print(type(e))
+
 menu(alphatechsl)
