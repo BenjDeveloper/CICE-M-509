@@ -21,6 +21,7 @@ def main():
         empleado = Empleado( fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9])
         lista.append(empleado)
 
+    #CREACION DEL MENU
     #ESCRITURA DEL ARCHIVO 
     fichero = open( path+'/fichero.csv', 'a')
     nombre = input ('Agregar nombre: ')
