@@ -35,7 +35,6 @@ def guardaEmpleadoInput(path, name_file):
     
     fichero.close()
 
-
 def ver_informacion(dic_departamentos):
     print()
     for nombre_depart, depar in dic_departamentos.items():
@@ -47,6 +46,9 @@ def ver_informacion(dic_departamentos):
 
 
 
+def cargar_gerencia(nombre):
+    gerencia = Gerencia(nombre):
+    return gerencia
 
 def cargar_departamenos(path, name_file):
     fichero = open( path + name_file, 'r')
@@ -62,7 +64,6 @@ def cargar_departamenos(path, name_file):
 
     fichero.close()
     return dic_departamentos   
-
 
 def cargar_empleados(path, file_empleados, file_departamentos):
     fichero = open( path + file_empleados, 'r')
@@ -85,8 +86,9 @@ def main():
     file_empleados = '/fichero_empleados.csv'
     file_departamentos = '/fichero_departamentos.csv'
     
-    #! EMPLEADOS
-    dic_departamentos = cargar_empleados(path, file_empleados, file_departamentos) 
+    #! CARGA GLOBAL
+    gerencia = cargar_gerencia('McDonals')
+    gerencia.lista_departametos = cargar_empleados(path, file_empleados, file_departamentos) 
 
 main()
 
