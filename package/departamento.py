@@ -1,10 +1,10 @@
 
 from .empleado import Empleado
 class Departamento:
-    def __init__ (self, nombre, telefono,lista_empleados = []):
+    def __init__ (self, nombre, telefono):
         self.nombre = nombre
         self.telefono = telefono
-        self.empleados = lista_empleados
+        self.empleados = []
 
     def __str__ (self):
         cadena = f'''\n DEPARTAMENTO {self.nombre.upper ()} -- Teléfono del departamento: {self.telefono}
