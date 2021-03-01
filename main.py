@@ -2,6 +2,7 @@
 # EJEMPLO DE MANEJO  DE REPOSITORIOS Y CLASES POR MEDIO DE PAQUETES
 
 from os import system
+from package.empleado import Empleado
 
 
 def pausa():
