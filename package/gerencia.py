@@ -1,12 +1,12 @@
-
+from package.empleado import Empleado
+import csv
+import os
 class Gerencia():
 
     #CONSTRUCTOR
     def __init__(self, nombre_empresa):
         self.nombre_empresa = nombre_empresa
-from package.empleado import Empleado
-import csv
-import os
+
 
 #? 2) EJERCICIO
 # agrege una clase al paquete que permita manejar una lista del departamento 
