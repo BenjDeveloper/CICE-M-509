@@ -27,17 +27,17 @@ def main():
     # departamento_matematicas = Departamento('Matemáticas', '773284936')
     # departamento_diseño = Departamento('Diseño gráfico', '266493817')
 
-    # cice = Gerencia('CICE')
+    cice = Gerencia('CICE')
 
-    # path_prog = Path('./UNIDAD 7/CICE-M-509/empl_programacion.csv')
-    # path_mat = Path('./UNIDAD 7/CICE-M-509/empl_matematicas.csv')
-    # path_dis = Path('./UNIDAD 7/CICE-M-509/empl_diseño.csv')
+    path_prog = Path('./UNIDAD 7/CICE-M-509/empl_programacion.csv')
+    path_mat = Path('./UNIDAD 7/CICE-M-509/empl_matematicas.csv')
+    path_dis = Path('./UNIDAD 7/CICE-M-509/empl_diseño.csv')
 
-    # cargas_pendientes = {departamento_programacion:path_prog,departamento_matematicas:path_mat,departamento_diseño:path_dis}
+    cargas_pendientes = {departamento_programacion:path_prog,departamento_matematicas:path_mat,departamento_diseño:path_dis}
 
-    # cice.carga_empleados(cargas_pendientes)
+    cice.carga_empleados(cargas_pendientes)
 
-    # cice.muestra_departamentos()
+    cice.muestra_departamentos()
 
     # print(f'Media: {departamento_programacion.media_salarial():.2f}\n')
     # print(f'Reporte salarial del departamento "{departamento_programacion.nombre}" ordenado de mayor a menor salario:\n{departamento_programacion.reporte_salarios()}')
@@ -45,7 +45,7 @@ def main():
     runing = True
 
     while runing:
-        menu_principal()
+        cice.menu_principal()
 
         input('pulse una tecla para continuar')
 
