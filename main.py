@@ -4,7 +4,6 @@ from package.usuario import Usuario
 from package.empleado import Empleado
 from package.departamento import Departamento
 from package.gerencia import Gerencia
-from package.utilidades import *
 from pathlib import Path
 import csv
 
@@ -23,15 +22,15 @@ def main():
     # print(f"Validacion: {yo.validacion('isargp@gmail.com', 'clavecita')}\n")
 
     
-    # departamento_programacion = Departamento('Programación Python', '911652637')
-    # departamento_matematicas = Departamento('Matemáticas', '773284936')
-    # departamento_diseño = Departamento('Diseño gráfico', '266493817')
+    departamento_programacion = Departamento('Programación Python', '911652637')
+    departamento_matematicas = Departamento('Matemáticas', '773284936')
+    departamento_diseño = Departamento('Diseño gráfico', '266493817')
 
     cice = Gerencia('CICE')
 
-    path_prog = Path('./UNIDAD 7/CICE-M-509/empl_programacion.csv')
-    path_mat = Path('./UNIDAD 7/CICE-M-509/empl_matematicas.csv')
-    path_dis = Path('./UNIDAD 7/CICE-M-509/empl_diseño.csv')
+    path_prog = Path('C:/Users/Isabel/Documents/PYTHON/MPP/UNIDAD 7/CICE-M-509/empl_programacion.csv')
+    path_mat = Path('C:/Users/Isabel/Documents/PYTHON/MPP/UNIDAD 7/CICE-M-509/empl_matematicas.csv')
+    path_dis = Path('C:/Users/Isabel/Documents/PYTHON/MPP/UNIDAD 7/CICE-M-509/empl_diseño.csv')
 
     cargas_pendientes = {departamento_programacion:path_prog,departamento_matematicas:path_mat,departamento_diseño:path_dis}
 
@@ -39,14 +38,16 @@ def main():
 
     cice.muestra_departamentos()
 
+    cice.muestra_empleados()
+
     # print(f'Media: {departamento_programacion.media_salarial():.2f}\n')
     # print(f'Reporte salarial del departamento "{departamento_programacion.nombre}" ordenado de mayor a menor salario:\n{departamento_programacion.reporte_salarios()}')
     
-    runing = True
+    # runing = True
 
-    while runing:
-        cice.menu_principal()
+    # while runing:
+    #     cice.menu_principal()
 
-        input('pulse una tecla para continuar')
+    #     input('pulse una tecla para continuar')
 
 main()
