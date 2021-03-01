@@ -1,3 +1,6 @@
+from os import system
+
+
 # 1.- Cree una clase Persona con los siguientes atributos: 
 #     nombre:str 
 #     apellido:str 
@@ -73,21 +76,32 @@ class Persona():
             return año[2]
         else:
             return haño
-"""
-anonimo = Persona('Guillermo', 'Ginestal','7/03/1989','204290350Y','Calle Avila' )
-
-print(anonimo)
-print(anonimo.getNombreCompleto())
-print('Día >>>',anonimo.getDia())
-print('Mes >>>',anonimo.getMes())
-print('Año >>>',anonimo.getAño(),'\n')
-
-print('Editando la fecha de nacimiento...')
-
-print('Día >>>',anonimo.setDia(16))
-print('Mes >>>',anonimo.setDia(12))
-print('Año >>>',anonimo.setDia(1988))
-"""
 
 
+"""def main():
+    titulo ='---Bienvenido al respaso de la unidad 1 a la 5---'
+    opciones = ['1. consulta de tipos de datos',
+                '2. hacer operacion selecionada',
+                '3. la wiki',
+                '4. Operaciones especiales',
+                '5. OPCION DE PRUEBA',
+                '0. salida'
+                ]
+    nivel = 0
+    salida = True
+    while salida == True:
+        system('cls') # system('clear') 
 
+        opcion = menu(nivel, titulo, opciones)
+
+        if   opcion == '1': opcion_1()
+        elif opcion == '2': opcion_2()   
+        elif opcion == '3': opcion_3()
+        elif opcion == '4': opcion_4()
+        elif opcion == '5': pass
+        elif opcion == '0': salida = opcion_0()
+        else: 
+            print('la opcion seleccionada no se encuentra dispobible, intente nuevamente')
+            pausa()
+
+main()"""

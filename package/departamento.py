@@ -16,10 +16,10 @@ class Departamento:
     e2 = Empleado(1800,'L-S 9H a 19H','jose@gmail.com','afhsdjfsdf','Jose','Galardo','G', '04358213-Z', 'Calle Piedra 28')
     lista_empleados = [e1, e2]
 
-    def __init__(self, departamento_nombre:str, departamento_telefono:str, lista_emp):
+    def __init__(self, departamento_nombre:str, departamento_telefono:str):
         self.departamento_nombre = departamento_nombre
         self.departamento_telefono = departamento_telefono
-        self.lista_emp = lista_emp
+        self.lista_emp = []
 
     def media_salarial(self):
         lista_salario = []
