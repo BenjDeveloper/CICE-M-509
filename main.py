@@ -11,8 +11,15 @@ def pausa():
 def opcion_1( lista_departamento):
     print('opcion 1 - Departameno - Create')
     objeto_departamento = Departamento("RRHH", " 5555-5555-55" )
-    print(objeto_departamento)
-    lista_departamento.append(objecto_departamento)
+    si_existe_departamento = False
+    for i in lista_departamento:
+        if i.nombre == objeto_departamento.nombre:
+            si_existe_departamento = True
+    if si_existe_departamento == False:
+        lista_departamento.append(objeto_departamento)
+        print(objeto_departamento)
+    else:
+        print("El departamento ya esta creado")
     pausa()
 
 def opcion_2():
