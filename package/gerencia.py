@@ -29,8 +29,11 @@ class Gerencia():
 
     def carga_empleados(self, cargas):
 
+        #recorre departamento
         for depart in cargas:
+            #si no existe
             if not depart in self.departamentos:
+                #se agrega al csv
                 self.departamentos.append(depart)
                 print(f'\n{depart.nombre} agregado a la lista de departamentos de {self.empresa}')    
             f = open(cargas[depart],'r')
