@@ -4,6 +4,7 @@
 from os import system
 from package.empleado import Empleado
 from package.departamento import Departamento
+from package.gerencia import Gerencia
 
 def pausa():
     input('presione enter para continuar...') 
@@ -49,7 +50,7 @@ def opcion_3(dic_departamento):
 
         atributo = input("Agrege nombre del atributo que desea editar: " ) # nombre, telefono, empleados
         valor = input("Agrege valor del atributo anterior que desea editar: " )
-        if atributo != 'empleados'; 
+        if atributo != 'empleados': 
             setattr(dic_departamento[nombre_departamento], atributo, valor)
         
         if atributo == 'nombre':
@@ -110,7 +111,6 @@ def opcion_5(lista_departamento, dic_departamento):
         #             print(departamento)
     pausa()
 
-
 def opcion_6(dic_departamento):
     print('opcion 6 - Empleado - Read')
     dni_empleado = input("Agrege el DNI del empleado que desea consultar:")
@@ -151,9 +151,11 @@ def opcion_8(dic_departamento):
 
 def main():
 
-    lista_departamento = []
-    dic_departamento = {}
+    objeto_gerencia = Gerencia('Dainese')
+    objeto_gerencia.dic_departametos = {}
 
+    lista_departamento = []
+    
     salida = True
     while salida == True:
         system('clear') # system('cls') 
@@ -170,14 +172,14 @@ def main():
 
         opcion = input('selecione una:')
 
-        if   opcion == '1': opcion_1( lista_departamento, dic_departamento) #Departamento - Create
-        elif opcion == '2': opcion_2(dic_departamento) #Departamento - Read  
-        elif opcion == '3': opcion_3(dic_departamento) #Departamento - Update
-        elif opcion == '4': opcion_4(dic_departamento) #Departamento - Delete
-        elif opcion == '5': opcion_5(lista_departamento,dic_departamento) #Empleado - Create
-        elif opcion == '6': opcion_6(dic_departamento) #Empleado - Read
-        elif opcion == '7': opcion_7() #Empleado - Update
-        elif opcion == '8': opcion_8(dic_departamento) #Empleado - Delete
+        if   opcion == '1': opcion_1( lista_departamento, objeto_gerencia.dic_departametos) #Departamento - Create
+        elif opcion == '2': opcion_2(objeto_gerencia.dic_departametos) #Departamento - Read  
+        elif opcion == '3': opcion_3(objeto_gerencia.dic_departametos) #Departamento - Update
+        elif opcion == '4': opcion_4(objeto_gerencia.dic_departametos) #Departamento - Delete
+        elif opcion == '5': opcion_5(lista_departamento,objeto_gerencia.dic_departametos) #Empleado - Create
+        elif opcion == '6': opcion_6(objeto_gerencia.dic_departametos) #Empleado - Read
+        elif opcion == '7': opcion_7(objeto_gerencia.dic_departametos) #Empleado - Update
+        elif opcion == '8': opcion_8(objeto_gerencia.dic_departametos) #Empleado - Delete
         elif opcion == '0': 
             print('Adios...')
             pausa()
@@ -190,3 +192,24 @@ def main():
 main()
 
 
+# ! GERENCIA 
+#         Nombre
+# ?         dic_departametos {
+#                             'nombre':objeto_departamento,
+# !                             'RRHH':objeto_departamento_RRHH
+#                                                             nombre
+#                                                             telefono
+# ?                                                             empleados {
+# !                                                                         'dni':objeto_empleado
+#                                                                                             nombre
+#                                                                                             apellido
+#                                                                                             fecha nacimiento
+#                                                                                             direccion
+#                                                                                             dni
+#                                                                                             horario
+#                                                                                             email 
+#                                                                                             clave
+#                                                                                             salario
+#                                                                                             activo
+#                                                             }
+#         }
