@@ -4,6 +4,7 @@
 from os import system
 from package.empleado import Empleado
 from package.departamento import Departamento
+from package.gerencia import Gerencia
 
 def pausa():
     input('presione enter para continuar...') 
@@ -41,8 +42,24 @@ def opcion_2(dic_departamento):
 
     pausa()
 
-def opcion_3():
+def opcion_3(dic_departamento):
     print('opcion 3 - Departameno - Update')
+    nombre_departamento = input("Agrege el Nombre del departamento que desea ver:")
+    if nombre_departamento in dic_departamento.keys():
+        print(dic_departamento[nombre_departamento])
+
+        atributo = input("Agrege el nombre del atributo que desea editar: ") #nombre, telefono, empleados
+        valor = input("Agrege el atributo anterior que desea editar: ")
+        if atributo in ['nombre', 'telefono']:
+            setattr(dic_departamento[nombre_departamento], atributo, valor)
+        
+        if atributo == 'nombre':
+            objeto_departamento = dic_departamento.nombre(nombre_departamento)
+            dic_departamento[objeto_departamento.nombre] = objeto_departamento
+        
+        print(dic_departamento[nombre_departamento])
+
+
     pausa()
 
 def opcion_4(dic_departamento):
@@ -115,8 +132,22 @@ def opcion_6(dic_departamento):
 
     pausa()
 
-def opcion_7():
-    print('opcion 7')
+def opcion_7(dic_departamento):
+    print('opcion 7 - Empleado - Update')
+    nombre_departamento = input('Departamento que desea ver: ')
+    dni_empleado = input('Agrega el DNI: ')
+        
+    if nombre_departamento in dic_departamento.keys():
+        if dni_empleado in dic_departamento[nombre_departamento].empleados.keys():
+            atributo = input("Introduce el atributo que deseas editar: ")
+            valor = input("Agregue el valor del atributo anterior que desea editar:")
+            if atributo in ["nombre", "apellido", "fecha_nacimiento", "direccion", "email", "clave", "activo", "salario", "horario"]:
+                setattr(dic_departamento[nombre_departamento].empleados[dni_empleado],atributo,valor)
+        else: 
+            print('Dni no registrado')
+    else: 
+        print('El departamento no existe')
+
     pausa()
 
 def opcion_8(dic_departamento):
@@ -137,6 +168,10 @@ def opcion_8(dic_departamento):
 
 def main():
 
+    objeto_gerencia = Gerencia('Dainese')
+    objeto_gerencia.dic_departametos = {}
+
+
     lista_departamento = []
     dic_departamento = {}
 
@@ -156,14 +191,14 @@ def main():
 
         opcion = input('selecione una:')
 
-        if   opcion == '1': opcion_1( lista_departamento, dic_departamento) #Departamento - Create
-        elif opcion == '2': opcion_2(dic_departamento) #Departamento - Read  
-        elif opcion == '3': opcion_3(dic_departamento) #Departamento - Update
-        elif opcion == '4': opcion_4(dic_departamento) #Departamento - Delete
-        elif opcion == '5': opcion_5(lista_departamento,dic_departamento) #Empleado - Create
-        elif opcion == '6': opcion_6(dic_departamento) #Empleado - Read
-        elif opcion == '7': opcion_7() #Empleado - Update
-        elif opcion == '8': opcion_8(dic_departamento) #Empleado - Delete
+        if   opcion == '1': opcion_1( lista_departamento, objeto_gerencia.dic_departametos) #Departamento - Create
+        elif opcion == '2': opcion_2(objeto_gerencia.dic_departametos) #Departamento - Read  
+        elif opcion == '3': opcion_3(objeto_gerencia.dic_departametos) #Departamento - Update
+        elif opcion == '4': opcion_4(objeto_gerencia.dic_departametos) #Departamento - Delete
+        elif opcion == '5': opcion_5(lista_departamento,objeto_gerencia.dic_departametos) #Empleado - Create
+        elif opcion == '6': opcion_6(objeto_gerencia.dic_departametos) #Empleado - Read
+        elif opcion == '7': opcion_7(objeto_gerencia.dic_departametos) #Empleado - Update
+        elif opcion == '8': opcion_8(objeto_gerencia.dic_departametos) #Empleado - Delete
         elif opcion == '0': 
             print('Adios...')
             pausa()
@@ -174,5 +209,29 @@ def main():
 
 
 main()
+
+#! Gerencia
+
+#       Nombre
+#?         dic_departamentos {
+#             'nombre': objeto_departamento
+#!             'RRHH': objeto_departamento_RRHH
+#                                             nombre
+#                                             telefono
+#?                                             empleados{
+#!                                                        'dni':objeto_empleado
+#                                                                             nombre
+#                                                                             apellido
+#                                                                             fecha fecha_nacimiento
+#                                                                             direccion
+#                                                                             dni 
+#                                                                             horario
+#                                                                             email
+#                                                                             clave
+#                                                                             salario
+#                                                                             activo
+#                                             }
+
+#         }
 
 
