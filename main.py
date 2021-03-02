@@ -4,37 +4,74 @@
 from os import system
 from package.empleado import Empleado
 from package.departamento import Departamento
+from package.gerencia import Gerencia
+
+
 
 def pausa():
     input('presione enter para continuar...') 
 
-def opcion_1( lista_departamento):
+def opcion_1( lista_departamento,dic_departamento):
     print('opcion 1 - Departameno - Create')
     objeto_departamento = Departamento("RRHH", " 5555-5555-55" )
-    si_existe_departamento = False
-    for i in lista_departamento:
-        if i.nombre == objeto_departamento.nombre:
-            si_existe_departamento = True
-    if si_existe_departamento == False:
-        lista_departamento.append(objeto_departamento)
-        print(objeto_departamento)
+    #Diccionario
+    if not objeto_departamento.nombre in dic_departamento.keys():
+        dic_departamento[objeto_departamento.nombre]= objeto_departamento
     else:
         print("El departamento ya esta creado")
     pausa()
+    #Lista
+    # si_existe_departamento = False
+    # for i in lista_departamento:
+    #     if i.nombre == objeto_departamento.nombre:
+    #         si_existe_departamento = True
+    # if si_existe_departamento == False:
+    #     lista_departamento.append(objeto_departamento)
+    #     print(objeto_departamento)
+    # else:
+    #     print("El departamento ya esta creado")
+    # pausa()
 
-def opcion_2():
+def opcion_2(dic_departamento):
     print('opcion 2 - Departameno - Read')
+    # nombre_departamento = input("Nombre del departamento que desea ver:")
+    # if nombre_departamento in dic_departamento.keys():
+    #     print(dic_departamento[nombre_departamento])#Esto imprime solo un departamento
+
+    for valor_objeto_departamento in dic_departamento.values():
+        print(valor_objeto_departamento)
+
+
+
     pausa()
 
-def opcion_3():
+def opcion_3(dic_departamento,):
     print('opcion 3 - Departameno - Update')
+    nombre_departamento = input("Nombre del departamento que desea ver:")
+    if nombre_departamento in dic_departamento.keys():
+        print(dic_departamento[nombre_departamento])
+        atributo = input("Agregue el nombre del atributo que desea editar:")#Nombre,telefono,empleados
+        valor = input("Agregue el valor del atributo anterior que desea editar:")
+        if  atributo in ["nombre","telefono"]:
+            setattr(dic_departamento[nombre_departamento],atributo,valor)
+
+        if atributo == "nombre":
+            objeto_departamento = dic_departamento.pop(nombre_departamento)
+            dic_departamento[objeto_departamento.nombre]=objeto_departamento
+            print(dic_departamento[objeto_departamento.nombre])
     pausa()
 
 def opcion_4():
     print('opcion 4 - Departameno - Delete')
+    nombre_departamento = input("Nombre del departamento donde desea eliminar:")
+    if nombre_departamento in dic_departamento.keys():
+        dic_departamento.pop(nombre_departamento)
+    else:
+        print("El departmento no existe")
+        
     pausa()
 
-def opcion_5(lista_departamento):
+def opcion_5(lista_departamento,dic_departamento):
     print('opcion 5-Empleado - Create')
     
     objeto_empleado = Empleado("ricardo",
@@ -47,43 +84,86 @@ def opcion_5(lista_departamento):
                                 True,
                                 1500.00,
                                 "jornada completa")
-    print(objeto_empleado)
     nombre_departamento = input("Nombre del departamento que desea agregar el empleado:")
-    lista_empleados = []
-    si_existe_empleado = False
-    for departamento in lista_departamento:
-        if departamento.nombre == nombre_departamento:
-            print("Encontro el departamento")
-            lista_empleados = departamento.empleados
+    #Diccionario
+    if nombre_departamento in dic_departamento.keys():
+        if not objeto_empleado.dni in  dic_departamento[nombre_departamento].empleados.keys():
+            dic_departamento[nombre_departamento].empleados[objeto_empleado.dni]= objeto_empleado
+        else:
+            print("El empleado ya se encuentra registrado")
+    else:
+        print("El departamento no existe")
+    print(objeto_empleado)
+    #Lista
+    # nombre_departamento = input("Nombre del departamento que desea agregar el empleado:")
+    # lista_empleados = []
+    # si_existe_empleado = False
+    # for departamento in lista_departamento:
+    #     if departamento.nombre == nombre_departamento:
+    #         print("Encontro el departamento")
+    #         lista_empleados = departamento.empleados
 
-            for empleado in lista_empleados:
-                if objeto_empleado.dni == empleado.dni:
-                    si_existe_empleado = True
+    #         for empleado in lista_empleados:
+    #             if objeto_empleado.dni == empleado.dni:
+    #                 si_existe_empleado = True
             
-            if si_existe_empleado == False:
-                departamento.empleados.append(objeto_empleado)
-                print(departamento)
+    #         if si_existe_empleado == False:
+    #             departamento.empleados.append(objeto_empleado)
+    #             print(departamento)
     pausa()
 
 
-def opcion_6():
-    print('opcion 6')
+def opcion_6(dic_departamento):
+    print('opcion 6 - Empleado - Read')
+    dni_empleado = input("Ingresa el dni  del empleado que quieres buscar:")
+    nombre_departamento = input("Nombre del departamento donde desea buscar:")
+
+    if nombre_departamento in dic_departamento.keys():
+        if dni_empleado in dic_departamento[nombre_departamento].empleados.keys():
+            print(dic_departamento[nombre_departamento].empleados[dni_empleado])
+    
+
+
+
     pausa()
 
-def opcion_7():
+def opcion_7(dic_departamento):
+    dni_empleado = input("Introduce el dni del empleado que quieres actualizar:")
+    nombre_departamento = input("Introduce el nombre del departamento  donde esta empleado:")
+    if nombre_departamento in dic_departamento.keys():
+        if dni_empleado in dic_departamento[nombre_departamento].empleados.keys():
+
+            atributo=  input("Introduce el atributo que deseas editar:")
+            valor = input("Agregue el valor del atributo anterior que desea editar:")
+            if atributo in ["nombre","apellido", "fecha_de_nacimiento","direccion", "email", "clave", "activo", "salario", "horario"]:
+                setattr(dic_departamento[nombre_departamento].empleados[dni_empleado],atributo,valor)
+
     print('opcion 7')
     pausa()
 
 def opcion_8():
-    print('opcion 8')
+    print('opcion 8- Empleado -Delete')
+    dni_empleado = input("Ingresa el dni  del empleado que quieres buscar:")
+    nombre_departamento = input("Agrega el nombre del departamento que desea eliminar:")
+    if nombre_departamento in dic_departamento.keys():
+        if dni_empleado in dic_departamento[nombre_departamento].empleados.keys():
+            dic_departamento[nombre_departamento].empleados.pop(dni_empleado)
+        else:
+            print("El dni no se encuentra registrado en este departamento")
+    else:
+        print("El departamento no existe")
+
     pausa()
 
 
 
 def main():
 
-    lista_departamento = []
+    objeto_gerencia = Gerencia("Dainese")
+    objeto_gerencia.dic_departamentos = {}
 
+    lista_departamento = []
+    dic_departamento ={}
 
     salida = True
     while salida == True:
@@ -101,14 +181,14 @@ def main():
 
         opcion = input('selecione una:')
 
-        if   opcion == '1': opcion_1( lista_departamento) #Departamento - Create
-        elif opcion == '2': opcion_2() #Departamento - Read  
-        elif opcion == '3': opcion_3() #Departamento - Update
-        elif opcion == '4': opcion_4() #Departamento - Delete
-        elif opcion == '5': opcion_5(lista_departamento) #Empleado - Create
-        elif opcion == '6': opcion_6() #Empleado - Read
-        elif opcion == '7': opcion_7() #Empleado - Update
-        elif opcion == '8': opcion_8() #Empleado - Delete
+        if   opcion == '1': opcion_1( lista_departamento,objeto_gerencia.dic_departamentos) #Departamento - Create
+        elif opcion == '2': opcion_2(objeto_gerencia.dic_departamentos) #Departamento - Read  
+        elif opcion == '3': opcion_3(objeto_gerencia.dic_departamentos) #Departamento - Update
+        elif opcion == '4': opcion_4(objeto_gerencia.dic_departamentos) #Departamento - Delete
+        elif opcion == '5': opcion_5(lista_departamento,objeto_gerencia.dic_departamentos) #Empleado - Create
+        elif opcion == '6': opcion_6(objeto_gerencia.dic_departamentos) #Empleado - Read
+        elif opcion == '7': opcion_7(objeto_gerencia.dic_departamentos) #Empleado - Update
+        elif opcion == '8': opcion_8(objeto_gerencia.dic_departamentos) #Empleado - Delete
         elif opcion == '0': 
             print('Adios...')
             pausa()
@@ -119,5 +199,28 @@ def main():
 
 
 main()
+
+#!crear una opcion edite la gerencia
+
+# Gerencia
+
+#         Nombre
+#         dic_departamentos {
+#             'nombre': objeto_departamento
+#             'RRHH': objeto_departamento_RRHH
+#                                             nombre
+#                                             telefono
+#                                             empleados{
+#                                                        'dni':objeto_empleado
+#                                                                             nombre
+#                                                                             apellido
+#                                                                             fecha fecha_nacimiento
+#                                                                             direccion
+#                                                                             dni 
+#                                                                             horario
+#                                                                             email
+#                                                                             clave
+#                                                                             salario
+#                                                                             activo
 
 
