@@ -8,9 +8,10 @@ class Persona(object):
         self.fecha=datetime.strptime(fecha,"%d/%m/%Y")
         self.dni=dni
         self.direccion=direccion
+        self.fechastr=self.fecha.strftime("%d/%m/%Y")
     def __str__(self):
-        fechastr=self.fecha.strftime("%d/%m/%Y")
-        return f"nombre: {self.nombre}, apellido: {self.apellido}, fecha: {fechastr}, dni: {self.dni}, direccion: {self.direccion}"
+        
+        return f"nombre: {self.nombre}, apellido: {self.apellido}, fecha: {self.fechastr}, dni: {self.dni}, direccion: {self.direccion}"
     def getNombreCompleto(self):
         return self.nombre+" "+self.apellido
     def getDia(self):

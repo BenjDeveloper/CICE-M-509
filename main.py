@@ -37,6 +37,9 @@ def crear_Depa(empresaExistente):
 
 def crear_Emp(empresaExistente):
     nombredepartamento=input("Introduzca el nombre del departamento al que pertenece el Empleado: ")
+    if empresaExistente.getDepartamento(nombredepartamento)==None:
+        print(f"El departamento {nombredepartamento} no existe")
+        return
     nombre=input("Introduzca el nombre del Empleado: ")
     apellido=input("Introduzca el apellido del Empleado: ")
     fecha=input("Introduzca el fecha del Empleado: ")
@@ -58,17 +61,27 @@ def leer_Depa(empresaExistente):
         print(f"El departamento {nombre} si existe")
 
 
-def leer_Emp(empresaExistente):
-    alphatechsl.updateAllEmpleados()
-    nombre=input("Introduzca el nombre del empleado que quiere comprobar: ")
-    existe=False
-    for empleado in alphatechsl.getAllEmpleados():
-        if empleado.nombre==nombre:
-            print(f"El empleado {nombre} si existe")
-            existe=True
-            break
-    if existe==False:
-        print(f"El empleado {nombre} no existe")
+def leer_Emp(empresaExistente,txt):
+    # alphatechsl.updateAllEmpleados()
+    # nombre=input("Introduzca el nombre del empleado que quiere comprobar: ")
+    # existe=False
+    # for empleado in alphatechsl.getAllEmpleados():
+    #     if empleado.nombre==nombre:
+    #         print(f"El empleado {nombre} si existe")
+    #         existe=True
+    #         break
+    # if existe==False:
+    #     print(f"El empleado {nombre} no existe")
+
+    dni=input(f"Introduzca el dni del empleado que quiere {txt}: ")
+    for dict_depart in empresaExistente.departamentos.values():
+        dict_depart=dict_depart.empleados
+        if dni in dict_depart:
+            print(f"El empleado {dict_depart[dni].nombre}, con dni {dni} si existe")
+            print(dict_depart[dni])
+            return dict_depart,dni
+    print(f"El empleado con {dni} no existe")
+    return None,None
 
 
 def update_Depa(empresaExistente):
@@ -82,7 +95,7 @@ def update_Depa(empresaExistente):
         nombrenew=input("Introduzca el nuevo nombre del departamento: ")
         if nombrenew!="":
             departoUpdate.nombre=nombrenew
-            empresaExistente.departamento[nombrenew]=empresaExistente.departamento.pop(nombreold)
+            empresaExistente.departamentos[nombrenew]=empresaExistente.departamentos.pop(nombreold)
         telefono=input("Introduzca el nuevo telefono del departamento: ")
         departoUpdate.telefono=departoUpdate.telefono if telefono=="" else telefono
         print(f"Se ha actualizado el departamento {nombreold}")
@@ -92,26 +105,21 @@ def update_Depa(empresaExistente):
     # print(departoUpdate)
 
 def update_Emp(empresaExistente):
-    alphatechsl.updateAllEmpleados()
-    nombre=input("Introduzca el nombre del Empleado que quiere actualizar: ")
-    existe=False
-    for empleado in alphatechsl.getAllEmpleados():
-        if empleado.nombre==nombre:
-            print(f"El empleado {nombre} si existe")
-            existe=True
-            break
-    if existe==False:
-        print(f"El empleado {nombre} no existe")
+    dict_depart,dni=leer_Emp(empresaExistente,"actualizar")
+    if dict_depart==None:
         return
-    # print(empleado)
+    empleado=dict_depart[dni]
+
     nombre=input("Introduzca el nuevo nombre del Empleado: ")
     empleado.nombre=empleado.nombre if nombre=="" else nombre
     apellido=input("Introduzca el nuevo apellido del Empleado: ")
     empleado.apellido=empleado.apellido if apellido=="" else apellido                   #condicional ternario
     fecha=input("Introduzca el nuevo fecha del Empleado: ")
     empleado.fecha=empleado.fecha if fecha=="" else fecha
-    dni=input("Introduzca el nuevo dni del Empleado: ")
-    empleado.dni=empleado.dni if dni=="" else dni
+    dninew=input("Introduzca el nuevo dni del Empleado: ")
+    if dninew!="":
+        empleado.dni=dninew
+        dict_depart[dninew]=dict_depart.pop(dni)
     direccion=input("Introduzca la nueva direccion del Empleado: ")
     empleado.direccion=empleado.direccion if direccion=="" else direccion
     email=input("Introduzca el nuevo email del Empleado: ")
@@ -130,22 +138,27 @@ def update_Emp(empresaExistente):
 def eliminar_Depa(empresaExistente):
     print("Tambien se va a elimnar todos los empleados del departamento que quiere Eliminar: ")
     nombre=input("Introduzca el nombre del departamento que quiere Eliminar: ")
-    empresaExistente.departamento.remove(empresaExistente.getDepartamento(nombre))
+    empresaExistente.departamentos.remove(empresaExistente.getDepartamento(nombre))
     print(empresaExistente)
     print(f"El departamento {nombre} se ha eliminado")                                                              #!implementar errores
 
 def eliminar_Emp(empresaExistente):
-    nombre=input("Introduzca el nombre del empleado que quiere Eliminar: ")
-    nombredepartamento=input("Introduzca el nombre del departamento al que pertenece el Empleado: ")
-    existe=False
-    for index,empleado in enumerate(empresaExistente.getDepartamento(nombredepartamento).empleados):
-        if empleado.nombre==nombre:
-            empresaExistente.getDepartamento(nombredepartamento).empleados.pop(index)
-            print(f"El empleado {nombre} se ha eliminado")
-            existe=True
-            break
-    if existe==False:
-        print(f"El empleado {nombre}, o el departamento no existe")                                                 #!implementar errores
+    dict_depart,dni=leer_Emp(empresaExistente,"Eliminar")
+    if dict_depart==None:
+        return
+    dict_depart.pop(dni)
+    print(f"El empleado con {dni} se ha eliminado")
+    # nombre=input("Introduzca el nombre del empleado que quiere Eliminar: ")
+    # nombredepartamento=input("Introduzca el nombre del departamento al que pertenece el Empleado: ")
+    # existe=False
+    # for index,empleado in enumerate(empresaExistente.getDepartamento(nombredepartamento).empleados):
+    #     if empleado.nombre==nombre:
+    #         empresaExistente.getDepartamento(nombredepartamento).empleados.pop(index)
+    #         print(f"El empleado {nombre} se ha eliminado")
+    #         existe=True
+    #         break
+    # if existe==False:
+    #     print(f"El empleado {nombre}, o el departamento no existe")                                                 #!implementar errores
 
 
 
@@ -155,7 +168,7 @@ def menu(empresaExistente):
     while salida == False:
         # system('clear') 
         # system('cls') 
-        print(empresaExistente.departamento)
+        # print(empresaExistente.departamentos)
 
         print('--- TITULO MENU ---')
         print('0. opcion - Salir ')
@@ -186,7 +199,7 @@ def menu(empresaExistente):
             crear_Emp(empresaExistente)     #Empleado - Create
             pausa()
         elif opcion == '6': 
-            leer_Emp(empresaExistente)      #Empleado - Read
+            leer_Emp(empresaExistente,"comprobar")      #Empleado - Read
             pausa()
         elif opcion == '7': 
             update_Emp(empresaExistente)    #Empleado - Update
@@ -208,7 +221,24 @@ def menu(empresaExistente):
 alphatechsl=Gerencia("Alphatech S.L.")
 alphatechsl.setDepartamentosCSV("importempCSV\departamentos.csv")
 alphatechsl.updateAllEmpleados()
-print(alphatechsl.departamento)
+print(alphatechsl.departamentos)
 
 
 menu(alphatechsl)
+# opcion editar gerencia --- cambia el nombre solo e imprime la gerencia
+
+def printAll():
+    print("empresa")
+    print(alphatechsl.empresa)
+    for depart in alphatechsl.departamentos.values():
+        indented=10
+        # print(" "*indented+str(depart))
+        print(" "*indented+f"{'departamento':<20}{'telefono':<20}")
+        print(" "*indented+f"{depart.nombre:<20}{depart.telefono:<20}")
+        for emp in depart.empleados.values():
+            indented=40
+            # print(" "*indented+str(emp).replace("\n","\n"+" "*indented))
+            # print(emp.nombre,emp.apellido,emp.fecha,emp.dni,emp.direccion,emp.email, emp.clave, emp.salario,emp.horario)
+            # print(emp.nombre,emp.apellido,emp.fechastr,emp.dni,emp.email, emp.salario,emp.horario)
+            print(" "*indented+f"{'nombre':<20}{'apellido':<20}{'fecha':<20}{'dni':<20}{'email':<20}{'salario':<20}{'horario':<20}")
+            print(" "*indented+f"{emp.nombre:<20}{emp.apellido:<20}{emp.fechastr:<20}{emp.dni:<20}{emp.email:<20}{str(emp.salario):<20}{emp.horario:<20}")

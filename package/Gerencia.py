@@ -5,18 +5,18 @@ from package.empleado import Empleado
 class Gerencia(object):
     def __init__(self, empresa):
         self.empresa=empresa
-        # self.departamento=[]
-        self.departamento=dict()
+        # self.departamentos=[]
+        self.departamentos=dict()
         self.__allempleados=[]
 
     def __str__(self):
-        return f'{self.empresa} \ndepartamentos: {", ".join([d.nombre for d in self.departamento])}'
+        return f'{self.empresa} \ndepartamentos: {", ".join([d for d in self.departamentos])}'
 
     def setDepartamentos(self, *departamentos):
         # for i in departamentos:
-        #     self.departamento.append(i)
+        #     self.departamentos.append(i)
         for i in departamentos:
-            self.departamento[i.nombre]=i
+            self.departamentos[i.nombre]=i
     
     def setDepartamentosCSV(self, csvfile):
         filedepartamentos=open(csvfile,"r")
@@ -28,7 +28,7 @@ class Gerencia(object):
                 continue
             # print(row[0],row[1])
             midepartamento=Departamento(row[0],row[1])
-            # self.departamento.append(midepartamento)
+            # self.departamentos.append(midepartamento)
             self.setDepartamentos(midepartamento)
             
             fileempleados=open(row[2],"r")
@@ -44,20 +44,20 @@ class Gerencia(object):
         fileempleados.close()
 
     # def getDepartamento(self,nombredepartamento):
-    #     for i,d in enumerate(self.departamento):
-    #         # print(d.nombre,self.departamento[i])
+    #     for i,d in enumerate(self.departamentos):
+    #         # print(d.nombre,self.departamentos[i])
     #         if nombredepartamento==d.nombre:
-    #             return self.departamento[i]
+    #             return self.departamentos[i]
     #     return None
     def getDepartamento(self,nombredepartamento):
-        if nombredepartamento in self.departamento:
-            return self.departamento[nombredepartamento]
+        if nombredepartamento in self.departamentos:
+            return self.departamentos[nombredepartamento]
         return None 
     
     def updateAllEmpleados(self):
         # print(empleadosObj,type(empleadosObj))
-        for depart in self.departamento.values():
-            for empleado in depart.empleados:
+        for depart in self.departamentos.values():
+            for empleado in depart.empleados.values():
                 # print(empleado,type(empleado))
                 if empleado not in self.__allempleados:
                     self.__allempleados.append(empleado)

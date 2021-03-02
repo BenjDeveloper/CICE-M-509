@@ -6,16 +6,24 @@ class Departamento():
         self.telefono=telefonodepartamento
         self.nombre=nombredepartamento
         # self.departYemplea[self.nombre]=[]
-        self.empleados=[]
+        # self.empleados=[]
+        self.empleados=dict()
         
     def __str__(self):
         return f"nombre del departamento: {self.nombre}, telefono del departamento: {self.telefono}"
     
     def setEmpleados (self,*listempl):
         # self.empleados.extend(listempl)
-        for emp in listempl:
-            self.empleados.append(emp)
-            emp.pertenece_departamento=self
+        # for emp in listempl:
+        #     self.empleados.append(emp)
+        #     emp.pertenece_departamento=self
+        for empl in listempl:
+            self.empleados[empl.dni]=empl
+    
+    def getEmpleados (self,nombreempleado):
+        if nombreempleado in self.departamento:
+            return self.departamento[nombredepartamento]
+        return None
     
     def getSalario(self,emp):
         return emp.salario
