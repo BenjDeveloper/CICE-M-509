@@ -41,8 +41,22 @@ def opcion_2(dic_departamento):
 
     pausa()
 
-def opcion_3():
+def opcion_3(dic_departamento):
     print('opcion 3 - Departameno - Update')
+    nombre_departamento = input("Agrege el Nombre del departamento que desea ver:")
+    if nombre_departamento in dic_departamento.keys():
+        print(dic_departamento[nombre_departamento])
+
+        atributo = input("Agrege nombre del atributo que desea editar: " ) # nombre, telefono, empleados
+        valor = input("Agrege valor del atributo anterior que desea editar: " )
+        if atributo != 'empleados'; 
+            setattr(dic_departamento[nombre_departamento], atributo, valor)
+        
+        if atributo == 'nombre':
+            objeto_departamento = dic_departamento.pop(nombre_departamento)
+            dic_departamento[objeto_departamento.nombre] = objeto_departamento
+
+        print(dic_departamento[nombre_departamento])
     pausa()
 
 def opcion_4(dic_departamento):
