@@ -52,6 +52,8 @@ class Gerencia():
                     5 - Salario
                     6 - Horario
                     7 - CANCELAR''')
+        while not opc in ('1','2','3','4','5','6','7'):
+            opc = input('\nOpcion incorrecta. ¿Qué desea editar de este empleado? (1,2,3,4,5,6 ó 7): ')
         if opc == '1':
             emp.direccion = input('\nIntroduzca la nueva dirección: ')
         if opc == '2':
@@ -76,13 +78,70 @@ class Gerencia():
         for dto in self.departamentos:
             for emp in dto.empleados:
                 if emp.dni == dni:
-                    return self.editar_empleado(emp)
+                    return emp
         for emp in self.emp_sin_dep:
             if emp.dni == dni:
-                return self.editar_empleado(emp)
+                return emp
         print('\nNo hay coincidencias')
+        return None
 
-    # def buscar_departamento(self,nombre):
+    def editar_departamento(self, dto):
+        opc = input('''\n¿Qué desea editar de este departamento? 
+                    1 - Telefono
+                    2 - Agregar empleado
+                    3 - Quitar empleado
+                    4 - CANCELAR''')
+        while not opc in ('1','2','3','4'):
+            opc = input('\nOpción incorrecta. ¿Qué desea editar de este departamento? (1,2,3 ó 4): ')
+        if opc == '1':
+            dto.telefono = input('\nIntroduzca el nuevo número de telefono: ')
+        if opc == '2':
+            emp = self.buscar_empleado(input('\nDNI del empleado que desea agregar: '))
+            if emp != None:
+                dto.empleados.append(emp)
+        if opc == '3':
+            if dto.empleados != []:
+                cont = 0
+                filtro = input('\nDNI del empleado que desea quitar: ')
+                for emp in dto.empleados:
+                    if filtro == emp.dni:
+                        self.emp_sin_dep.append(dto.empleados.pop(cont))
+                        print('\nEmpleado quitado del departamento.')
+                        return
+                    cont += 1
+                print('\nEl empleado que busca no pertenece a este departamento. ')
+            else:
+                print('\nEste departamento no tiene empleados.')
+        if opc == '4':
+            return
+
+    def buscar_departamento(self,nombre):
+        for dto in self.departamentos:
+            if dto.nombre == nombre:
+                return dto
+        print('\nNo hay coincidencias')
+        return None
+
+    def eliminar_empleado(self, dni):
+        for dep in self.departamentos:
+            cont = 0
+            for emp in dep.empleados:
+                if emp.dni == dni:
+                    dep.empleados.pop(cont)
+                cont += 1
+        cont = 0    
+        for emp in self.emp_sin_dep:
+            if emp.dni == dni:
+                self.emp_sin_dep.pop(cont)
+            cont += 1
+
+    def eliminar_departamento(self, nombre):
+        cont = 0
+        for dto in self.departamentos:
+            if dto.nombre == nombre:
+                self.departamentos.pop(cont)
+            cont += 1
+
 
     def menu_crud(self, opt):
         os.system('cls')
@@ -103,14 +162,20 @@ class Gerencia():
                 self.muestra_departamentos()
         if seleccion == 'U':
             if opt == '1':
-                self.buscar_empleado(input('\nIntroduzca el dni del empleado que desea editar: '))
-    #         else:
-    #             #*Editar departamento
-    #     if seleccion == 'D':
-    #         if opt == '1':
-    #             #*Eliminar empleado
-    #         else:
-    #             #*Eliminar departamento
+                emp = self.buscar_empleado(input('\nIntroduzca el dni del empleado que desea editar: '))
+                if emp != None:
+                    self.editar_empleado(emp)
+            else:
+                dto = self.buscar_departamento(input('\nIntroduzca el nombre del departamento que desea editar: '))
+                if dto != None:
+                    self.editar_departamento(dto)
+        if seleccion == 'D':
+            if opt == '1':
+                filtro = input('\nIntroduzca el dni del empleado que desea eliminar: ')
+                self.eliminar_empleado(filtro)
+            else:
+                filtro = input('\nIntroduzca el nombre del departamento que desea eliminar: ')
+                self.eliminar_departamento(filtro)
         if seleccion == 'S' or opt == '3':
             print("Adiós...")   # Muestra despedida
             sys.exit()          # Salir
