@@ -1,6 +1,8 @@
 from .department import Department
 import csv
 import os
+from os import remove
+from os import path
 import re
 
 
@@ -176,6 +178,7 @@ class ManageLadder:
                 if list_department[number_deparment] not in line:
                     department_file.write(line)              
             department_file.close()
+            #if path.exists('')
             print(f"El departamento {list_department[number_deparment]} ha sido eliminado exitosamente")
     
 

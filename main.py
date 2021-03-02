@@ -9,10 +9,14 @@ import csv
 
 def main():
     header()
+    print("===================   ADVANCE ONCE, ADVANCE ALWAYS   ====================")
+    print("=========================================================================")
+    print("")
+    print("")
     obj = ManageLadder()
-    obj.updateDepartment()
+    #obj.updateDepartment()
 
-    """
+
     shutdown = True
     while shutdown == True:
         option = input("1._DEPARTAMENTOS \n2._EMPLEADOS \n3._SALIR \nELIGA UNA OPCIÓN: ")
@@ -51,7 +55,7 @@ def main():
             shutdown = exit()
         else:
             print('La opción introducida no es válida') 
-        """    
+
 
 def exit():
     print("==============================================================")
