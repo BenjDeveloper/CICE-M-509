@@ -36,18 +36,18 @@ def main():
 
     cice.carga_empleados(cargas_pendientes)
 
-    cice.muestra_departamentos()
+    # cice.muestra_departamentos()
 
-    cice.muestra_empleados()
+    # cice.muestra_empleados()
 
     # print(f'Media: {departamento_programacion.media_salarial():.2f}\n')
     # print(f'Reporte salarial del departamento "{departamento_programacion.nombre}" ordenado de mayor a menor salario:\n{departamento_programacion.reporte_salarios()}')
     
-    # runing = True
+    runing = True
 
-    # while runing:
-    #     cice.menu_principal()
+    while runing:
+        cice.menu_principal()
 
-    #     input('pulse una tecla para continuar')
+        input('\n\npulse una tecla para continuar')
 
 main()

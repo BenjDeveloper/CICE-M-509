@@ -1,7 +1,7 @@
 
 from package.empleado import Empleado
-import csv
-import os
+import csv, os, sys
+
 
 #? 2) EJERCICIO
 # agrege una clase al paquete que permita manejar una lista del departamento 
@@ -40,29 +40,70 @@ class Gerencia():
         for dep in self.departamentos:
             for emp in dep.empleados:
                 print (emp)
-        for emp_sin_dep in self.emp_sin_dep:
+        for emp in self.emp_sin_dep:
             print(emp)
 
-    # def menu_crud(opt):
-    #     os.system('cls')
-    #     print('C - Crear un','empleado' if opt == '1' else 'departamento','\nR - Consultar existencias \nU - Editar datos \nD - Eliminar un','empleado' if opt == '1' else 'departamento')
-    #     seleccion = input('\n¿Qué acción desea realizar? (C,R,U ó D): ').upper()
-    #     while not seleccion in ('C','R','U','D'):
-    #         seleccion = input('Opción incorrecta. ¿Qué acción desea realizar? (C,R,U ó D): ')
+    def editar_empleado(self, emp):
+        opc = input('''\n¿Qué desea editar de este empleado? 
+                    1 - Direccion
+                    2 - Email
+                    3 - Clave
+                    4 - Activo
+                    5 - Salario
+                    6 - Horario
+                    7 - CANCELAR''')
+        if opc == '1':
+            emp.direccion = input('\nIntroduzca la nueva dirección: ')
+        if opc == '2':
+            emp.email = input('\nIntroduzca el nuevo email: ')
+        if opc == '3':
+            emp.clave = input('\nIntroduzca la nueva clave: ')
+        if opc == '4':
+            if emp.activo == 'True':
+                emp.activo = 'False'
+                print('El empleado NO está activo ahora')
+            else:
+                emp.activo = 'True'
+                print('El empleado está activo ahora')
+        if opc == '5':
+            emp.salario = input('\nIntroduzca el nuevo salario: ')
+        if opc == '6':
+            emp.horario = input('\nIntroduzca el nuevo horario: ')
+        if opc == '7':
+            return
+
+    def buscar_empleado(self, dni):
+        for dto in self.departamentos:
+            for emp in dto.empleados:
+                if emp.dni == dni:
+                    return self.editar_empleado(emp)
+        for emp in self.emp_sin_dep:
+            if emp.dni == dni:
+                return self.editar_empleado(emp)
+        print('\nNo hay coincidencias')
+
+    # def buscar_departamento(self,nombre):
+
+    def menu_crud(self, opt):
+        os.system('cls')
+        print('C - Crear un','empleado' if opt == '1' else 'departamento','\nR - Consultar existencias \nU - Editar datos \nD - Eliminar un','empleado' if opt == '1' else 'departamento','\nS - SALIR')
+        seleccion = input('\n¿Qué acción desea realizar? (C, R, U, D ó S): ').upper()
+        while not seleccion in ('C','R','U','D','S'):
+            seleccion = input('Opción incorrecta. ¿Qué acción desea realizar? (C, R, U, D ó S): ')
         
     #     if seleccion == 'C':
     #         if opt == '1':
     #             #*Crear empleado
     #         else:
     #             #*Crear departamento
-    #     if seleccion == 'R':
-    #         if opt == '1':
-    #             #*Ver empleados
-    #         else:
-    #             self.muestra_departamentos()
-    #     if seleccion == 'U':
-    #         if opt == '1':
-    #             #*Editar empleado
+        if seleccion == 'R':
+            if opt == '1':
+                self.muestra_empleados()
+            else:
+                self.muestra_departamentos()
+        if seleccion == 'U':
+            if opt == '1':
+                self.buscar_empleado(input('\nIntroduzca el dni del empleado que desea editar: '))
     #         else:
     #             #*Editar departamento
     #     if seleccion == 'D':
@@ -70,14 +111,17 @@ class Gerencia():
     #             #*Eliminar empleado
     #         else:
     #             #*Eliminar departamento
+        if seleccion == 'S' or opt == '3':
+            print("Adiós...")   # Muestra despedida
+            sys.exit()          # Salir
 
-
-    def menu_principal():
+    def menu_principal(self):
         os.system('cls')
         print('''\t *MENÚ PRINCIPAL*
         1- Empleados
-        2- Departamentos''')
+        2- Departamentos
+        3- Salir''')
         seleccion = input('\n¿Qué campo desea editar o consultar? (1 ó 2): ')
-        while not seleccion in ('1','2'):
+        while not seleccion in ('1','2','3'):
             seleccion = input('Opción incorrecta. ¿Qué campo desea editar o consultar? (1 ó 2): ')
-        return menu_crud(seleccion)
+        return self.menu_crud(seleccion)
