@@ -6,19 +6,25 @@ from package.managaError import ManageError
 from package.manage import ManageLadder
 from header import header
 import csv
+from os import system
 
 def main():
-    header()
-    print("===================   ADVANCE ONCE, ADVANCE ALWAYS   ====================")
-    print("=========================================================================")
-    print("")
-    print("")
+    #header()
+    #print("===================   ADVANCE ONCE, ADVANCE ALWAYS   ====================")
+    #print("=========================================================================")
+    #print("")
+    #print("")
     obj = ManageLadder()
     #obj.updateDepartment()
 
 
     shutdown = True
     while shutdown == True:
+        header()
+        print("===================   ADVANCE ONCE, ADVANCE ALWAYS   ====================")
+        print("=========================================================================")
+        print("")
+        print("")
         option = input("1._DEPARTAMENTOS \n2._EMPLEADOS \n3._SALIR \nELIGA UNA OPCIÓN: ")
         if option == '1':
             go_back_to_main_menu = True
@@ -34,7 +40,8 @@ def main():
                 elif department_options == '4': obj.deleteDepartment()
                 elif department_options == '5': go_back_to_main_menu = False
                 else:
-                    print("La opción introducida no es válida")        
+                    print("La opción introducida no es válida")  
+                clean_screen()      
             
         elif option == '2':
             go_back_to_main_menu = True
@@ -51,11 +58,15 @@ def main():
                 elif employee_options == '5': go_back_to_main_menu = False
                 else:
                     print("La opción introducida no es válida") 
+                clean_screen()
         elif option == '3':
             shutdown = exit()
         else:
             print('La opción introducida no es válida') 
+        clean_screen()
 
+def clean_screen():
+    system('cls')
 
 def exit():
     print("==============================================================")
