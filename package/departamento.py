@@ -5,6 +5,7 @@ class Departamento:
         self.nombre = nombre
         self.telefono = telefono
         self.empleados = {}
+        self.supervisor = None
 
     def __str__ (self):
         cadena = f'''\n DEPARTAMENTO {self.nombre.upper ()} -- Teléfono del departamento: {self.telefono}

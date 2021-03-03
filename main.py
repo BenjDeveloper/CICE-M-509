@@ -4,14 +4,17 @@
 from os import system
 from package.empleado import Empleado
 from package.departamento import Departamento
-from package.gerencia import Gerencia
+from package.direccion_admitiva import DireccionAdministrativa
+from package.supervisor import Supervisor
 
 def pausa():
     input('presione enter para continuar...') 
 
-def opcion_1( lista_departamento, dic_departamento):
+def opcion_1(dic_departamento):
     print('opcion 1 - Departameno - Create')
-    objeto_departamento = Departamento("RRHH", " 5555-5555-55" )
+    nombre = input('agrege nombre del departamento: ')
+    telefono = input('agrege el telefono del departamento: ')
+    objeto_departamento = Departamento(nombre, telefono )
 
     #! DICCIONARIO
     if not objeto_departamento.nombre in dic_departamento.keys():
@@ -69,7 +72,7 @@ def opcion_4(dic_departamento):
         print('EL DEPARTAMENTO NO EXISTE')
     pausa()
 
-def opcion_5(lista_departamento, dic_departamento):
+def opcion_5(dic_departamento):
     print('opcion 5-Empleado - Create')
     
     objeto_empleado = Empleado("ricardo",
@@ -129,7 +132,18 @@ def opcion_6(dic_departamento):
 
     pausa()
 
-def opcion_7():
+def opcion_7(dic_departamento):
+    print('opcion 7 - Empleado - Update')
+    dni_empleado = input("Introduce el dni del empleado que quieres actualizar:")
+    nombre_departamento = input("Introduce el nombre del departamento  donde esta empleado:")
+    if nombre_departamento in dic_departamento.keys():
+        if dni_empleado in dic_departamento[nombre_departamento].empleados.keys():
+
+            atributo=  input("Introduce el atributo que deseas editar:")
+            valor = input("Agregue el valor del atributo anterior que desea editar:")
+            if atributo in ["nombre","apellido", "fecha_de_nacimiento","direccion", "email", "clave", "activo", "salario", "horario"]:
+                setattr(dic_departamento[nombre_departamento].empleados[dni_empleado],atributo,valor)
+
     print('opcion 7')
     pausa()
 
@@ -147,15 +161,10 @@ def opcion_8(dic_departamento):
 
     pausa()
 
+def menu_simple(objeto_DA):
 
+    dic_supervisores = {}
 
-def main():
-
-    objeto_gerencia = Gerencia('Dainese')
-    objeto_gerencia.dic_departametos = {}
-
-    lista_departamento = []
-    
     salida = True
     while salida == True:
         system('clear') # system('cls') 
@@ -173,14 +182,19 @@ def main():
 
         opcion = input('selecione una:')
 
-        if   opcion == '1': opcion_1( lista_departamento, objeto_gerencia.dic_departametos) #Departamento - Create
-        elif opcion == '2': opcion_2(objeto_gerencia.dic_departametos) #Departamento - Read  
-        elif opcion == '3': opcion_3(objeto_gerencia.dic_departametos) #Departamento - Update
-        elif opcion == '4': opcion_4(objeto_gerencia.dic_departametos) #Departamento - Delete
-        elif opcion == '5': opcion_5(lista_departamento,objeto_gerencia.dic_departametos) #Empleado - Create
-        elif opcion == '6': opcion_6(objeto_gerencia.dic_departametos) #Empleado - Read
-        elif opcion == '7': opcion_7(objeto_gerencia.dic_departametos) #Empleado - Update
-        elif opcion == '8': opcion_8(objeto_gerencia.dic_departametos) #Empleado - Delete
+        if   opcion == '1': opcion_1(objeto_DA.dic_departametos) #Departamento - Create
+        elif opcion == '2': opcion_2(objeto_DA.dic_departametos) #Departamento - Read  
+        elif opcion == '3': opcion_3(objeto_DA.dic_departametos) #Departamento - Update
+        elif opcion == '4': opcion_4(objeto_DA.dic_departametos) #Departamento - Delete
+        
+        elif opcion == '5': opcion_5(objeto_DA.dic_departametos) #Empleado - Create
+        elif opcion == '6': opcion_6(objeto_DA.dic_departametos) #Empleado - Read
+        elif opcion == '7': opcion_7(objeto_DA.dic_departametos) #Empleado - Update
+        elif opcion == '8': opcion_8(objeto_DA.dic_departametos) #Empleado - Delete
+
+        elif opcion == '9': opcion_9(dic_supervisores) #Supervisor - Crear
+        elif opcion == '10': opcion_10() #Supervisor - Consultar
+        
         elif opcion == '0': 
             print('Adios...')
             pausa()
@@ -190,7 +204,28 @@ def main():
             pausa()
 
 
+def main():
+
+    objeto_DA = DireccionAdministrativa('Dainese')
+    menu_simple(objeto_DA)
+
 main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # ! GERENCIA 
