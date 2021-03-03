@@ -19,7 +19,9 @@ def opcion_1(dic_departamento):
     #! DICCIONARIO
     if not objeto_departamento.nombre in dic_departamento.keys():
         dic_departamento [ objeto_departamento.nombre ]  =  objeto_departamento
+        print(dic_departamento)
         print(objeto_departamento)
+
     else:
         print("EL DEPARTAMENTO YA ESTA CREADO")
 
@@ -159,6 +161,25 @@ def opcion_8(dic_departamento):
     else:
         print('EL DEPARTAMENTO NO EXISTE')
 
+    pausa()
+
+def opcion_9(dic_supervisores):
+    print('opcion 9 - Supervisor - Create')
+    
+    objeto_supervisor = Supervisor("ricardo",
+                                    "lamas",
+                                    "16-julio-87",
+                                    "0157226q",
+                                    "povedilla 4",
+                                    "lamas@cice.es",
+                                    "1,2,3,4",
+                                    True)
+    #! DICCIONARIO    
+    if not objeto_supervisor.dni in dic_supervisores.keys():
+        dic_supervisores [ objeto_supervisor.dni ] = objeto_supervisor
+        print(objeto_superzvisor)
+    else:
+        print('EL Supervisor INDICADO YA SE ENCUENTRA REGISTRADO')
     pausa()
 
 def menu_simple(objeto_DA):
