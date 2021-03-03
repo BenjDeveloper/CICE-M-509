@@ -5,18 +5,20 @@ from os import system
 from package.empleado import Empleado
 from package.departamento import Departamento
 from package.gerencia import Gerencia
+from package.supervisor import Supervisor
 
 def pausa():
     input('presione enter para continuar...') 
 
-def opcion_1(lista_departamento, dic_departamento):
+def opcion_1(dic_departamento):
     print('opcion 1 - Departameno - Create')
-    objeto_departamento = Departamento('RRHH',
-                                        '555-55-55-55',
-                                        )
-    print(objeto_departamento)
+    nombre = input('Agrege departamento: ')
+    telefono = input('Agrege telefono: ')
+    objeto_departamento = Departamento(nombre, telefono)
+
     if objeto_departamento.nombre not in dic_departamento.keys():
         dic_departamento [ objeto_departamento.nombre] = objeto_departamento
+        print(objeto_departamento)
     else:
         print('El departamento esta creado')
     # print(objeto_departamento)
@@ -62,7 +64,7 @@ def opcion_4(dic_departamento):
         print('El departamento no existe')
     pausa()
 
-def opcion_5(lista_departamento, dic_departamento):
+def opcion_5(dic_departamento):
     print('opcion 5')
     objeto_empleado = Empleado('Ricardo',
                                 'Lamas',
@@ -153,15 +155,61 @@ def opcion_8(dic_departamento):
         print('El departamento no existe')
     pausa()
 
+def opcion_9(dic_supervisores):
+    print('Opcion 9')
+    objeto_supervisor = Supervisor('Suan',
+                                    'Fan SOne',
+                                    '16-Julio-87',
+                                    '1234',
+                                    'Amazonas 34',
+                                    'suanfansone@cice.com',
+                                    'suaaaaaaaaan',
+                                    True,
+                                    )
 
+    if not objeto_supervisor.dni in dic_supervisores.keys():
+        dic_supervisores [objeto_supervisor.dni] = objeto_supervisor
+        print( objeto_supervisor)
+    else:
+        print('El supervisor esta registrado')
 
-def main():
+    pausa()
 
-    objeto_gerencia = Gerencia('Dainese')
+def opcion_10(dic_supervisores, dic_departametos):
+
+    dni_super = input('Agregue DNI: ')
+    departamento_super = input('Agregue departamento: ')
+
+    if dni_super in dic_supervisores.keys():
+        if departamento_super in dic_departametos.keys():
+            obj_super = dic_supervisores[dni_super]
+            obj_depar = dic_departametos[departamento_super]
+
+            obj_super.departamento = obj_depar
+            obj_depar.supervisor = obj_super
+
+        else:
+            print('Departamento no registrado')
+    else:
+        print('SUpervisor no existe')
+
+    pausa()
+
+def opcion_11(dic_supervisores):
+    print('11. opcion - Supervisor - Acceder al departamento')
+    dni_super = input('Agrege DNI: ')
+    if dni_super in dic_supervisores.keys():
+        print(dic_supervisores[dni_super])
+        print(dic_supervisores[dni_super].departamento)
+        
+
+    pausa()
+
+def menu_simple(objeto_gerencia):
+
+    dic_supervisores = {}
+    dic_departamentos = {}
     objeto_gerencia.dic_departametos = {}
-
-    lista_departamento = []
-    dic_departamento = {}
     salida = True
     while salida == True:
         system('clear') # system('cls') 
@@ -171,21 +219,29 @@ def main():
         print('2. opcion - Departamento - Read ')
         print('3. opcion - Departamento - Update ')
         print('4. opcion - Departamento - Delete ')
+
         print('5. opcion - Empleado - Create')
         print('6. opcion - Empleado - Read')
         print('7. opcion - Empleado - Update')
         print('8. opcion - Empleado - Delete')
 
+        print('9. opcion - Supervisor - Create')
+        print('10. opcion - Supervisor - Conectar instancias')
+        print('11. opcion - Supervisor - Acceder al departamento')
+
         opcion = input('selecione una:')
 
-        if   opcion == '1': opcion_1(lista_departamento, objeto_gerencia.dic_departametos) #Departamento - Create
+        if   opcion == '1': opcion_1(objeto_gerencia.dic_departametos) #Departamento - Create
         elif opcion == '2': opcion_2(objeto_gerencia.dic_departametos) #Departamento - Read  
         elif opcion == '3': opcion_3(objeto_gerencia.dic_departametos) #Departamento - Update
         elif opcion == '4': opcion_4(objeto_gerencia.dic_departametos) #Departamento - Delete
-        elif opcion == '5': opcion_5(lista_departamento, objeto_gerencia.dic_departametos) #Empleado - Create
+        elif opcion == '5': opcion_5(objeto_gerencia.dic_departametos) #Empleado - Create
         elif opcion == '6': opcion_6(objeto_gerencia.dic_departametos) #Empleado - Read
         elif opcion == '7': opcion_7(objeto_gerencia.dic_departametos) #Empleado - Update
         elif opcion == '8': opcion_8(objeto_gerencia.dic_departametos) #Empleado - Delete
+        elif opcion == '9': opcion_9(dic_supervisores) #Supervisor - Crear
+        elif opcion == '10': opcion_10(dic_supervisores, objeto_gerencia.dic_departametos) #Supervisor - Consultar
+        elif opcion == '11': opcion_11(dic_supervisores) #Supervisor - Acceder
         elif opcion == '0': 
             print('Adios...')
             pausa()
@@ -195,13 +251,11 @@ def main():
             pausa()
 
 
+def main():
+
+    objeto_gerencia = Gerencia('Dainese')
+    
+    menu_simple(objeto_gerencia)
+
+
 main()
-
-
-Gerencia
-        Nombre
-        dic_departamentos {
-                            'nombre'
-
-
-                        }
