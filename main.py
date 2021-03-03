@@ -65,6 +65,8 @@ def opcion_3(dic_departamento):
         print(dic_departamento[nombre_departamento])
     pausa()
 
+
+
 def opcion_4(dic_departamento):
     print('opcion 4 - Departameno - Delete')
     nombre_departamento = input('Agrege el nombre del departameno que desea eliminar: ')
