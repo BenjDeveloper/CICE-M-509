@@ -169,6 +169,7 @@ def main():
         print('6. opcion - Empleado - Read')
         print('7. opcion - Empleado - Update')
         print('8. opcion - Empleado - Delete')
+        print('0. opcion - salida')
 
         opcion = input('selecione una:')
 
