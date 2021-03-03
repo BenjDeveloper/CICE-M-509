@@ -8,6 +8,8 @@ class Departamento():
         # self.departYemplea[self.nombre]=[]
         # self.empleados=[]
         self.empleados=dict()
+        self.supervisor = None
+
         
     def __str__(self):
         return f"nombre del departamento: {self.nombre}, telefono del departamento: {self.telefono}"

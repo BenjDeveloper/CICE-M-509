@@ -15,13 +15,14 @@ def main():
 
     alphatechsl=Gerencia("Alphatech S.L.")
     alphatechsl.setDepartamentosCSV("importempCSV\departamentos.csv")
-    print(alphatechsl)
-    # print(alphatechsl.getDepartamento("informatica"))
-    depart_informatica=alphatechsl.getDepartamento("informatica")
-    print()
-    print(depart_informatica)
-    depart_informatica.printEmp()
-    print(depart_informatica.mediaSal())
+    menu(alphatechsl)
+    # print(alphatechsl)
+    # # print(alphatechsl.getDepartamento("informatica"))
+    # depart_informatica=alphatechsl.getDepartamento("informatica")
+    # print()
+    # print(depart_informatica)
+    # depart_informatica.printEmp()
+    # print(depart_informatica.mediaSal())
 
 
 
@@ -132,7 +133,7 @@ def update_Emp(empresaExistente):
     empleado.horario=empleado.horario if horario=="" else horario
     print(f"Se ha actualizado el Empleado {nombre}")
     # print(empleado)
-    alphatechsl.updateAllEmpleados()
+    empresaExistente.updateAllEmpleados()
     return
 
 def eliminar_Depa(empresaExistente):
@@ -220,25 +221,150 @@ def menu(empresaExistente):
 
 alphatechsl=Gerencia("Alphatech S.L.")
 alphatechsl.setDepartamentosCSV("importempCSV\departamentos.csv")
-alphatechsl.updateAllEmpleados()
-print(alphatechsl.departamentos)
+# alphatechsl.updateAllEmpleados()
+# print(alphatechsl.departamentos)
 
 
-menu(alphatechsl)
+
 # opcion editar gerencia --- cambia el nombre solo e imprime la gerencia
+# dep=depa.Departamento("aaaaaaaaaaaaaaa","1234567")
+# alphatechsl.setDepartamentos(dep)
+
+
 
 def printAll():
-    print("empresa")
-    print(alphatechsl.empresa)
+    empresa=alphatechsl.empresa
+    maxlen1=max(len(empresa),len("empresa"))
+
+    
+    maxlendepNombre=len('departamento')
+    maxlendepTelef=len('telefono')
+
+    maxlenempNombre=len('nombre')
+    maxlenempApellido=len('apellido')
+    maxlenempfecha=len('fecha')
+    maxlenempdni=len('dni')
+    maxlenempemail=len('email')
+    maxlenempsalario=len('salario')
+    maxlenemphorario=len('horario')
+    # print(maxlendepNombre,maxlendepTelef)
     for depart in alphatechsl.departamentos.values():
-        indented=10
-        # print(" "*indented+str(depart))
-        print(" "*indented+f"{'departamento':<20}{'telefono':<20}")
-        print(" "*indented+f"{depart.nombre:<20}{depart.telefono:<20}")
+        maxlendepNombre=max(maxlendepNombre,len(depart.nombre))
+        maxlendepTelef=max(maxlendepTelef,len(depart.telefono))
+
         for emp in depart.empleados.values():
-            indented=40
+            maxlenempNombre=max(maxlenempNombre,len(emp.nombre))
+            maxlenempApellido=max(maxlenempApellido,len(emp.apellido))
+            maxlenempfecha=max(maxlenempfecha,len(emp.fechastr))
+            maxlenempdni=max(maxlenempdni,len(emp.dni))
+            maxlenempemail=max(maxlenempemail,len(emp.email))
+            maxlenempsalario=max(maxlenempsalario,len(str(emp.salario)))
+            maxlenemphorario=max(maxlenemphorario,len(emp.horario))
+    
+    indented=maxlen1+2
+    indented2=maxlendepNombre+2+maxlendepTelef+2+1
+    
+
+    # print("+"+"-"*maxlen1+"+"+"-"*200+"+")
+    # print(f"+{'-':-^{maxlen1+2}}+")
+    # print("+"+"-"*indented+"+")
+
+    # print(f"|{"empresa":^{maxlen1+2}}|"+" "*200+"|")
+    # print(f"|{empresa:^{maxlen1+2}}|"+" "*200+"|")
+    # print(f"|{'empresa':^{maxlen1+2}}|")
+    separatorTitels=f"+{'-':-^{maxlen1+2}}+{'-':-^{maxlendepNombre+2}}+{'-':-^{maxlendepTelef+2}}+{'-':-^{maxlenempNombre+2}}+{'-':-^{maxlenempApellido+2}}+{'-':-^{maxlenempfecha+2}}+{'-':-^{maxlenempdni+2}}+{'-':-^{maxlenempemail+2}}+{'-':-^{maxlenempsalario+2}}+{'-':-^{maxlenemphorario+2}}+"
+    maxlentotal=len(separatorTitels)
+    print(separatorTitels)
+    print(f"|{'empresa':^{maxlen1+2}}|{'departamento':^{maxlendepNombre+2}}|{'telefono':^{maxlendepTelef+2}}|{'nombre':^{maxlenempNombre+2}}|{'apellido':^{maxlenempApellido+2}}|{'fecha':^{maxlenempfecha+2}}|{'dni':^{maxlenempdni+2}}|{'email':^{maxlenempemail+2}}|{'salario':^{maxlenempsalario+2}}|{'horario':^{maxlenemphorario+2}}|")
+    # print(f"+{'-':-^{maxlen1+2}}+")
+    print(separatorTitels)
+    print(f"|{empresa:^{maxlen1+2}}|{' ':^{maxlentotal-(maxlen1+5)}}|")
+
+    
+    # print(maxlen1)
+    for depart in alphatechsl.departamentos.values():
+        
+        print(f"+{'-':-^{indented}}+{'-':-^{maxlendepNombre+2}}+{'-':-^{maxlendepTelef+2}}+{'-':-^{maxlentotal-(maxlendepNombre+maxlendepTelef+maxlen1+11)}}+")
+        # print("|"+" "*indented+"|"+f"{'departamento':^{maxlendepNombre+2}}|{'telefono':^{maxlendepTelef+2}}|")
+        # print("|"+" "*indented+"+"+"-"*indented2+"+")
+        print(f"|{' ':^{indented}}|{depart.nombre:^{maxlendepNombre+2}}|{depart.telefono:^{maxlendepTelef+2}}|{' ':^{maxlentotal-(maxlendepNombre+maxlendepTelef+maxlen1+11)}}|")
+
+        # print(f"|{' ':^{indented}}+{'-':-^{maxlendepNombre+2}}+{'-':-^{maxlendepTelef+2}}+{'-':-^{maxlentotal-(maxlendepNombre+maxlendepTelef+maxlen1+11)}}+")
+        print(f"|{' ':^{indented}}+{'-':-^{maxlendepNombre+2}}+{'-':-^{maxlendepTelef+2}}+{'-':-^{maxlenempNombre+2}}+{'-':-^{maxlenempApellido+2}}+{'-':-^{maxlenempfecha+2}}+{'-':-^{maxlenempdni+2}}+{'-':-^{maxlenempemail+2}}+{'-':-^{maxlenempsalario+2}}+{'-':-^{maxlenemphorario+2}}+")
+        
+        for emp in depart.empleados.values():
+
             # print(" "*indented+str(emp).replace("\n","\n"+" "*indented))
             # print(emp.nombre,emp.apellido,emp.fecha,emp.dni,emp.direccion,emp.email, emp.clave, emp.salario,emp.horario)
             # print(emp.nombre,emp.apellido,emp.fechastr,emp.dni,emp.email, emp.salario,emp.horario)
-            print(" "*indented+f"{'nombre':<20}{'apellido':<20}{'fecha':<20}{'dni':<20}{'email':<20}{'salario':<20}{'horario':<20}")
-            print(" "*indented+f"{emp.nombre:<20}{emp.apellido:<20}{emp.fechastr:<20}{emp.dni:<20}{emp.email:<20}{str(emp.salario):<20}{emp.horario:<20}")
+            
+            print("|"+" "*indented+"|"+" "*indented2+f"|{emp.nombre:^{maxlenempNombre+2}}|{emp.apellido:^{maxlenempApellido+2}}|{emp.fechastr:^{maxlenempfecha+2}}|{emp.dni:^{maxlenempdni+2}}|{emp.email:^{maxlenempemail+2}}|{str(emp.salario):^{maxlenempsalario+2}}|{emp.horario:^{maxlenemphorario+2}}|")
+            print("|"+" "*indented+"|"+" "*indented2+f"+{'-':-^{maxlenempNombre+2}}+{'-':-^{maxlenempApellido+2}}+{'-':-^{maxlenempfecha+2}}+{'-':-^{maxlenempdni+2}}+{'-':-^{maxlenempemail+2}}+{'-':-^{maxlenempsalario+2}}+{'-':-^{maxlenemphorario+2}}+")
+printAll()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def printAll():
+    empresa=alphatechsl.empresa
+    maxlen1=max(len(empresa),len("empresa"))
+    print("+"+"-"*maxlen1+"+"+"-"*200+"+")
+    print("|"+"empresa"+(" "*abs(maxlen1-len("empresa")))+"|"+" "*200+"|")
+    print("|"+empresa+"|"+" "*200+"|")
+    
+    maxlendepNombre=len('departamento')
+    maxlendepTelef=len('telefono')
+
+    maxlenempNombre=len('nombre')
+    maxlenempApellido=len('apellido')
+    maxlenempfecha=len('fecha')
+    maxlenempdni=len('dni')
+    maxlenempemail=len('email')
+    maxlenempsalario=len('salario')
+    maxlenemphorario=len('horario')
+    # print(maxlendepNombre,maxlendepTelef)
+    for depart in alphatechsl.departamentos.values():
+        maxlendepNombre=max(maxlendepNombre,len(depart.nombre))
+        maxlendepTelef=max(maxlendepTelef,len(depart.telefono))
+
+        for emp in depart.empleados.values():
+            maxlenempNombre=max(maxlenempNombre,len(emp.nombre))
+            maxlenempApellido=max(maxlenempApellido,len(emp.apellido))
+            maxlenempfecha=max(maxlenempApellido,len(emp.fechastr))
+            maxlenempdni=max(maxlenempApellido,len(emp.dni))
+            maxlenempemail=max(maxlenempApellido,len(emp.email))
+            maxlenempsalario=max(maxlenempApellido,len(str(emp.salario)))
+            maxlenemphorario=max(maxlenempApellido,len(emp.horario))
+
+    indented=maxlen1
+    indented2=maxlendepNombre+2+maxlendepTelef+2+1
+    # print(maxlen1)
+    for depart in alphatechsl.departamentos.values():
+        
+        print("+"+"-"*indented+"+"+"-"*200+"+")
+        print("|"+" "*indented+"|"+f"{'departamento':^{maxlendepNombre+2}}|{'telefono':^{maxlendepTelef+2}}|")
+        print("|"+" "*indented+"+"+"-"*indented2+"+")
+        print("|"+" "*indented+"|"+f"{depart.nombre:^{maxlendepNombre+2}}|{depart.telefono:^{maxlendepTelef+2}}|")
+
+        print("|"+" "*indented+"|"+" "*indented2+f"|{'nombre':^{maxlenempNombre+2}}|{'apellido':^{maxlenempApellido+2}}|{'fecha':^{maxlenempfecha+2}}|{'dni':^{maxlenempdni+2}}|{'email':^{maxlenempemail+2}}|{'salario':^{maxlenempsalario+2}}|{'horario':^{maxlenemphorario+2}}|")
+
+        for emp in depart.empleados.values():
+
+            # print(" "*indented+str(emp).replace("\n","\n"+" "*indented))
+            # print(emp.nombre,emp.apellido,emp.fecha,emp.dni,emp.direccion,emp.email, emp.clave, emp.salario,emp.horario)
+            # print(emp.nombre,emp.apellido,emp.fechastr,emp.dni,emp.email, emp.salario,emp.horario)
+            
+            print("|"+" "*indented+"|"+" "*indented2+f"|{emp.nombre:^{maxlenempNombre+2}}|{emp.apellido:^{maxlenempApellido+2}}|{emp.fechastr:^{maxlenempfecha+2}}|{emp.dni:^{maxlenempdni+2}}|{emp.email:^{maxlenempemail+2}}|{str(emp.salario):^{maxlenempsalario+2}}|{emp.horario:^{maxlenemphorario+2}}|")
+# printAll()
