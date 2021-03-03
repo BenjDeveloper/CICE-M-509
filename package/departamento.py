@@ -3,10 +3,11 @@ import pandas as pd
 
 class Departamento():
 
-    def __init__(self, nombre, telefono, lista_empleados=[]):
+    def __init__(self, nombre, telefono, lista_empleados=[], supervisor = None):
         self.nombre = nombre
         self.telefono = telefono
         self.empleados = lista_empleados 
+        self.supervisor = supervisor
 
     def __str__(self):
         return f'Departamento: {self.nombre}, Teléfono: {self.telefono}'
@@ -52,3 +53,8 @@ class Departamento():
                 print(emp)
         else:
             print('\nEste departamento aun no tiene empleados.')
+
+    def create():
+        nombre = input('\nNombre: ')
+        telefono = input('\nTelefono: ')
+        return Departamento(nombre, telefono)

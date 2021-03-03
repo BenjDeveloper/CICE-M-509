@@ -1,5 +1,5 @@
 
-from package.empleado import Empleado
+from package.empleado import Empleado, Departamento
 import csv, os, sys
 
 
@@ -142,7 +142,6 @@ class Gerencia():
                 self.departamentos.pop(cont)
             cont += 1
 
-
     def menu_crud(self, opt):
         os.system('cls')
         print('C - Crear un','empleado' if opt == '1' else 'departamento','\nR - Consultar existencias \nU - Editar datos \nD - Eliminar un','empleado' if opt == '1' else 'departamento','\nS - SALIR')
@@ -150,11 +149,11 @@ class Gerencia():
         while not seleccion in ('C','R','U','D','S'):
             seleccion = input('Opción incorrecta. ¿Qué acción desea realizar? (C, R, U, D ó S): ')
         
-    #     if seleccion == 'C':
-    #         if opt == '1':
-    #             #*Crear empleado
-    #         else:
-    #             #*Crear departamento
+        if seleccion == 'C':
+            if opt == '1':
+                self.emp_sin_dep.append(Empleado.create())
+            else:
+                self.departamentos.append(Departamento.create())
         if seleccion == 'R':
             if opt == '1':
                 self.muestra_empleados()
