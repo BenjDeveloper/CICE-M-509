@@ -23,17 +23,23 @@ class Empleado(Persona, Usuario):
     def create():
         nombre = input('\nNombre:')
         apellido = input('\nApellido:')
+
+        # c) validar que cuando introduzca una fecha pueda convertirla en un Datetime
         fecha_nacimiento = input('\nFecha de nacimiento (dd-mm-aaaa):')
+        
         dni = input('\nDNI:')
         direccion = input('\nDireccion:')
-        email = input('\nE-mail:')
 
-        patron = '[A-z0-9]{6,30}[@][A-z0-9]{2,10}[.][A-z0-9]{2,4}'
-        while re.match ( patron, email) == False:
+        email = input('\nE-mail:')
+        patron = '[A-z0-9]{4,30}[@][A-z0-9]{2,10}[.][A-z0-9]{2,4}'
+        while not re.match( patron, email):
             email = input('\nEntrada incorrecta. E-mail:')
         
         clave = input('\nClave:')
         activo = 'False'
+
+        # b) tambien debera validar que el salario es un numero y posteriormente convertirlo 
         salario = input('\nSalario:')
+        
         horario = input('\nHorario:')
         return Empleado(nombre,apellido,fecha_nacimiento,dni,direccion,email,clave,activo,salario,horario)

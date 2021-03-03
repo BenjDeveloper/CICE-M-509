@@ -2,12 +2,6 @@
 from package.empleado import Empleado, Departamento
 import csv, os, sys
 
-
-#? 2) EJERCICIO
-# agrege una clase al paquete que permita manejar una lista del departamento 
-# llamada Gerencia y posea el nombre de la empresa
-
-
 class Gerencia():
 
     def __init__(self, empresa, departamentos = [], emp_sin_dep = []):

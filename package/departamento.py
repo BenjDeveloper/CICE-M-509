@@ -7,7 +7,7 @@ class Departamento():
         self.nombre = nombre
         self.telefono = telefono
         self.empleados = lista_empleados 
-        self.supervisor = supervisor
+        self.supervisor = supervisor #*condición: tiene que pertenecer si o si a la lista de empleados del dto.
 
     def __str__(self):
         return f'Departamento: {self.nombre}, Teléfono: {self.telefono}'
@@ -58,3 +58,10 @@ class Departamento():
         nombre = input('\nNombre: ')
         telefono = input('\nTelefono: ')
         return Departamento(nombre, telefono)
+
+    def asignar_supervisor(self, dni):
+        for emp in self.empleados:
+            if emp.dni == dni:
+                self.supervisor = emp
+            else:
+                print('\nEl empleado no existe en este departamento')
