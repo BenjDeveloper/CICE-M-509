@@ -51,7 +51,8 @@ def opcion_3(dic_departamento):
             objeto_departamento = dic_departamento.pop(nombre_departamento)
             dic_departamento[objeto_departamento.nombre] = objeto_departamento
 
-            print(dic_departamento[objeto_departamento.nombre1])
+            print(dic_departamento[objeto_departamento.nombre])
+
 
     pausa()
 
@@ -127,7 +128,7 @@ def opcion_7(dic_departamento):
     dni_empleado = input('Agregue el DNI: ')
 
     if nombre_departamento in dic_departamento.keys():
-        if dni_empleado in dic_departamento[nombre_departamento].empelados.keys():
+        if dni_empleado in dic_departamento[nombre_departamento].empleados.keys():
             atributo = input('Nombre del atributo: ') 
             valor = input('Valor atributo: ')
             if atributo in ['nombre', 'apellido', 'fecha_de_nacimiento', 'direccion', 'email', 'clave', 'activo', 'salario', 'horario']:
@@ -325,9 +326,47 @@ def main():
     menu_simple(objeto_gerencia)
 
 
-#?===============================
-    #? Escritura de fichero departamentos
+    #*=====================================
+    #! Escritura de fichero departamentos
+
+    fichero = open( path+'/fichero_departamentos.csv', 'w')
+    primera_linea = True
+    for objetos_depar in objeto_gerencia.dic_departamentos.values():
+        cadena = ''
+        if primera_linea == True:
+            cadena = f'{objetos_depar.nombre},{objetos_depar.telefono}'
+        else:
+            cadena = f'\n{objetos_depar.nombre},{objetos_depar.telefono}'
+        fichero.write(cadena)
+        primera_linea = False
     
+    # cadena = f'\nCalidad, 91 637 40 79'
+    # fichero.write(cadena)
+
+    # cadena = f'\nRRHH, 91 637 40 80'
+    # fichero.write(cadena)
+
+    # cadena = f'\nLogistica, 91 637 40 81'
+    # fichero.write(cadena)
+
+    fichero.close()
+
+    #! =====================================
+
+    #^ Escritura de fichero empelado
+
+    fichero = open( path+'/fichero_empleados.csv', 'w')
+    primera_linea = True
+    for objetos_empleado in objeto_gerencia.dic_departamentos.values():
+        cadena = ''
+        if primera_linea == True:
+            cadena = f'{objetos_empleado.nombre},{objetos_empleado.apellido}, {objetos_empleado.fecha_de_nacimiento}, {objetos_empleado.dni}, {objetos_empleado.email},{objetos_empleado.clave},{objetos_empleado.activo}, {objetos_empleado.salario}, {objetos_empleado.horario}'
+        else:
+            cadena = f'\n{objetos_empleado.nombre},{objetos_empleado.apellido}, {objetos_empleado.fecha_de_nacimiento}, {objetos_empleado.dni}, {objetos_empleado.email},{objetos_empleado.clave},{objetos_empleado.activo}, {objetos_empleado.salario}, {objetos_empleado.horario}'
+        fichero.write(cadena)
+        primera_linea = False
+    
+
 
 
 main()
