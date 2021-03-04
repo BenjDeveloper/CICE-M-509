@@ -6,6 +6,7 @@ from package.empleado import Empleado
 from package.direccion_administrativa import Direccion_administrativa
 from package.supervisor import Supervisor
 from package.departamento import Departamento
+import csv
 
 def pausa():
     input('presione enter para continuar...') 
@@ -222,6 +223,7 @@ def opcion_11(dic_supervisor):
 def menu_simple(objeto_DA):
 
     dic_supervisor = {}
+    
 
     salida = True
     while salida == True:
@@ -242,18 +244,18 @@ def menu_simple(objeto_DA):
 
         opcion = input('selecione una:')
 
-        if   opcion == '1': opcion_1(objeto_DA.dic_departametos) #Departamento - Create
-        elif opcion == '2': opcion_2(objeto_DA.dic_departametos) #Departamento - Read  
-        elif opcion == '3': opcion_3(objeto_DA.dic_departametos) #Departamento - Update
-        elif opcion == '4': opcion_4(objeto_DA.dic_departametos) #Departamento - Delete
+        if   opcion == '1': opcion_1(objeto_DA.dic_departamentos) #Departamento - Create
+        elif opcion == '2': opcion_2(objeto_DA.dic_departamentos) #Departamento - Read  
+        elif opcion == '3': opcion_3(objeto_DA.dic_departamentos) #Departamento - Update
+        elif opcion == '4': opcion_4(objeto_DA.dic_departamentos) #Departamento - Delete
 
-        elif opcion == '5': opcion_5(objeto_DA.dic_departametos) #Empleado - Create
-        elif opcion == '6': opcion_6(objeto_DA.dic_departametos) #Empleado - Read
-        elif opcion == '7': opcion_7(objeto_DA.dic_departametos) #Empleado - Update
-        elif opcion == '8': opcion_8(objeto_DA.dic_departametos) #Empleado - Delete
+        elif opcion == '5': opcion_5(objeto_DA.dic_departamentos) #Empleado - Create
+        elif opcion == '6': opcion_6(objeto_DA.dic_departamentos) #Empleado - Read
+        elif opcion == '7': opcion_7(objeto_DA.dic_departamentos) #Empleado - Update
+        elif opcion == '8': opcion_8(objeto_DA.dic_departamentos) #Empleado - Delete
 
         elif opcion == '9': opcion_9(dic_supervisor)            # Supervisor - Create
-        elif opcion == '10': opcion_10(dic_supervisor,objeto_DA.dic_departametos)          # Supervisor - Read
+        elif opcion == '10': opcion_10(dic_supervisor,objeto_DA.dic_departamentos)          # Supervisor - Read
         elif opcion == '11': opcion_11(dic_supervisor) 
 
         elif opcion == '0': 
@@ -266,9 +268,79 @@ def menu_simple(objeto_DA):
 
 
 def main():
-
+    
     objeto_DA = Direccion_administrativa('Dainese')
+    
+    #*LECTURA DE FICHEROS PARA CREAR UN DEPARTAMENTO
+
+
+    path = 'C:/Users/cice/Desktop/CICE-M-509-1'
+
+    fichero = open(path + '/fichero_departamentos.csv', 'r')
+    lectura = csv.reader(fichero) 
+    for fila in lectura:
+        print('FILA - :' ,fila[0], fila[1])
+        nombre = fila[0]
+        telefono = fila[1]
+        objeto_departamento = Departamento(nombre,telefono)
+
+        if objeto_departamento.nombre not in objeto_DA.dic_departamentos.keys():
+            objeto_DA.dic_departamentos [objeto_departamento.nombre] = objeto_departamento
+            print(objeto_departamento)
+        else:
+            print('El departamento está creado')
+
+    fichero.close()
+
+    #*LECTURA DE FICHEROS PARA CREAR UN EMPLEADO
+
+    path = 'C:/Users/cice/Desktop/CICE-M-509-1'
+
+    fichero = open(path + '/fichero_empleados.csv', 'r')
+    lectura = csv.reader(fichero) 
+    for fila in lectura:
+        print('FILA - :' ,fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9], fila[10])
+        objeto_empleado = Empleado(fila[0],
+                                fila[1],
+                                fila[2],
+                                fila[3],
+                                fila[4],
+                                fila[5],
+                                fila[6],
+                                fila[7],
+                                fila[8],
+                                fila[9],)
+        nombre_departamento=fila[10]
+        
+        if nombre_departamento in objeto_DA.dic_departamentos.keys():
+            
+            if not objeto_empleado.dni in objeto_DA.dic_departamentos[nombre_departamento].empleados.keys():
+                objeto_DA.dic_departamentos[nombre_departamento].empleados[objeto_empleado.dni] = objeto_empleado
+            else:
+                print('El empleado ya se encuentra registrado')
+        else:
+            print('El empleado no existe')
+
+        
+
+    fichero.close()
+
+#?===============================
+
     menu_simple(objeto_DA)
+
+#?===============================
+#?ESCRITURA DE FICHERO DE DEPARTAMENTOS
+
+
+
+
+
+
+
+
+
+
 
 main()
 
