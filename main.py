@@ -169,7 +169,7 @@ def opcion_9(dic_supervisores):
     objeto_supervisor = Supervisor("ricardo",
                                     "lamas",
                                     "16-julio-87",
-                                    "0157226q",
+                                    "123",
                                     "povedilla 4",
                                     "lamas@cice.es",
                                     "1,2,3,4",
@@ -177,9 +177,34 @@ def opcion_9(dic_supervisores):
     #! DICCIONARIO    
     if not objeto_supervisor.dni in dic_supervisores.keys():
         dic_supervisores [ objeto_supervisor.dni ] = objeto_supervisor
-        print(objeto_superzvisor)
+        print(objeto_supervisor)
     else:
         print('EL Supervisor INDICADO YA SE ENCUENTRA REGISTRADO')
+    pausa()
+
+def opcion_10(dic_supervisores, dic_departametos):
+    print('10. opcion - Supervisor - Conectar Instansias - Referencias de Objetos')
+    dni_super = input('agrege el DNI del supersor a asignar: ')
+    nombre_depa = input('agrege el NOMBRe del departamendo a ser asingado: ')
+
+    if dni_super in dic_supervisores.keys():
+        if nombre_depa in dic_departametos.keys():
+
+            dic_supervisores[dni_super].departamendo = dic_departametos[nombre_depa]
+            dic_departametos[nombre_depa].supervisor = dic_supervisores[dni_super]
+
+        else:
+            print('EL DEPARTAMENTO NO ESTA REGISTRADO')
+    else:
+        print('EL SUPERVISOR NO EXISTE - NO ESTA REGISTRADO')
+    pausa()
+
+def opcion_11(dic_supervisores):
+    print('11. opcion - Supervisor - acceder al departamento')
+    dni_super = input('agrege el DNI del supersor a consultar: ')
+    if dni_super in dic_supervisores.keys():
+        print(dic_supervisores[dni_super])
+        print(dic_supervisores[dni_super].departamento)
     pausa()
 
 def menu_simple(objeto_DA):
@@ -199,6 +224,9 @@ def menu_simple(objeto_DA):
         print('6. opcion - Empleado - Read')
         print('7. opcion - Empleado - Update')
         print('8. opcion - Empleado - Delete')
+        print('9. opcion - Supervisor - Crear')
+        print('10. opcion - Supervisor - Conectar Instansias - Referencias de Objetos')
+        print('11. opcion - Supervisor - acceder al departamento')
         print('0. opcion - salida')
 
         opcion = input('selecione una:')
@@ -214,7 +242,8 @@ def menu_simple(objeto_DA):
         elif opcion == '8': opcion_8(objeto_DA.dic_departametos) #Empleado - Delete
 
         elif opcion == '9': opcion_9(dic_supervisores) #Supervisor - Crear
-        elif opcion == '10': opcion_10() #Supervisor - Consultar
+        elif opcion == '10': opcion_10(dic_supervisores, objeto_DA.dic_departametos) #Supervisor - Conectar
+        elif opcion == '11': opcion_11(dic_supervisores) #Supervisor - Conectar
         
         elif opcion == '0': 
             print('Adios...')
