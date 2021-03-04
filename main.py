@@ -6,6 +6,7 @@ from package.empleado import Empleado
 from package.departamento import Departamento
 from package.direccion_admitiva import DireccionAdministrativa
 from package.supervisor import Supervisor
+import csv
 
 def pausa():
     input('presione enter para continuar...') 
@@ -257,7 +258,34 @@ def menu_simple(objeto_DA):
 def main():
 
     objeto_DA = DireccionAdministrativa('Dainese')
+
+   
+    #? LECTURA DE FICHERO PARA CREAR DEPARTAMENTOS 
+    path = '/Users/benjaminpenaloza/Dropbox/Mi Mac (MacBook Pro de Benjamin)/Documents/MyWorkspace/CICE-M-509'
+
+    fichero = open( path+'/fichero_departamentos.csv', 'r')
+    lectura = csv.reader(fichero) 
+    for fila in lectura:
+        print('FILA  - :',fila[0], fila[1])
+
+    fichero.close()
+
+     #? -------------------------------------------
+    #* LECTURA DE FICHERO PARA CREAR EMPLEADOS POR DEPARTAMENTO 
+
+
+
+    #* -------------------------------------------
+
     menu_simple(objeto_DA)
+
+
+
+    #! ESCRITURA DE FICHERO DEPARTAMENTOS
+    
+
+
+    #! -------------------------------------------
 
 main()
 
