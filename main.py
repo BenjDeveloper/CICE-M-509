@@ -54,14 +54,15 @@ def opcion_3(dic_departamento):
 
         atributo = input("Agrege el nombre del atributo que desea editar: ") #nombre, telefono, empleados
         valor = input("Agrege el atributo anterior que desea editar: ")
+
         if atributo in ['nombre', 'telefono']:
             setattr(dic_departamento[nombre_departamento], atributo, valor)
         
         if atributo == 'nombre':
-            objeto_departamento = dic_departamento.nombre(nombre_departamento)
+            objeto_departamento = dic_departamento.pop(nombre_departamento)
             dic_departamento[objeto_departamento.nombre] = objeto_departamento
         
-        print(dic_departamento[nombre_departamento])
+        print(dic_departamento[objeto_departamento.nombre])
 
 
     pausa()
@@ -332,9 +333,37 @@ def main():
 #?===============================
 #?ESCRITURA DE FICHERO DE DEPARTAMENTOS
 
+    fichero = open( path+'/fichero_departamentos.csv', 'w')
+    primera_linea = True
+    for objetos_depar in objeto_DA.dic_departamentos.values():
+        cadena = ''
+        
+        if primera_linea == True:
+            cadena = f'{objetos_depar.nombre},{objetos_depar.telefono}'
+        else:
+            cadena = f'\n{objetos_depar.nombre},{objetos_depar.telefono}'
+        
+        fichero.write(cadena)
+        primera_linea = False
+    
+    fichero.close()
 
+#?ESCRITURA DE FICHERO DE EMPLEADOS
 
-
+    fichero = open( path+'/fichero_empleados.csv', 'w')
+    primera_linea = True
+    for objetos_empl in objeto_DA.dic_empleados.values():
+        cadena = ''
+        
+        if primera_linea == True:
+            cadena = f'{objetos_empl.nombre},{objetos_empl.apellido},{objetos_empl.fecha_nacimiento},{objetos_empl.dni}{objetos_empl.direccion},{objetos_empl.apellido}'
+        else:
+            cadena = f'\n{objetos_depar.nombre},{objetos_depar.telefono}'
+        
+        fichero.write(cadena)
+        primera_linea = False
+    
+    fichero.close()
 
 
 
