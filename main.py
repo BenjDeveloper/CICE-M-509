@@ -6,6 +6,7 @@ from package.empleado import Empleado
 from package.departamento import Departamento
 from package.gerencia import Gerencia
 from package.supervisor import Supervisor
+import csv
 
 def pausa():
     input('presione enter para continuar...') 
@@ -26,7 +27,7 @@ def opcion_1(dic_departamento):
     pausa()
 
 def opcion_2(dic_departamento):
-    print('opcion 2 - Departameno - Read')
+    print('opcion 2 - Departamento - Read')
     # nombre_departamento = input('Departamento que desea ver')
     # if nombre_departamento in dic_departamento.keys:
     #     print(dic_departamento[nombre_departamento])
@@ -111,7 +112,7 @@ def opcion_6(dic_departamento):
     nombre_departamento = input('Agregue departamento: ')
 
     if nombre_departamento in dic_departamento.keys():
-        if dni_empleado in dic_departamento[nombre_departamento].empelados.keys():
+        if dni_empleado in dic_departamento[nombre_departamento].empleados.keys():
             print(dic_departamento[nombre_departamento].empleados[dni_empleado])
 
 
@@ -231,16 +232,16 @@ def menu_simple(objeto_gerencia):
 
         opcion = input('selecione una:')
 
-        if   opcion == '1': opcion_1(objeto_gerencia.dic_departametos) #Departamento - Create
-        elif opcion == '2': opcion_2(objeto_gerencia.dic_departametos) #Departamento - Read  
-        elif opcion == '3': opcion_3(objeto_gerencia.dic_departametos) #Departamento - Update
-        elif opcion == '4': opcion_4(objeto_gerencia.dic_departametos) #Departamento - Delete
-        elif opcion == '5': opcion_5(objeto_gerencia.dic_departametos) #Empleado - Create
-        elif opcion == '6': opcion_6(objeto_gerencia.dic_departametos) #Empleado - Read
-        elif opcion == '7': opcion_7(objeto_gerencia.dic_departametos) #Empleado - Update
-        elif opcion == '8': opcion_8(objeto_gerencia.dic_departametos) #Empleado - Delete
+        if   opcion == '1': opcion_1(objeto_gerencia.dic_departamentos) #Departamento - Create
+        elif opcion == '2': opcion_2(objeto_gerencia.dic_departamentos) #Departamento - Read  
+        elif opcion == '3': opcion_3(objeto_gerencia.dic_departamentos) #Departamento - Update
+        elif opcion == '4': opcion_4(objeto_gerencia.dic_departamentos) #Departamento - Delete
+        elif opcion == '5': opcion_5(objeto_gerencia.dic_departamentos) #Empleado - Create
+        elif opcion == '6': opcion_6(objeto_gerencia.dic_departamentos) #Empleado - Read
+        elif opcion == '7': opcion_7(objeto_gerencia.dic_departamentos) #Empleado - Update
+        elif opcion == '8': opcion_8(objeto_gerencia.dic_departamentos) #Empleado - Delete
         elif opcion == '9': opcion_9(dic_supervisores) #Supervisor - Crear
-        elif opcion == '10': opcion_10(dic_supervisores, objeto_gerencia.dic_departametos) #Supervisor - Consultar
+        elif opcion == '10': opcion_10(dic_supervisores, objeto_gerencia.dic_departamentos) #Supervisor - Consultar
         elif opcion == '11': opcion_11(dic_supervisores) #Supervisor - Acceder
         elif opcion == '0': 
             print('Adios...')
@@ -254,8 +255,79 @@ def menu_simple(objeto_gerencia):
 def main():
 
     objeto_gerencia = Gerencia('Dainese')
+
+    #?Lectura de fichero para crear departamentos
+
+
+    path = 'C:/Users/cice.AULA4POV14S/Documents/CICE-M-509'
+
+    fichero = open(path + '/fichero_departamentos.csv', 'r')
+    lectura = csv.reader(fichero) 
+    for fila in lectura:
+        print('FILA - :' ,fila[0], fila[1])
+        nombre = fila[0]
+        telefono = fila[1]
+        objeto_departamento = Departamento(nombre,telefono)
+
+        if objeto_departamento.nombre not in objeto_gerencia.dic_departamentos.keys():
+            objeto_gerencia.dic_departamentos [objeto_departamento.nombre] = objeto_departamento
+            print(objeto_departamento)
+        else:
+            print('El departamento está creado')
+
+    fichero.close()
+
+
     
+    #?===============================
+    #*Lectura de fichero para crear empleados por departamento
+
+    fichero = open(path + '/fichero_empleados.csv', 'r')
+    lectura = csv.reader(fichero) 
+    for fila in lectura:
+        print('FILA - :' ,fila[0], fila[1], fila[2], fila[3], fila[4], fila[5],fila[6], fila[7], fila[8], fila[9], fila[10])
+        # nombre = fila[0]
+        # telefono = fila[1]
+        # fecha_de_nacimiento = fila[2]
+        # dni = fila[3]
+        # direccion = fila[4]
+        # email = fila[5]
+        # clave = fila[6]
+        # activo = fila[7]
+        # salario = fila[8]
+        # horario = fila[9]
+        # nombre_departamento = fila[10]
+        objeto_empleado = Empleado(
+                                    fila[0],
+                                    fila[1],
+                                    fila[2],
+                                    fila[3],
+                                    fila[4],
+                                    fila[5],
+                                    fila[6],
+                                    fila[7],
+                                    fila[8],
+                                    fila[9],)
+        nombre_departamento = fila[10]
+
+        if nombre_departamento in objeto_gerencia.dic_departamentos.keys():
+            if not objeto_empleado.dni in objeto_gerencia.dic_departamentos[nombre_departamento].empleados.keys():
+                objeto_gerencia.dic_departamentos[nombre_departamento].empleados[objeto_empleado.dni] = objeto_empleado
+            else:
+                print('El empleado esta registrado')
+        else:
+            print('El empleado no existe')
+
+    fichero.close()
+
+    input('pausa....')    
+
     menu_simple(objeto_gerencia)
+
+
+#?===============================
+    #? Escritura de fichero departamentos
+    
 
 
 main()
