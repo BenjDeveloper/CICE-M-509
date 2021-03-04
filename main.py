@@ -6,7 +6,7 @@ from package.empleado import Empleado
 from package.departamento import Departamento
 from package.gerencia import Gerencia
 from package.supervisor import Supervisor
-
+import csv
 
 
 def pausa():
@@ -248,33 +248,59 @@ def menu_simple(objeto_gerencia):
 def main():
 
     objeto_gerencia = Gerencia("Dainese")
-    menu_simple(objeto_gerencia)
-
     
 
+    #?Lectura de fichero para crear departamento
+    
+    path="C:/Users/cice/Pictures/Screenshots/CICE-M-509/CICE-M-509-4"
+
+    fichero = open( path+'/fichero_departamentos.csv', 'r')
+    lectura = csv.reader(fichero) 
+    for fila in lectura:
+        print("Fila  -:",fila[0],fila[1])
+        nombre= fila[0]
+        telefono=[1]
+        objeto_departamento=Departamento(nombre,telefono)
+        if not objeto_departamento.nombre in objeto_gerencia.dic_departamentos.keys():
+            objeto_gerencia.dic_departamentos[objeto_departamento.nombre]= objeto_departamento
+        else:
+            print("El departamento ya esta creado")
+    fichero.close()
+    #----------------------------------------------------------
+    #?Lectura empleado
+
+    fichero = open( path+'/fichero_empleados.csv', 'r')
+    lectura = csv.reader(fichero) 
+    for fila in lectura:
+        print(len(fila),"Fila  -:",fila[0],fila[1],fila[2],fila[3],fila[4],fila[5],fila[6],fila[7],fila[8],fila[9],fila[10])
+        objeto_empleado = Empleado(fila[0],
+                                fila[1],
+                                fila[2],
+                                fila[3],
+                                fila[4],
+                                fila[5],
+                                fila[6],
+                                fila[7],
+                                fila[8],
+                                fila[9])
+        nombre_departamento=fila[10]
+        if nombre_departamento in objeto_gerencia.dic_departamentos.keys():
+            if not objeto_empleado.dni in  objeto_gerencia.dic_departamentos[nombre_departamento].empleados.keys():
+                objeto_gerencia.dic_departamentos[nombre_departamento].empleados[objeto_empleado.dni]= objeto_empleado
+            else:
+                print("El empleado ya se encuentra registrado")
+        else:
+            print("El empleado no existe")
+        print(objeto_empleado)
+
+
+
+
+    fichero.close()
+
+    pausa()
+
+    menu_simple(objeto_gerencia)
+
 main()
-
-#!crear una opcion edite la gerencia
-
-# Gerencia
-
-#         Nombre
-#         dic_departamentos {
-#             'nombre': objeto_departamento
-#             'RRHH': objeto_departamento_RRHH
-#                                             nombre
-#                                             telefono
-#                                             empleados{
-#                                                        'dni':objeto_empleado
-#                                                                             nombre
-#                                                                             apellido
-#                                                                             fecha fecha_nacimiento
-#                                                                             direccion
-#                                                                             dni 
-#                                                                             horario
-#                                                                             email
-#                                                                             clave
-#                                                                             salario
-#                                                                             activo
-
 
