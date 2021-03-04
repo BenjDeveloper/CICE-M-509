@@ -8,3 +8,5 @@ class Supervisor(Persona,User):
         Persona.__init__(self,nombre,apellido,fecha,dni,direccion)
         User.__init__(self,email,clave)
         self.departamento = None
+    def __str__ (self):
+        return 'Supervisor : '+Persona.__str__(self) + User.__str__(self)
