@@ -196,6 +196,7 @@ def opcion_10(dic_supervisor,dic_departamentos):
     else:
         print("El supervisor no existe - No esta registrado")
     pausa()
+    
 def opcion_11(dic_supervisor):
     print("Opcion 11 - supervisor - acceder al departamento")
     dni_super=input("Introduzca el dni del supervisor: ")
@@ -259,7 +260,7 @@ def main():
     for fila in lectura:
         print("Fila  -:",fila[0],fila[1])
         nombre= fila[0]
-        telefono=[1]
+        telefono=fila[1]
         objeto_departamento=Departamento(nombre,telefono)
         if not objeto_departamento.nombre in objeto_gerencia.dic_departamentos.keys():
             objeto_gerencia.dic_departamentos[objeto_departamento.nombre]= objeto_departamento
@@ -292,15 +293,30 @@ def main():
         else:
             print("El empleado no existe")
         print(objeto_empleado)
+    
+    fichero.close()
 
+    
+    menu_simple(objeto_gerencia)
 
+    #----------------------------------------------------------
+    #!Escritura de fichero departamentos
+
+    fichero = open( path+'/fichero_departamentos_AUX.csv', 'w')
+    contador = 0
+    for objeto_departamento in objeto_gerencia.dic_departamentos.values():
+        cadena = ""
+        if contador == 0:
+            cadena = f"{objeto_departamento.nombre},{objeto_departamento.telefono}"
+        else:
+            cadena = f"\n{objeto_departamento.nombre},{objeto_departamento.telefono}"
+        fichero.write(cadena) 
+
+        contador = 1
 
 
     fichero.close()
 
-    pausa()
-
-    menu_simple(objeto_gerencia)
 
 main()
 
