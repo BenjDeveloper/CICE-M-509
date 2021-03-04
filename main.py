@@ -277,6 +277,25 @@ def printAll(empresaExistente):
                 print("|"+" "*indented+"|"+" "*indented2+f"+{'-':-^{maxlenempNombre+2}}+{'-':-^{maxlenempApellido+2}}+{'-':-^{maxlenempfecha+2}}+{'-':-^{maxlenempdni+2}}+{'-':-^{maxlenempemail+2}}+{'-':-^{maxlenempsalario+2}}+{'-':-^{maxlenemphorario+2}}+")
     print(f"+{'-':-^{indented}}+{'-':-^{indented2}}+{'-':-^{maxlentotal-(maxlendepNombre+maxlendepTelef+maxlen1+11)}}+")
 
+def export_CSV(empresaExistente):
+    print("los departamentos y empleados se exportaran a un archivo csv ubicado en la carpeta exportCSV.\nSe sobreescribirán los archivos en esa carpeta")
+    pausa()
+    op=""
+    while (op!="y") and (op!="n"):
+        op=input("¿Desa exportar los datos? [Y/N]").lower()
+        if op=="y":
+            empresaExistente.export_to_CSV()
+            print("Los datos se han exportado.")
+            return
+        elif op=="n":
+            print("Operacion cancelada. Slaiendo.")
+            return
+        else:
+            print("El comando no se reconoce. Elija una opcion valida.")
+
+alphatechsl=Gerencia("Alphatech S.L.")
+alphatechsl.setDepartamentosCSV("importempCSV\departamentos.csv")
+export_CSV(alphatechsl)
 def menu(empresaExistente):
 
     dic_supervisores = {}
@@ -302,6 +321,7 @@ def menu(empresaExistente):
         print('11. opcion - Supervisor - acceder al departamento')
         print('12. opcion - cargar csv Departamentos y Empleados')
         print('13. opcion - ALL - Read')
+        print('14. opcion - exportar csv Departamentos y Empleados')
 
         opcion = input('selecione una:')
 
@@ -341,6 +361,9 @@ def menu(empresaExistente):
             printAll(empresaExistente) #ALL - Read
             pausa()
 
+        elif opcion == '14': 
+            export_CSV(empresaExistente)
+
         elif opcion == '0': 
             print('Adios...')
             pausa()
@@ -350,7 +373,7 @@ def menu(empresaExistente):
             pausa()
 
 
-main()
+# main()
 
 # alphatechsl=Gerencia("Alphatech S.L.")
 # alphatechsl.setDepartamentosCSV("importempCSV\departamentos.csv")

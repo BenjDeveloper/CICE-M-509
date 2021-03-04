@@ -43,12 +43,24 @@ class Gerencia(object):
             fileempleados.close()
         fileempleados.close()
 
-    # def getDepartamento(self,nombredepartamento):
-    #     for i,d in enumerate(self.departamentos):
-    #         # print(d.nombre,self.departamentos[i])
-    #         if nombredepartamento==d.nombre:
-    #             return self.departamentos[i]
-    #     return None
+    def export_to_CSV(self):
+        filecreate=open("exportCSV\departamentos.csv","w", newline='')
+        depcsv=csv.writer(filecreate)
+        depheader=["departamento","telefono","ruta csv empleados"]
+        empheader=["nombre","apellido","fecha","dni","direccion","email","clave","salario","horario"]
+        depcsv.writerow(depheader)
+        cont=1
+        for depart in self.departamentos.values():
+            filename=f"exportCSV\empleados{str(cont)}.csv"
+            fileemp=open(filename,"w", newline='')
+            empcsv=csv.writer(fileemp)
+            empcsv.writerow(empheader)
+            for emp in depart.empleados.values():
+                # print([emp.nombre,emp.apellido,emp.fechastr,emp.dni,emp.direccion,emp.email,emp.clave,emp.salario,emp.horario])
+                empcsv.writerow([emp.nombre,emp.apellido,emp.fechastr,emp.dni,emp.direccion,emp.email,emp.clave,emp.salario,emp.horario])
+            depcsv.writerow([depart.nombre,depart.telefono,filename])
+            cont+=1
+
     def getDepartamento(self,nombredepartamento):
         if nombredepartamento in self.departamentos:
             return self.departamentos[nombredepartamento]
