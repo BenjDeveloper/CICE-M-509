@@ -10,7 +10,7 @@ class Persona(object):
         self.mascotas = {}
 
     def __str__ (self):
-        return f'- Nombre: {self.nombre} - Apellido: {self.apellido} - Dirección:{self.direccion} - Teléfono: {self.telefono} - Dni: {self.dni}'
+        return f'\nNUEVA PERSONA\n\n- Nombre: {self.nombre}\n- Apellido: {self.apellido}\n- Dirección:{self.direccion}\n- Teléfono: {self.telefono}\n- Dni: {self.dni}'
 
     
 class Mascotas(object):
@@ -24,7 +24,7 @@ class Mascotas(object):
 
     def __str__ (self):
         
-        return f'- Nombre: {self.nombre_mascota} - Tipo: {self.tipo} - Raza:{self.raza} - Edad: {self.edad} - Color: {self.color}'
+        return f'\nNUEVA MASCOTA\n\n- Nombre: {self.nombre_mascota}\n- Tipo: {self.tipo}\n- Raza:{self.raza}\n- Edad: {self.edad}\n- Color: {self.color}'
 
 class Veterinaria(object):
 
