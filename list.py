@@ -221,7 +221,7 @@ def modificar_parametro(estudiantes, horario):
 
 # Ejercicio 5: Crear una nueva lista con todos los estudiantes de Python
 total_student = mañana + tarde
-#print(total_student)
+# print(total_student)
 
 # Ejercicio 6: De la última lista creada dividir por género
 
@@ -237,7 +237,7 @@ def dividir_genero(estudiantes):
             mujer.append(estudiante)
     return hombre, mujer
 
-print(dividir_genero(total_student))
+# print(dividir_genero(total_student))
 
 # Ejercicio 7: Crear una función que además de agregar la clave courses a cada uno de los estudiantes, se le pueda indicar uno de los	cursos matriculados
 
@@ -249,7 +249,56 @@ def añadir_curso(total_students):
         ciriaco = random.choice(cursos)
         estudiantes['cursos'] = ciriaco
 
-
 print(añadir_curso(total_student))
 
+def get_student(total_student):
+    id_student = input('ID: ')
+    for student in total_student:
+        if student['id'] == id_student:
+            return student
 
+print(get_student(total_student))
+# element loop
+# element loop [condition]
+# element condition1 condition2 loop
+
+# element for element in list_of_elements if condition
+# element if condition else condition for element in list_of_elements
+lista = [1,2,3,4]
+# print([element * 4 if element >= 2 else element for element in lista])
+
+
+# callback function
+def add(x,y):
+    return x + y
+# print(lambda x: x + 5)
+# add_5 = lambda x, y: x + y
+# print(add_5(5, 3))
+
+# filter(add, lista)
+
+# listaC = []
+# for element in lista:
+#     if element > 2:
+#         listaC.append(element * 2)
+#     else:
+#         listaC.append(element)
+# print(listaC)
+# print([element * 3 for element in lista if element > 2])
+# print([element * 2 if element % 2 == 0 else element for element in lista])
+# print([elemento*2 for elemento in lista if elemento % 2 == 0])
+# lista2 = [elemento*2 for elemento in lista]
+# print(lista2)
+
+# for elemento in lista:
+#     elemento * 2
+
+
+'''
+funciones anonimas(lambda)
+'''
+# filter(lambda word: word + 's', 'sara')
+
+
+
+# print(list(filter(lambda x: x > 2,lista)))
