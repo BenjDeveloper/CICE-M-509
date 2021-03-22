@@ -109,13 +109,16 @@ print(valores_1(data))
     # Debe tener tantas propiedas como claves en el diccionario
 
 class Municipio:
+    counter = 0
     def __init__ (self, municipio_nombre, densidad_por_km2, superficie_km2 ):
         self.municipio_nombre = municipio_nombre
         self.densidad_por_km2 = densidad_por_km2
         self.superficie_km2 = superficie_km2
 
+        Municipio.counter += 1
+
     def __str__ (self):
-        return f"\nNombre: {self.municipio_nombre}\nDensidad: {self.densidad_por_km2}\nSuperficie: {self.superficie_km2} "
+        return f"\nNombre: {self.municipio_nombre}\nDensidad: {self.densidad_por_km2:.3f}\nSuperficie: {self.superficie_km2:.3f} "
 
 
 # Ejercicio 7: Crear una función que acepte un solo parámetro (municipio) y que devuleva un objecto con las propiedades (nombre, densidad, superfice)
@@ -132,3 +135,72 @@ def municipio(nombre_municipio):
     return 'Este municipio no existe'
 
 print(municipio('Villalbilla'))
+
+
+# Ejercicio 9: Crear una función que acepte como parámetro toda la lista de diccionarios y devuelva una lista de objetos
+
+
+class Municipio2:
+    def __init__ (self, municipio_codigo, densidad_por_km2, municipio_codigo_ine, nuts4_nombre, municipio_nombre, nuts4_codigo, superficie_km2 ):
+        self.municipio_codigo = municipio_codigo
+        self.densidad_por_km2 = densidad_por_km2
+        self.municipio_codigo_ine = municipio_codigo_ine
+        self.nuts4_nombre = nuts4_nombre
+        self.municipio_nombre = municipio_nombre
+        self.nuts4_codigo = nuts4_codigo
+        self.superficie_km2 = superficie_km2
+
+    # def __str__ (self):
+    #     return f"\nCodigo del Municipio: {self.municipio_codigo}\nDensidad: {self.densidad_por_km2:.3f}\nCodigo Ine: {self.municipio_codigo_ine}\nZona: {self.nuts4_nombre}\nNombre: {self.municipio_nombre}\n Codigo Zona: {self.nuts4_codigo}\nSuperficie: {self.superficie_km2:.3f} "
+
+def objetolistamunicipios(lista):
+    lista_municipios = []
+
+    for diccionario in lista:
+        obj = Municipio2(diccionario['municipio_codigo'],
+                        diccionario['densidad_por_km2'],
+                        diccionario['municipio_codigo_ine'],
+                        diccionario['nuts4_nombre'],
+                        diccionario['municipio_nombre'],
+                        diccionario['nuts4_codigo'],
+                        diccionario['superficie_km2'])
+        lista_municipios.append(obj)
+    return lista_municipios
+
+
+# print(objetolistamunicipios(data))
+    
+
+# Ejercicio 10: Considerando que en cada objeto tenemos la superficie y densidad ambas por km2, crear un MÉTODO (una función dentro del objeto) que devuelva la densidad total del municipio dado
+
+def densidad_total_u(nombre_municipio):
+    for mun in data:
+        if mun['municipio_nombre'] == nombre_municipio:
+            densidad = mun['densidad_por_km2']
+            superficie_total = mun['superficie_km2']
+            densidad_total = densidad * superficie_total
+            return f'La densidad total es {densidad_total}'
+
+print(densidad_total_u('Villalbilla'))
+
+# todos_municipios = [mun['municipio_nombre'] for mun in data]
+# for i in todos_municipios:
+#     print(densidad_total_u(i))
+
+
+def densidad_madrid(lista):
+
+    lista_densidades = []
+    lista_superficies = []
+
+    for mun in lista:
+        lista_densidades.append(mun['densidad_por_km2'])
+        lista_superficies.append(mun['superficie_km2'])
+    densidad_total_madrid = sum(lista_densidades) * sum(lista_superficies)
+    return f'La densidad total de Madrid es {densidad_total_madrid:.2f}'
+
+print(densidad_madrid(data))
+
+    
+
+    
