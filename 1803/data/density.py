@@ -8,6 +8,7 @@ data = data["data"]
 # print(data[1])
 o.close()
 
+# https://github.com/vgenov-py/python_cice/blob/master/density.md
 # Ejercicio 1: Obtender la densidad media de los municipios de Madrid
     
 def densidad_media(lista):
@@ -99,9 +100,9 @@ def valores_1(lista):
     porcentaje2 = len(lista2)*100/len(lista_densidad)
     porcentaje3 = len(lista3)*100/len(lista_densidad)
     porcentaje4 = len(lista4)*100/len(lista_densidad)
-    return f"Lista 1: {len(lista1)}, porcentaje: {porcentaje1}\nLista 2: {len(lista2)}, porcentaje: {porcentaje2}\nLista 3: {len(lista3)}, porcentaje: {porcentaje3}\nLista 4: {len(lista4)}, porcentaje: {porcentaje4}"
+    return f"Lista 1: {len(lista1)}, porcentaje: {porcentaje1:.2f}\nLista 2: {len(lista2)}, porcentaje: {porcentaje2:.2f}\nLista 3: {len(lista3)}, porcentaje: {porcentaje3:.2f}\nLista 4: {len(lista4)}, porcentaje: {porcentaje4:.2f}"
 
-print(valores_1(data))
+# print(valores_1(data))
 
 
 # Ejercicio 5: Crear una clase de tipo municipality/municipio
@@ -110,12 +111,32 @@ print(valores_1(data))
 
 class Municipio:
     counter = 0
+    total_population = 0
+    anual_growth = 1.02
+
     def __init__ (self, municipio_nombre, densidad_por_km2, superficie_km2 ):
         self.municipio_nombre = municipio_nombre
         self.densidad_por_km2 = densidad_por_km2
         self.superficie_km2 = superficie_km2
 
+        Municipio.total_population += self.population
         Municipio.counter += 1
+
+# Ejercicio 18: Define un set_anual_growth que permita modificar la tasa de crecimiento
+
+    def apply_anual_growth(self):
+        delf.densidad *= Municipio.anual_growth
+
+    @classmethod 
+    def set_anual_growth(cls, value):
+        cls.anual_growth = value
+
+
+# Ejercicio 16: Convertir el método del ejercicio 10 en propiedad
+
+    @property
+    def population(self):
+        return self.densidad_por_km2 * self.superficie_km2
 
     def __str__ (self):
         return f"\nNombre: {self.municipio_nombre}\nDensidad: {self.densidad_por_km2:.3f}\nSuperficie: {self.superficie_km2:.3f} "
@@ -179,7 +200,7 @@ def densidad_total_u(nombre_municipio):
             densidad = mun['densidad_por_km2']
             superficie_total = mun['superficie_km2']
             densidad_total = densidad * superficie_total
-            return f'La densidad total es {densidad_total}'
+            return f'La densidad total es {densidad_total:.0f}'
 
 print(densidad_total_u('Villalbilla'))
 
@@ -190,17 +211,41 @@ print(densidad_total_u('Villalbilla'))
 
 def densidad_madrid(lista):
 
-    lista_densidades = []
-    lista_superficies = []
+    #lista_densidades = []
+    lista_superficie = []
+    lista_poblacion = []
 
     for mun in lista:
-        lista_densidades.append(mun['densidad_por_km2'])
-        lista_superficies.append(mun['superficie_km2'])
-    densidad_total_madrid = sum(lista_densidades) * sum(lista_superficies)
-    return f'La densidad total de Madrid es {densidad_total_madrid:.2f}'
+        poblacion = mun['densidad_por_km2'] * mun['superficie_km2']
+        lista_superficie.append(mun['superficie_km2'])
+        lista_poblacion.append(poblacion)
 
-print(densidad_madrid(data))
-
+    poblacion_total = sum(lista_poblacion)
+    densidad_t = poblacion_total / sum(lista_superficie)
     
+    return f'La densidad total de Madrid es {densidad_t:.0f}'
 
-    
+# print(densidad_madrid(data))
+
+# Ejercicio 13: Crea un classmethod llamado from_str que crea una instancia de la siguiente cadena --> "test-3.54-23.86"
+
+@classmethod
+def from_str(cls, string_):
+    nombre, densidad, superficie = string_.split('-')
+    densidad = float(densidad)
+    superficie = float(superficie)
+    return cls(nombre, densidad, superficie)
+
+# Ejercicio 14: Estable una tasa de crecimiento anual del 2%
+# Ejercicio 15: Define un método que aplique el crecimiento anual sobre un objeto
+
+def crecimiento_anual(nombre_municipio):
+    for mun in data:
+        if mun['municipio_nombre'] == nombre_municipio:
+            densidad = mun['densidad_por_km2']
+            superficie_total = mun['superficie_km2']
+            densidad_total = densidad * superficie_total
+            crecimiento_anual_municipio = densidad_total * 0.02
+            return f'El creciemiento anual es {crecimiento_anual_municipio:.0f}'
+
+print(crecimiento_anual('Villalbilla'))
