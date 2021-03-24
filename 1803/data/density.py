@@ -1,6 +1,11 @@
 import json
 import os.path
+import csv
+
+
 pwd = os.path.dirname(os.path.realpath(__file__))
+
+
 o = open(f"{pwd}/data.json")
 
 data = json.load(o)
@@ -8,6 +13,8 @@ data = data["data"]
 # print(data[1])
 o.close()
 
+
+# genovese.work@gmail.com
 # https://github.com/vgenov-py/python_cice/blob/master/density.md
 # Ejercicio 1: Obtender la densidad media de los municipios de Madrid
     
@@ -155,7 +162,7 @@ def municipio(nombre_municipio):
             return objeto_municipio
     return 'Este municipio no existe'
 
-print(municipio('Villalbilla'))
+#print(municipio('Villalbilla'))
 
 
 # Ejercicio 9: Crear una función que acepte como parámetro toda la lista de diccionarios y devuelva una lista de objetos
@@ -189,7 +196,7 @@ def objetolistamunicipios(lista):
     return lista_municipios
 
 
-# print(objetolistamunicipios(data))
+#print(objetolistamunicipios(data))
     
 
 # Ejercicio 10: Considerando que en cada objeto tenemos la superficie y densidad ambas por km2, crear un MÉTODO (una función dentro del objeto) que devuelva la densidad total del municipio dado
@@ -202,7 +209,7 @@ def densidad_total_u(nombre_municipio):
             densidad_total = densidad * superficie_total
             return f'La densidad total es {densidad_total:.0f}'
 
-print(densidad_total_u('Villalbilla'))
+#print(densidad_total_u('Villalbilla'))
 
 # todos_municipios = [mun['municipio_nombre'] for mun in data]
 # for i in todos_municipios:
@@ -248,4 +255,16 @@ def crecimiento_anual(nombre_municipio):
             crecimiento_anual_municipio = densidad_total * 0.02
             return f'El creciemiento anual es {crecimiento_anual_municipio:.0f}'
 
-print(crecimiento_anual('Villalbilla'))
+#print(crecimiento_anual('Villalbilla'))
+
+# fichero = open(f'{pwd}/fichero.csv','a')
+
+test_object = objetolistamunicipios(data)
+# print(test_object)
+
+
+with open(f'{pwd}/fichero.csv' , 'w', newline='') as file:
+    csv_writer = csv.writer(file)
+    csv_writer.writerow(['Nombre', 'Densidad', 'Superficie'])
+    csv_writer.writerow([test_object.municipio_nombre, test_object.densidad_por_km2, test_object.superficie_km2])
+    
