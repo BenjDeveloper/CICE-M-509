@@ -29,7 +29,6 @@ def densidad_media(lista):
 
 # print(densidad_media(data))
 
-
 # Ejercicio 2: Obtener municipio por codigo ine // Extra: utilizando función filter
 
 def obtener_municipio(lista):
