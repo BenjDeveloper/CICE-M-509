@@ -6,12 +6,14 @@ import time
 import threading # module == threading != Thread
 import concurrent.futures
 
-response = req.get('https://restcountries.eu/data/arg.svg')
+# response = req.get('https://restcountries.eu/data/arg.svg')
+# name_img = name.split('-')
+# name_img[1]
 
-print(response.content)
+# print(response.content)
 
-with open('images.svg', 'wb') as img:
-    img.write(response.content)
+# with open('./images/dell.svg', 'wb') as img:
+#     img.write(response.content)
 
 
 # www.unsplash.com galeria de imagenes
@@ -67,72 +69,124 @@ with open('images.svg', 'wb') as img:
 # print(f'Delta tiempo -->{finish-start}')
 
 
-# def paises():
-#     question1 = input('Elige continente o pais: ')
-#     if question1 == 'continente':
-#         region = input('Introduce el continente: ')
-#         response2 = req.get(f'https://restcountries.eu/rest/v2/region/{region}').json()
-#         lista_paises = []
-#         lista_poblaciones = []
-#         for element in response2:
-#                 lista_paises.append(element['name'])
+def paises():
+    question1 = input('Elige continente o pais: ')
+    if question1 == 'continente':
+        region = input('Introduce el continente: ')
+        response2 = req.get(f'https://restcountries.eu/rest/v2/region/{region}').json()
+        lista_paises = []
+        lista_poblaciones = []
+        for element in response2:
+                lista_paises.append(element['name'])
 
-#         for e in response2:
-#                 lista_poblaciones.append(e['population'])
+        for e in response2:
+                lista_poblaciones.append(e['population'])
 
-#         print(f'{sum(lista_poblaciones)} personas')
+        print(f'{sum(lista_poblaciones)} personas')
 
-#         name = input('Introduce el pais: ')
-#         # response = req.get(f"https://restcountries.eu/rest/v2/name/{name}").json()
-#         # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+        name = input('Introduce el pais: ')
+        response = req.get(f"https://restcountries.eu/rest/v2/name/{name}").json()
+        print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}\nBandera: {response[0]['flag']}")
 
-#         with concurrent.futures.ThreadPoolExecutor() as executor:
-#             future = executor.submit(get_country, name )
-#             print('Su respuesta se esta procesando...')
-#             print(future.result())
+        # with concurrent.futures.ThreadPoolExecutor() as executor:
+        #     future = executor.submit(get_country, name )
+        #     print('Su respuesta se esta procesando...')
+        #     print(future.result())
 
-#         # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+        question2 = input('Desea guardar la imagen del pais encontrado: ')
+        if question2 != 'no':
+            bandera = response[0]['flag']
+            bandera1 = req.get(bandera)
+            name_bandera = bandera.split('/')
+            with open(f'./imagenes/{name_bandera[-1]}', 'wb') as img:
+                img.write(bandera1.content)
 
-#         response = future.result()
+        # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}\nBandera: {response[0]['flag']}")
 
-#         tiDict = {
-#             'paises':[{
-#             'name': response[0]['name'],
-#             'capital': response[0]['capital'],
-#             'region': response[0]['region'],
-#             'population': response[0]['population'],
-#             'area': response[0]['area'],
-#             'languages': response[0]['languages'][0]['nativeName']
-#             }
-#             ]
-#         }
+        # response = future.result()
 
-#         with open(f"{region}.json", 'w') as file:
-#             json.dump(tiDict, file)
-#     else:
+        tiDict = {
+            'paises':[{
+            'name': response[0]['name'],
+            'capital': response[0]['capital'],
+            'region': response[0]['region'],
+            'population': response[0]['population'],
+            'area': response[0]['area'],
+            'languages': response[0]['languages'][0]['nativeName'],
+            'bandera' : response[0]['flag']
+            }
+            ]
+        }
 
-#         name = input('Introduce el pais: ')
-#         # response = req.get(f"https://restcountries.eu/rest/v2/name/{name}").json()
-#         # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+        with open(f"{region}.json", 'w') as file:
+            json.dump(tiDict, file)
+    else:
 
-#         with concurrent.futures.ThreadPoolExecutor() as executor:
-#             future = executor.submit(get_country, name)
-#             print('Su respuesta se esta procesando...')
-#             print(future.result())
+        name = input('Introduce el pais: ')
+        response = req.get(f"https://restcountries.eu/rest/v2/name/{name}").json()
+        print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}\nBandera: {response[0]['flag']}")
+
+        question2 = input('Desea guardar la imagen del pais encontrado: ')
+        if question2 != 'no':
+            bandera = response[0]['flag']
+            bandera1 = req.get(bandera)
+            name_bandera = bandera.split('/')
+            with open(f'./imagenes/{name_bandera[-1]}', 'wb') as img:
+                img.write(bandera1.content)
+
+        # with concurrent.futures.ThreadPoolExecutor() as executor:
+        #     future = executor.submit(get_country, name)
+        #     print('Su respuesta se esta procesando...')
+        #     print(future.result())
         
-#         # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+        # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}\nBandera: {response[0]['flag']}")
 
 
-#         lista_pablo = ','.join([response[0]['name'],response[0]['capital'], response[0]['region'], str(response[0]['population']), str(response[0]['area']), response[0]['languages'][0]['nativeName']])
-#         file_pablo = open('paises.csv', 'a')
-#         # file_pablo.write('Name, Capital, Region, Population, Area, Idioma')
-#         file_pablo.write(f"\n{lista_pablo}")
-#         file_pablo.close()
+        lista_pablo = ','.join([response[0]['name'],response[0]['capital'], response[0]['region'], str(response[0]['population']), str(response[0]['area']), response[0]['languages'][0]['nativeName'], response[0]['flag']])
+        file_pablo = open('paises.csv', 'a')
+        # file_pablo.write('Name, Capital, Region, Population, Area, Idioma')
+        file_pablo.write(f"\n{lista_pablo}")
+        file_pablo.close()
+
+        print('---HISTORIAL DE BUSQUEDA---')
+        with open('paises.csv', "r") as file:
+            csv_reader = csv.reader(file)
+            lista_band = []
+            for e in csv_reader:
+                print(e[0], e[3])
+                lista_band.append(e[-1])
+                
+                
+
+            question3 = input('Desea descargar las imagenes del historial: ')
+            if question3 == 'si':
+
+                with open(f'./imagenes/{[-1]}', 'wb') as img:
+                    img.write(bandera1.content)
+
+
+
+
+
+        # file_pablo = open('paises.csv', 'r')
+        # evanderpringao = csv.read(file_pablo)
+        # for e in evanderpringao:
+        #     print(e)
+
+        # print('HISTORIAL DE BUSQUEDA')
+        # nombre_historial = []
+        # poblacion_historial = []
+        # for e in response:
+        #     nombre_historial.append(e['name'])
+        # for e1 in response:
+        #     poblacion_historial.append(e1['population'])
+        # print(nombre_historial, poblacion_historial)
+        
 
     
     
 
-# paises()
+paises()
 
 # with concurrent.futures.ThreadPoolExecutor() as executor:
 #     future = executor.submit(get)
