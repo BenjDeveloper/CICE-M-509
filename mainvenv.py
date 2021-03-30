@@ -6,15 +6,22 @@ import time
 import threading # module == threading != Thread
 import concurrent.futures
 
+response = req.get('https://restcountries.eu/data/arg.svg')
+
+print(response.content)
+
+with open('images.svg', 'wb') as img:
+    img.write(response.content)
+
 
 # www.unsplash.com galeria de imagenes
 # https://pypi.org/project/PySimpleGUI/
 
 
-def get_country(country):
-    response = req.get(f'https://restcountries.eu/rest/v2/name/{country}').json()
-    # return (f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
-    return response
+# def get_country(country):
+#     response = req.get(f'https://restcountries.eu/rest/v2/name/{country}').json()
+#     # return (f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+#     return response
 
 # user = input('Que pais: ')
 # with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -60,72 +67,72 @@ def get_country(country):
 # print(f'Delta tiempo -->{finish-start}')
 
 
-def paises():
-    question1 = input('Elige continente o pais: ')
-    if question1 == 'continente':
-        region = input('Introduce el continente: ')
-        response2 = req.get(f'https://restcountries.eu/rest/v2/region/{region}').json()
-        lista_paises = []
-        lista_poblaciones = []
-        for element in response2:
-                lista_paises.append(element['name'])
+# def paises():
+#     question1 = input('Elige continente o pais: ')
+#     if question1 == 'continente':
+#         region = input('Introduce el continente: ')
+#         response2 = req.get(f'https://restcountries.eu/rest/v2/region/{region}').json()
+#         lista_paises = []
+#         lista_poblaciones = []
+#         for element in response2:
+#                 lista_paises.append(element['name'])
 
-        for e in response2:
-                lista_poblaciones.append(e['population'])
+#         for e in response2:
+#                 lista_poblaciones.append(e['population'])
 
-        print(f'{sum(lista_poblaciones)} personas')
+#         print(f'{sum(lista_poblaciones)} personas')
 
-        name = input('Introduce el pais: ')
-        # response = req.get(f"https://restcountries.eu/rest/v2/name/{name}").json()
-        # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+#         name = input('Introduce el pais: ')
+#         # response = req.get(f"https://restcountries.eu/rest/v2/name/{name}").json()
+#         # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
 
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            future = executor.submit(get_country, name )
-            print('Su respuesta se esta procesando...')
-            print(future.result())
+#         with concurrent.futures.ThreadPoolExecutor() as executor:
+#             future = executor.submit(get_country, name )
+#             print('Su respuesta se esta procesando...')
+#             print(future.result())
 
-        # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+#         # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
 
-        response = future.result()
+#         response = future.result()
 
-        tiDict = {
-            'paises':[{
-            'name': response[0]['name'],
-            'capital': response[0]['capital'],
-            'region': response[0]['region'],
-            'population': response[0]['population'],
-            'area': response[0]['area'],
-            'languages': response[0]['languages'][0]['nativeName']
-            }
-            ]
-        }
+#         tiDict = {
+#             'paises':[{
+#             'name': response[0]['name'],
+#             'capital': response[0]['capital'],
+#             'region': response[0]['region'],
+#             'population': response[0]['population'],
+#             'area': response[0]['area'],
+#             'languages': response[0]['languages'][0]['nativeName']
+#             }
+#             ]
+#         }
 
-        with open(f"{region}.json", 'w') as file:
-            json.dump(tiDict, file)
-    else:
+#         with open(f"{region}.json", 'w') as file:
+#             json.dump(tiDict, file)
+#     else:
 
-        name = input('Introduce el pais: ')
-        response = req.get(f"https://restcountries.eu/rest/v2/name/{name}").json()
-        # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+#         name = input('Introduce el pais: ')
+#         # response = req.get(f"https://restcountries.eu/rest/v2/name/{name}").json()
+#         # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
 
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            future = executor.submit(get_country, name)
-            print('Su respuesta se esta procesando...')
-            # print(future.result())
+#         with concurrent.futures.ThreadPoolExecutor() as executor:
+#             future = executor.submit(get_country, name)
+#             print('Su respuesta se esta procesando...')
+#             print(future.result())
         
-        print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
+#         # print(f"\nName: {response[0]['name']}\nCapital: {response[0]['capital']}\nRegion: {response[0]['region']}\nPopulation: {response[0]['population']} personas\nArea: {response[0]['area']} km2\nIdioma: {response[0]['languages'][0]['nativeName']}")
 
 
-        lista_pablo = ','.join([response[0]['name'],response[0]['capital'], response[0]['region'], str(response[0]['population']), str(response[0]['area']), response[0]['languages'][0]['nativeName']])
-        file_pablo = open('paises.csv', 'a')
-        # file_pablo.write('Name, Capital, Region, Population, Area, Idioma')
-        file_pablo.write(f"\n{lista_pablo}")
-        file_pablo.close()
+#         lista_pablo = ','.join([response[0]['name'],response[0]['capital'], response[0]['region'], str(response[0]['population']), str(response[0]['area']), response[0]['languages'][0]['nativeName']])
+#         file_pablo = open('paises.csv', 'a')
+#         # file_pablo.write('Name, Capital, Region, Population, Area, Idioma')
+#         file_pablo.write(f"\n{lista_pablo}")
+#         file_pablo.close()
 
     
     
 
-paises()
+# paises()
 
 # with concurrent.futures.ThreadPoolExecutor() as executor:
 #     future = executor.submit(get)
