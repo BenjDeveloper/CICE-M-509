@@ -18,6 +18,12 @@ import concurrent.futures
 
 # www.unsplash.com galeria de imagenes
 # https://pypi.org/project/PySimpleGUI/
+# https://getbootstrap.com/
+# https://material.io/design
+# http://brackets.io/
+
+
+
 
 
 # def get_country(country):
@@ -172,19 +178,6 @@ def paises():
         # evanderpringao = csv.read(file_pablo)
         # for e in evanderpringao:
         #     print(e)
-
-        # print('HISTORIAL DE BUSQUEDA')
-        # nombre_historial = []
-        # poblacion_historial = []
-        # for e in response:
-        #     nombre_historial.append(e['name'])
-        # for e1 in response:
-        #     poblacion_historial.append(e1['population'])
-        # print(nombre_historial, poblacion_historial)
-        
-
-    
-    
 
 paises()
 
