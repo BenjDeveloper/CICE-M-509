@@ -3,5 +3,5 @@ class DireccionAdministrativa:
 
     def __init__(self, nombre):
         self.nombre = nombre
-        self.dic_departametos = {} 
+        self.dic_departamentos = {} 
     

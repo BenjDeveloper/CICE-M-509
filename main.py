@@ -63,7 +63,7 @@ def opcion_3(dic_departamento):
             objeto_departamento = dic_departamento.pop(nombre_departamento)
             dic_departamento[objeto_departamento.nombre] = objeto_departamento
 
-        print(dic_departamento[nombre_departamento])
+        print(dic_departamento[valor])
     pausa()
 
 def opcion_4(dic_departamento):
@@ -183,16 +183,16 @@ def opcion_9(dic_supervisores):
         print('EL Supervisor INDICADO YA SE ENCUENTRA REGISTRADO')
     pausa()
 
-def opcion_10(dic_supervisores, dic_departametos):
+def opcion_10(dic_supervisores, dic_departamentos):
     print('10. opcion - Supervisor - Conectar Instansias - Referencias de Objetos')
     dni_super = input('agrege el DNI del supersor a asignar: ')
     nombre_depa = input('agrege el NOMBRe del departamendo a ser asingado: ')
 
     if dni_super in dic_supervisores.keys():
-        if nombre_depa in dic_departametos.keys():
+        if nombre_depa in dic_departamentos.keys():
 
-            dic_supervisores[dni_super].departamendo = dic_departametos[nombre_depa]
-            dic_departametos[nombre_depa].supervisor = dic_supervisores[dni_super]
+            dic_supervisores[dni_super].departamendo = dic_departamentos[nombre_depa]
+            dic_departamentos[nombre_depa].supervisor = dic_supervisores[dni_super]
 
         else:
             print('EL DEPARTAMENTO NO ESTA REGISTRADO')
@@ -232,18 +232,18 @@ def menu_simple(objeto_DA):
 
         opcion = input('selecione una:')
 
-        if   opcion == '1': opcion_1(objeto_DA.dic_departametos) #Departamento - Create
-        elif opcion == '2': opcion_2(objeto_DA.dic_departametos) #Departamento - Read  
-        elif opcion == '3': opcion_3(objeto_DA.dic_departametos) #Departamento - Update
-        elif opcion == '4': opcion_4(objeto_DA.dic_departametos) #Departamento - Delete
+        if   opcion == '1': opcion_1(objeto_DA.dic_departamentos) #Departamento - Create
+        elif opcion == '2': opcion_2(objeto_DA.dic_departamentos) #Departamento - Read  
+        elif opcion == '3': opcion_3(objeto_DA.dic_departamentos) #Departamento - Update
+        elif opcion == '4': opcion_4(objeto_DA.dic_departamentos) #Departamento - Delete
         
-        elif opcion == '5': opcion_5(objeto_DA.dic_departametos) #Empleado - Create
-        elif opcion == '6': opcion_6(objeto_DA.dic_departametos) #Empleado - Read
-        elif opcion == '7': opcion_7(objeto_DA.dic_departametos) #Empleado - Update
-        elif opcion == '8': opcion_8(objeto_DA.dic_departametos) #Empleado - Delete
+        elif opcion == '5': opcion_5(objeto_DA.dic_departamentos) #Empleado - Create
+        elif opcion == '6': opcion_6(objeto_DA.dic_departamentos) #Empleado - Read
+        elif opcion == '7': opcion_7(objeto_DA.dic_departamentos) #Empleado - Update
+        elif opcion == '8': opcion_8(objeto_DA.dic_departamentos) #Empleado - Delete
 
         elif opcion == '9': opcion_9(dic_supervisores) #Supervisor - Crear
-        elif opcion == '10': opcion_10(dic_supervisores, objeto_DA.dic_departametos) #Supervisor - Conectar
+        elif opcion == '10': opcion_10(dic_supervisores, objeto_DA.dic_departamentos) #Supervisor - Conectar
         elif opcion == '11': opcion_11(dic_supervisores) #Supervisor - Conectar
         
         elif opcion == '0': 
@@ -267,22 +267,61 @@ def main():
     lectura = csv.reader(fichero) 
     for fila in lectura:
         print('FILA  - :',fila[0], fila[1])
+        nombre = fila[0]
+        telefono =  fila[1]
+        objeto_departamento = Departamento(nombre,telefono)
 
+        if objeto_departamento.nombre not in objeto_DA.dic_departamentos.keys():
+            objeto_DA.dic_departamentos[ objeto_departamento.nombre] = objeto_departamento
+            print(objeto_departamento)
+        else:
+            print('El departamento esta creado')
     fichero.close()
 
      #? -------------------------------------------
     #* LECTURA DE FICHERO PARA CREAR EMPLEADOS POR DEPARTAMENTO 
 
-
-
+    fichero = open( path+'/fichero_empleados.csv', 'r')
+    lectura = csv.reader(fichero) 
+    for fila in lectura:
+        print(len(fila),"Fila  -:",fila[0],fila[1],fila[2],fila[3],fila[4],fila[5],fila[6],fila[7],fila[8],fila[9],fila[10])
+        objeto_empleado = Empleado(fila[0],
+                                fila[1],
+                                fila[2],
+                                fila[3],
+                                fila[4],
+                                fila[5],
+                                fila[6],
+                                fila[7],
+                                fila[8],
+                                fila[9])
+        nombre_departamento=fila[10]
+        if nombre_departamento in objeto_DA.dic_departamentos.keys():
+            if not objeto_empleado.dni in  objeto_DA.dic_departamentos[nombre_departamento].empleados.keys():
+                objeto_DA.dic_departamentos[nombre_departamento].empleados[objeto_empleado.dni]= objeto_empleado
+            else:
+                print("El empleado ya se encuentra registrado")
+        else:
+            print("El empleado no existe")
+        print(objeto_empleado)
+    pausa()
     #* -------------------------------------------
 
     menu_simple(objeto_DA)
 
-
-
     #! ESCRITURA DE FICHERO DEPARTAMENTOS
-    
+    fichero = open( path+'/fichero_departamentos.csv', 'w')
+    primera_linea = True
+    for objetos_depar in objeto_DA.dic_departamentos.values():
+        cadena = ''
+        if primera_linea == True:
+            cadena = f'{objetos_depar.nombre},{objetos_depar.telefono}'
+        else:
+            cadena = f'\n{objetos_depar.nombre},{objetos_depar.telefono}'
+        fichero.write(cadena)
+        primera_linea = False
+
+    fichero.close()
 
 
     #! -------------------------------------------
@@ -308,7 +347,7 @@ main()
 
 # ! GERENCIA 
 #         Nombre
-# ?         dic_departametos {
+# ?         dic_departamentos {
 #                             'nombre':objeto_departamento,
 # !                             'RRHH':objeto_departamento_RRHH
 #                                                             nombre
