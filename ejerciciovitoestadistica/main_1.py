@@ -8,7 +8,7 @@ import std
 
 with open("covid.json") as file:
     json_reader = json.load(file)
-    data = json_reader["data"]
+    data = json_reader["data"] 
     # result = set([mun["municipio_distrito"] for mun in data]) # 199
     def get_tia(parse):
         result = 0
@@ -52,3 +52,13 @@ with open("covid.json") as file:
     #plt.plot(x,y)
     #plt.ylabel(y)
     #plt.show()
+
+    # def get_all_date(dataset, offset, limit = None):
+    #     dates = set([date["fecha_informe"] for date in dataset])
+    #     result = 0
+    #     for date in dates[offset:None]:
+
+    # def get_all_date(dataset, offset, limit = None):
+    #     dates = set([date["fecha_informe"] for date in dataset])
+    #     result = 0
+    #     for date in dates[offset:limit]:
