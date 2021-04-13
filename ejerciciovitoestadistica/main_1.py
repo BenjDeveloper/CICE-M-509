@@ -36,10 +36,12 @@ with open("covid.json") as file:
         return result
         
     y = get_all(data)
+    
     #y.reverse()
     # print(len(y))
     
     x = [num for num in range(1,128)]
+    
     #print(x)
     #print(y)
 
