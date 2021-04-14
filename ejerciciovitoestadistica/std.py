@@ -19,17 +19,19 @@ class Statistics:
 
     @property
     def x_times_y(self):
-        result = sum([couple[0]*couple[1] for couple in zip(self.x, self.y)])
+        # result = sum([couple[0]*couple[1] for couple in zip(self.x, self.y)])
+        result_lambda = sum(map((lambda x, y  : x*y), self.x, self.y))
         # lo que hace la comprehension: 
         # lista_en_conjunto = zip(self.x, self.y)
         # result = 0
         # for pareja in lista_en_conjunto:
         #     result += pareja[0] * pareja[1]
-        return result
+        return result_lambda
     
     @property
     def x_pow(self):
         result = sum([value**2 for value in self.x])
+        # result_reduce = reduce(lambda number)
         return result
 
     @property
