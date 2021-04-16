@@ -72,16 +72,34 @@ with open("covid_3.json") as file:
 
     #? 5-Obtener la proporción año a año de parejas heterosexuales y parejas homosexuales
 
+    dates = sorted(set(map(lambda par: par['inscripcion_año'], data)))
 
     def by_year(given_list):
         dates = sorted(set(map(lambda par: par['inscripcion_año'], given_list)))
         hetero_list = []
+        homomas_list = []
+        homofem_list = []
         for year in dates:
-            hetero = sum(list(map(lambda par:int(par['num_inscripciones']) if par['inscripcion_año'] == year else 0, given_list)))
-            hetero_list.append((year,hetero))
-        print(hetero_list)
+            hetero = sum(list(map(lambda par:int(par['num_inscripciones']) if par['inscripcion_año'] == year and par['pareja_tipo'] == 'heterosexual' else 0, given_list)))
+            homomas = sum(list(map(lambda par:int(par['num_inscripciones']) if par['inscripcion_año'] == year and par['pareja_tipo'] == 'homosexual masculina' else 0, given_list)))
+            homofem = sum(list(map(lambda par:int(par['num_inscripciones']) if par['inscripcion_año'] == year and par['pareja_tipo'] == 'homosexual femenina' else 0, given_list)))
+            hetero_list.append(hetero)
+            homomas_list.append(homomas)
+            homofem_list.append(homofem)
+        # print(hetero_list, homomas_list, homofem_list)
+        return homofem_list
+
+        
 
     print(by_year(data))
+
+    y = by_year(data)
+
+    x = dates
+
+    plt.plot(x,y,'m--')
+    # plt.ylabel()
+    plt.show()
 
     
 

@@ -3329,7 +3329,7 @@
             "inscripcion_a\u00f1o": "2012",
             "pareja_tipo": "heterosexual",
             "inscripcion_mes": "05",
-            "num_inscripciones_cancelacion": "41",
+            "num_inscripciones_cancelacion": "43",
             "num_inscripciones": "161"
         },
         {
@@ -3371,7 +3371,7 @@
             "inscripcion_a\u00f1o": "2012",
             "pareja_tipo": "heterosexual",
             "inscripcion_mes": "07",
-            "num_inscripciones_cancelacion": "63",
+            "num_inscripciones_cancelacion": "64",
             "num_inscripciones": "186"
         },
         {
@@ -3623,7 +3623,7 @@
             "inscripcion_a\u00f1o": "2013",
             "pareja_tipo": "heterosexual",
             "inscripcion_mes": "07",
-            "num_inscripciones_cancelacion": "41",
+            "num_inscripciones_cancelacion": "42",
             "num_inscripciones": "213"
         },
         {
@@ -4568,7 +4568,7 @@
             "inscripcion_a\u00f1o": "2017",
             "pareja_tipo": "heterosexual",
             "inscripcion_mes": "04",
-            "num_inscripciones_cancelacion": "40",
+            "num_inscripciones_cancelacion": "41",
             "num_inscripciones": "309"
         },
         {
@@ -4610,7 +4610,7 @@
             "inscripcion_a\u00f1o": "2017",
             "pareja_tipo": "heterosexual",
             "inscripcion_mes": "06",
-            "num_inscripciones_cancelacion": "50",
+            "num_inscripciones_cancelacion": "51",
             "num_inscripciones": "395"
         },
         {
@@ -5535,21 +5535,21 @@
             "pareja_tipo": "heterosexual",
             "inscripcion_mes": "04",
             "num_inscripciones_cancelacion": "0",
-            "num_inscripciones": "125"
+            "num_inscripciones": "140"
         },
         {
             "inscripcion_a\u00f1o": "2021",
             "pareja_tipo": "homosexual femenina",
             "inscripcion_mes": "04",
             "num_inscripciones_cancelacion": "0",
-            "num_inscripciones": "2"
+            "num_inscripciones": "3"
         },
         {
             "inscripcion_a\u00f1o": "2021",
             "pareja_tipo": "homosexual masculina",
             "inscripcion_mes": "04",
             "num_inscripciones_cancelacion": "0",
-            "num_inscripciones": "9"
+            "num_inscripciones": "10"
         }
     ]
 }
