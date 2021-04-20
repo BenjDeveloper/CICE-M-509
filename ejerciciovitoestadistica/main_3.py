@@ -27,8 +27,9 @@ with open("covid_3.json") as file:
     
 #? 3-Establecer dos muestras una desde el inicio del dataset hasta 2005 inclusive y otra desde 2006 en adelante
 
-    a = list(filter(lambda par:par["inscripcion_a\u00f1o"] <= '2010', data))
-    b = list(filter(lambda par:par["inscripcion_a\u00f1o"] >= '2011', data))
+    fecha_tope = '2010'
+    a = list(filter(lambda par:par["inscripcion_a\u00f1o"] <= fecha_tope, data))
+    b = list(filter(lambda par:par["inscripcion_a\u00f1o"] >= fecha_tope, data))
     a_n = sum(list(map(lambda par: int(par["num_inscripciones"]), a)))
     b_n = sum(list(map(lambda par: int(par["num_inscripciones"]), b)))
     
@@ -47,9 +48,9 @@ with open("covid_3.json") as file:
     porcentaje_homosexual_masculina_a = hom_a*100/a_n
     porcentaje_homosexual_femenina_a = hof_a*100/a_n
 
-    print(f"El porcentaje de Heterosexuales en el grupo A es de: {porcentaje_heterosexual_a:.2f}%")
-    print(f"El porcentaje de Homosexuales masculinos en el grupo A es de: {porcentaje_homosexual_masculina_a:.2f}%")
-    print(f"El porcentaje de Homosexuales femeninos en el grupo A es de: {porcentaje_homosexual_femenina_a:.2f}%")
+    # print(f"El porcentaje de Heterosexuales en el grupo A es de: {porcentaje_heterosexual_a:.2f}%")
+    # print(f"El porcentaje de Homosexuales masculinos en el grupo A es de: {porcentaje_homosexual_masculina_a:.2f}%")
+    # print(f"El porcentaje de Homosexuales femeninos en el grupo A es de: {porcentaje_homosexual_femenina_a:.2f}%")
 
 
     he_b = sum(list(map(lambda par:int(par['num_inscripciones']) if par['pareja_tipo'] == 'heterosexual' else 0, b)))
@@ -60,14 +61,25 @@ with open("covid_3.json") as file:
     porcentaje_homosexual_masculina_b = hom_b*100/b_n
     porcentaje_homosexual_femenina_b = hof_b*100/b_n
 
-    print(f"El porcentaje de Heterosexuales en el grupo B es de: {porcentaje_heterosexual_b:.2f}%")
-    print(f"El porcentaje de Homosexuales masculinos en el grupo B es de: {porcentaje_homosexual_masculina_b:.2f}%")
-    print(f"El porcentaje de Homosexuales femeninos en el grupo B es de: {porcentaje_homosexual_femenina_b:.2f}%")
+    # print(f"El porcentaje de Heterosexuales en el grupo B es de: {porcentaje_heterosexual_b:.2f}%")
+    # print(f"El porcentaje de Homosexuales masculinos en el grupo B es de: {porcentaje_homosexual_masculina_b:.2f}%")
+    # print(f"El porcentaje de Homosexuales femeninos en el grupo B es de: {porcentaje_homosexual_femenina_b:.2f}%")
 
     # print(he_a)
     # print(hom_a)
     # print(hof_a)
     # print(he_b) 
+
+    # labels = 'Heterosexual', 'Homosexual Masculino', 'Homosexual Femenino'
+    # sizes = [porcentaje_heterosexual_a, porcentaje_homosexual_masculina_a, porcentaje_homosexual_femenina_a]
+    # explode = (0, 0.1, 0)
+
+    # fig1, ax1 = plt.subplots()
+    # ax1.pie(sizes, explode= explode, labels=labels, autopct='%1.1f%%',
+    #         shadow=True, startangle=90)
+    # ax1.axis('equal')
+
+    # plt.show()
 
 
     #? 5-Obtener la proporción año a año de parejas heterosexuales y parejas homosexuales
@@ -83,23 +95,34 @@ with open("covid_3.json") as file:
             hetero = sum(list(map(lambda par:int(par['num_inscripciones']) if par['inscripcion_año'] == year and par['pareja_tipo'] == 'heterosexual' else 0, given_list)))
             homomas = sum(list(map(lambda par:int(par['num_inscripciones']) if par['inscripcion_año'] == year and par['pareja_tipo'] == 'homosexual masculina' else 0, given_list)))
             homofem = sum(list(map(lambda par:int(par['num_inscripciones']) if par['inscripcion_año'] == year and par['pareja_tipo'] == 'homosexual femenina' else 0, given_list)))
-            hetero_list.append(hetero)
-            homomas_list.append(homomas)
-            homofem_list.append(homofem)
+            hetero_list.append((hetero, year))
+            homomas_list.append((homomas, year))
+            homofem_list.append((homofem, year))
         # print(hetero_list, homomas_list, homofem_list)
-        return homofem_list
+        return hetero_list, homomas_list, homofem_list
 
-        
+    hetero_list2010, homomas_list2010, homofem_list2010 = by_year(a)
+    hetero_list_total, homomas_list_total, homofem_list_total = by_year(data)
 
-    print(by_year(data))
+    # print(homomas_list2010)
 
-    y = by_year(data)
+    hetero_y = list(map(lambda par: par[0],hetero_list_total))
+    homomas_y = list(map(lambda par: par[0], homomas_list_total))
+    homofem_y = list(map(lambda par: par[0], homofem_list_total))    
+    years_x = list(map(lambda par: par[1], hetero_list_total))
 
-    x = dates
 
-    plt.plot(x,y,'m--')
-    # plt.ylabel()
-    plt.show()
+    print(hetero_y)
+
+    
+
+
+    # plt.plot(years_x,hetero_y,'y--', label= 'Heterosexual')
+    # plt.plot(years_x,homomas_y,'m--', label= 'Homosexual masculino')
+    # plt.plot(years_x,homofem_y,'b--', label= 'Homosexual femenino')
+    # # plt.ylabel()
+    # plt.legend()
+    # plt.show()
 
     
 
@@ -133,7 +156,12 @@ with open("covid_3.json") as file:
 
     # # print(heterosexual_year_b(b))
 
-    
+    # by_year(a)
+    # hetero_a, homomas_a, homofem_a = divide(a)
+    # hetero_b, homomas_b, homofem_b = divide(b)
+
+    # print((homomas_a + homofem_a)/a_n)
+    # print((homomas_b + homofem_b)/b_n)
 
 
 
