@@ -1,8 +1,8 @@
 import requests as req
 import json
-response = req.get("https://datos.comunidad.madrid/catalogo/dataset/35609dd5-9430-4d2e-8198-3eeb277e5282/resource/c38446ec-ace1-4d22-942f-5cc4979d19ed/download/desfibriladores_externos_fuera_ambito_sanitario.json").json()
-with open("deas/desfibriladores.json", "w") as file:
-    json.dump(response, file, indent=4)
+# response = req.get("https://datos.comunidad.madrid/catalogo/dataset/35609dd5-9430-4d2e-8198-3eeb277e5282/resource/c38446ec-ace1-4d22-942f-5cc4979d19ed/download/desfibriladores_externos_fuera_ambito_sanitario.json").json()
+# with open("deas/desfibriladores.json", "w") as file:
+#     json.dump(response, file, indent=4)
 
 def get_data():
     with open ('deas/desfibriladores.json') as file:
@@ -26,12 +26,13 @@ def m30_dea_number(given):
     for dea in given:
         counter += 1 if dea["direccion_codigo_postal"] in postal_code_m30 else 0
     return counter
-a = m30_dea_number(data)
-# print(a)
+x = m30_dea_number(data)
+# print(x)
 
 def menu():
     print("DEAS")
     print('Opcion 1: Crear usuario')
+    print('Opcion 2: Acceder ')
     print('Salir')
 menu()
 user = input('Elija opcion: ')
@@ -40,17 +41,33 @@ while user.lower() != 'Salir':
     if user == '1':
         name = input('Introduzca su nombre: ')
         password = input('Introduzca su contraseña: ')
-        new_user = {'Nombre': name, 'Contraseña': password}
-        def opcion_1():
-            with open ('deas/users.json', 'r') as file:
-                users = json.load(file)
-                return users
-        users = opcion_1()
-        users['data'].append(new_user)
-        with open('deas/users.json') as file:
-            json.dump(users, file)
+        new_user = {'Nombre': name, 'Password': password}
+        with open ('deas/users.json') as file:
+            users = json.load(file)
+        users["data"].append(new_user)
+        with open('deas/users.json', 'w', encoding= 'UTF-8') as file:
+            json.dump(users, file, ensure_ascii=False, indent=4)
+    elif user == '2':
+        password = input('Introduce contraseña: ')
+        with open ('deas/users.json') as file:
+            users = json.load(file)["data"]
+        confirm_user = filter(lambda user: True if user["Password"] == password else False, users )
+        
+        if next(confirm_user):
+            pregunta_2 = input('Que desea hacer a continuacion: 1 = DEA por codigo 2 = DEA por distancia: ')
+            if pregunta_2 == '1':
+                dea_code = input('Introduzca el codigo DEA: ')
+                with open('deas/desfibriladores.json') as file:
+                    dea_reader = json.load(file)["data"]
+                    show_dea = filter(lambda dea:dea['codigo_dea'] == dea_code, data)
+                    print(next(show_dea))
+
+
+
+    else:
+        print('La contraseña no es correcta')        
         menu()
-        user = input(': ')
+        
 
         
         

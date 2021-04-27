@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "Nombre": "Pablo",
+            "Password": "1234"
+        },
+        {
+            "Nombre": "Borja",
+            "Password": "cuatro"
+        },
+        {
+            "Nombre": "Andres",
+            "Password": "chase"
+        },
+        {
+            "Nombre": "Ciriaco",
+            "Password": "motomoto"
+        }
+    ]
+}
