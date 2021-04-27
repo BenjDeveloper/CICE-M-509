@@ -35,6 +35,13 @@ def menu():
     print('Opcion 2: Acceder ')
     print('Salir')
 menu()
+
+def sub_menu():
+    print('1.DEA por codigo ')
+    print('2.DEA por distancia')
+    print('3.Salir')
+
+
 user = input('Elija opcion: ')
 
 while user.lower() != 'Salir':
@@ -52,15 +59,24 @@ while user.lower() != 'Salir':
         with open ('deas/users.json') as file:
             users = json.load(file)["data"]
         confirm_user = filter(lambda user: True if user["Password"] == password else False, users )
-        
         if next(confirm_user):
-            pregunta_2 = input('Que desea hacer a continuacion: 1 = DEA por codigo 2 = DEA por distancia: ')
+            sub_menu()
+            pregunta_2 = input('Elija opcion: ')
             if pregunta_2 == '1':
                 dea_code = input('Introduzca el codigo DEA: ')
                 with open('deas/desfibriladores.json') as file:
                     dea_reader = json.load(file)["data"]
                     show_dea = filter(lambda dea:dea['codigo_dea'] == dea_code, data)
                     print(next(show_dea))
+                sub_menu()
+            elif pregunta_2 == '2':
+                user_x = input('Introduzca la coordenada x: ')
+                user_y = input('Introduzca la coordenada y: ')
+                with open('deas/desfibriladores.json') as file:
+                    dea_reader = json.load(file)["data"]
+                    dea_location = filter(lambda dea: dea['direccion_coordenada_x'] == user_x and dea['direccion_coordenada_y'] == user_y, data)
+                    print(list(dea_location))
+
 
 
 
