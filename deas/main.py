@@ -1,5 +1,6 @@
 import requests as req
 import json
+from models import Dea, User
 # response = req.get("https://datos.comunidad.madrid/catalogo/dataset/35609dd5-9430-4d2e-8198-3eeb277e5282/resource/c38446ec-ace1-4d22-942f-5cc4979d19ed/download/desfibriladores_externos_fuera_ambito_sanitario.json").json()
 # with open("deas/desfibriladores.json", "w") as file:
 #     json.dump(response, file, indent=4)
@@ -70,12 +71,14 @@ while user.lower() != 'Salir':
                     print(next(show_dea))
                 sub_menu()
             elif pregunta_2 == '2':
-                user_x = input('Introduzca la coordenada x: ')
-                user_y = input('Introduzca la coordenada y: ')
+                user_x = int(input('Introduzca la coordenada x: '))
+                user_y = int(input('Introduzca la coordenada y: '))
                 with open('deas/desfibriladores.json') as file:
                     dea_reader = json.load(file)["data"]
-                    dea_location = filter(lambda dea: dea['direccion_coordenada_x'] == user_x and dea['direccion_coordenada_y'] == user_y, data)
-                    print(list(dea_location))
+                    user = User(user_x, user_y)
+                    dea = user.get_nearest_dea(data)
+                    print(dea)
+                    
 
 
 
