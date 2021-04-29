@@ -27,4 +27,3 @@ class User:
                 result = dea
                 H = dea_object.get_distance(self.x, self.y)
         return result
-        

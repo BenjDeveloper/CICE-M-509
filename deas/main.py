@@ -78,8 +78,6 @@ while user.lower() != 'Salir':
                     user = User(user_x, user_y)
                     dea = user.get_nearest_dea(data)
                     print(dea)
-                    
-
 
 
 
