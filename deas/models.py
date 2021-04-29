@@ -18,3 +18,7 @@ class User:
         self.x = x 
         self.y = y 
         
+
+    def get_nearest_by_radio(self, given_list)
+        H = radio 
+        result = list(fileter(lambda dea: Dea(dea['direccion_coordenada_x'], dea['direccion_coordenada_x']).get))

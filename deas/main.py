@@ -72,10 +72,7 @@ while user.lower() != 'Salir':
             elif pregunta_2 == '2':
                 user_x = input('Introduzca la coordenada x: ')
                 user_y = input('Introduzca la coordenada y: ')
-                with open('deas/desfibriladores.json') as file:
-                    dea_reader = json.load(file)["data"]
-                    dea_location = filter(lambda dea: dea['direccion_coordenada_x'] == user_x and dea['direccion_coordenada_y'] == user_y, data)
-                    print(list(dea_location))
+                
 
 
 
