@@ -17,13 +17,17 @@ class User:
         self.y = y 
 
     def get_nearest_dea(self, given_list):
-        # first_dea = given_list[0]
-        # first_object = Dea(dea['direccion_coordenada_x'], dea['direccion_coordenada_y'])
-        H = 100000000
+        first_dea = given_list[0]
+        first_object = Dea(first_dea['direccion_coordenada_x'], first_dea['direccion_coordenada_y'])
+        H = 100000000000
         result = None
+
         for dea in given_list:
+
             dea_object = Dea(dea['direccion_coordenada_x'], dea['direccion_coordenada_y'])
+            
             if dea_object.get_distance(self.x, self.y) <= H:
-                result = dea
+                result = dea              
                 H = dea_object.get_distance(self.x, self.y)
-        return result
+
+        return result, H
